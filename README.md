@@ -30,9 +30,9 @@ The folders are very similar to a regular Hugo static site template. They includ
 
 You shall notice these config files:
 
-`panel.yml` ~ ruby microservice backend + Panel UI settings
-`config.ru` ~ only needed for Rack type deployment
-`config.toml` ~ static site config (Hugo), editable through the Panel UI
++ __panel.yml__ ~ ruby microservice backend + Panel UI settings
++ __config.ru__ ~ only needed for Rack type deployment
++ __config.toml__ ~ static site config (Hugo), editable through the Panel UI
 
 ### Testing
 
@@ -54,9 +54,10 @@ Start the static site server (Hugo):
 
 Visit `localhost:1313` to see the static site.
 
-## Deploying static
+## Deploying static, serving dynamic
 
-Ruby On Go is designed to run in cheap environments, like shared hosting. It cuts down on deployment costs by staying fully static on the frontend, highly deployable, yet allowing adding microservices at the backend with very little effort.
+Ruby On Go is designed to "run fast by default", even in cheap memory-poor environments, like shared hosting. It cuts down on deployment costs by staying fully static on the frontend, highly deployable, yet allowing adding microservices at the backend with very little effort.
+
 
 ## Minimal requirements:
 
