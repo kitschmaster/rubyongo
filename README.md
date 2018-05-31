@@ -42,11 +42,11 @@ Write tests in the test folder and run them with:
 
 ### Developing a site
 
-Start the panel app (Sinatra):
+Start the Panel UI + backend app (Sinatra):
 
     $ rog s
 
-    Visit `localhost:9393` to see the panel, edit content...
+Visit `localhost:9393` to see the panel, edit content...
 
 Start the static site server (Hugo):
 
