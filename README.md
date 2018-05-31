@@ -30,8 +30,8 @@ The folders are very similar to a regular Hugo static site template. They includ
 
 You shall notice these config files:
 
-`panel.yml` ~ ruby backend, microservices and Panel UI settings
-`config.ru` ~ only needed for rack startup of the panel
+`panel.yml` ~ ruby microservice backend + Panel UI settings
+`config.ru` ~ only needed for Rack type deployment
 `config.toml` ~ static site config (Hugo), editable through the Panel UI
 
 ### Testing
@@ -63,8 +63,8 @@ Ruby On Go is designed to run in cheap environments, like shared hosting. It cut
 + go 1.6
 + ruby 1.9
 + the host needs to support running Ruby Rack.
-+ Hugo, the static site generator is a dependency currently and is used as the default static site generator
-+ (optional) the host needs to support running go web apps (for example on Dreamhost this is achieved by FCGI). in case you want to run go microservices next to the ruby microservices.
++ Hugo, the static site generator is a dependency currently and is used as the default static site generator.
++ (optional) the host needs to support running go web apps (for example on Dreamhost this is achieved by FCGI). In case you want to run go microservices next to the ruby microservices.
 
 ## Deployment system commands
 
@@ -82,7 +82,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rubyongo. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kitschmaster/rubyongo. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
