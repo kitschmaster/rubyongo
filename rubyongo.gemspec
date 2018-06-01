@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'dm-core'
   s.add_dependency 'dm-sqlite-adapter'
   s.add_dependency 'dm-migrations'
-  s.add_dependency 'dm-serializer'
+  s.add_dependency 'dm-serializer', '~>1.2.2'
   s.add_dependency 'dm-timestamps'
   s.add_dependency 'dm-transactions'
   s.add_dependency 'dm-types'
