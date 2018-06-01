@@ -1,6 +1,6 @@
 # Ruby On Go
 
-[![Build Status](https://travis-ci.org/mihael/rubyongo.png?branch=master)](https://travis-ci.org/kitschmaster/rubyongo)
+[![Build Status](https://travis-ci.org/kitschmaster/rubyongo.svg?branch=master)](https://travis-ci.org/kitschmaster/rubyongo)
 
 Welcome to Ruby On Go ~ a webshop framework.
 
