@@ -1,8 +1,24 @@
+#01.06.2018 23:27:46 ComSession::END
+
+after the quick morning commit session ii then took a test for a dayjob.
+
+had a friend come around, so only got around to setup the travis build badge.
+
+#01.06.2018 23:20:34 ComSession::BEGIN
+
+#01.06.2018 10:33:16 CodingSession::END
+
+commited most of the existing code.
+
+#01.06.2018 09:03:43 CodingSession::BEGIN
+
+#31.05.2018 23:23:11 CodingSession::END
+
 preparing next commit some more...
 
 nope can't commit yet, still have one more thingy to make more overridable.
 
-
+not polished, but it will do.
 
 #31.05.2018 22:05:16 CodingSession::BEGIN
 
