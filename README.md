@@ -12,7 +12,7 @@ Install the framework:
 
 Please also install the static site generator Hugo:
 
-    [https://gohugo.io/getting-started/installing/](https://gohugo.io/getting-started/installing/)
+    https://gohugo.io/getting-started/installing/
 
 You should now be able to run `rog` the Ruby On Go CLI.
 
