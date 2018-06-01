@@ -93,7 +93,7 @@ def generate_rog_dir(name, path)
 
     #Panel
     gen(path, 'panel')
-    gen(path, 'views')
+    gen(path, 'panel', 'views')
     #gen(path, 'panel.yml')
     #gen(path, 'config.ru')
     gen(path, 'gen', 'Rakefile')
