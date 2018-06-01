@@ -2,8 +2,7 @@ sudo: false
 language: ruby
 rvm:
   - 1.9.3
-install:
+before_install:
   - wget -O /tmp/hugo.deb https://github.com/spf13/hugo/releases/download/v0.41/hugo_0.41_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-before_install:
   - gem install bundler -v 1.16.2
