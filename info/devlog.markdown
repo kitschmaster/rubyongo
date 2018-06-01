@@ -471,9 +471,7 @@ GOPATH is go's "workspace", where it downloads packages.
 
 #16.08.2016 20:30:56 CodingSession::BEGIN
 
-#12.05.2016 09:07:53 CodingSession::END
-
-leeches surround me. ii must be god.
+#12.05.2016 11:08:21 CodingSession::END
 
 testing... go test ./tests/api_tests/auth_middleware_test.go
 
@@ -484,9 +482,9 @@ where to put the settings for the backend JWT keys... settings/tests.json
 
 replacing the redis client with sqlite... go get github.com/mattn/go-sqlite3
 
-#12.05.2016 11:08:21 CodingSession::BEGIN
+#12.05.2016 09:07:53 CodingSession::BEGIN
 
-#11.05.2016 11:06:37 CodingSession::END
+#11.05.2016 17:56:34 CodingSession::END
 
 running the go wo package:
 export APP_ADDR=0.0.0.0:8080
@@ -496,7 +494,7 @@ jwt auth + taking orders and pushing them into the db...
 
 how to test...
 
-#11.05.2016 17:56:34 CodingSession::BEGIN
+#11.05.2016 11:06:37 CodingSession::BEGIN
 
 #03.05.2016 17:49:59 CodingSession::END
 
