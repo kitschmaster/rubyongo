@@ -1,0 +1,20 @@
+{{ partial "header.html" . }}
+
+{{ partial "cart.html" . }}
+
+<div id="post-index item-index" class="container">
+    {{ partial "intro.html" . }}
+
+    <ol class="post-list item-list">
+        {{ $pag := .Paginate .Data.Pages }}
+        {{ range $pag.Pages }}
+            {{ partial "item-stub.html" . }}
+        {{ end }}
+    </ol>
+
+    <div class="post-navigation item-navigation">
+        {{ partial "pagination.html" . }}
+    </div>
+</div>
+
+{{ partial "footer.html" . }}

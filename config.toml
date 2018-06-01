@@ -1,0 +1,34 @@
+baseURL = "http://rubyongo.org/"
+languageCode = "en-us"
+title = "My New Rog Site"
+
+theme = "default"
+
+[params]
+    title = "Ruby On Go"
+    subtitle = "A webshop framework."
+    author = "Miha Plohl"
+    description = ""
+    keywords = ""
+
+    #Site settings
+    currency = "EUR"
+    taxRate = 0.22
+    shippingFlatRate = 3
+    shippingTotalRate = 0
+    shippingQuantityRate = 0
+    shippingFreeQuantity = 2
+
+    # Body background color
+    bodybgcolor = "#f9f9f9"
+
+    # Order button
+    buttontext = "Add to basket"
+
+    # Footer text
+    footertext = "Prices include tax 01.06.2018<br/><br/><br/><a style='font-size: 0.5em' href='https://kitschmaster.com'>kitschmaster design</a>"
+
+    # Wo integration
+    [params.wo]
+        url = "w/o"
+        redirect = "w/d"

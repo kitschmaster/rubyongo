@@ -1,0 +1,15 @@
+<header class="post-header simpleCart_shelfItem">
+    <h1 class="post-title item_name">{{ .Title }}</h1>
+    {{ if .Description }}
+        <p class="post-description">{{ .Description }}</p>
+    {{ end }}
+    <p class="post-date">
+        <span>by</span>
+        <a href="{{ .Site.Author.profile }}">{{ .Site.Author.name }}</a>
+    </p>
+    {{ if .Params.price }}
+        <p class="post-description item_price">{{ .Params.price }}
+        <a class="simpleCart_item_add item_add" href="javascript:;"><i class="fa fa-shopping-cart"></i> Add to My Cart </a>
+        </p>
+    {{ end }}
+</header>

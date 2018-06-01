@@ -1,0 +1,15 @@
+development: &common_settings
+  app_name: rubyongo
+  usr: rubyongo
+  pas: shop1111
+  ss: 369736hkkfs98u39fjot4b98u089vdgnndkjg1044
+  sendform_to_business: rubyongo@gmail.com
+  sendform_subject: Order
+  sendform_from: rubyongo@gmail.com
+  thumbnail_resize: '250x250!'
+
+test:
+  <<: *common_settings
+
+production:
+  <<: *common_settings
