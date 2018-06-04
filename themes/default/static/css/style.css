@@ -199,9 +199,12 @@ table {
       background: #303030; }
 
 .site-logo {
-  display: block; }
+  display: inline-block; }
   .site-logo img {
-    margin: 0; }
+    margin: 0;
+    width: 69px;
+    height: 85px;
+  }
 
 .site-nav {
   list-style: none;

@@ -168,6 +168,14 @@
 
 				isReady: false,
 
+				settings: function() {
+					return settings;
+				},
+
+				set: function(key, value) {
+					settings[key]= value;
+				},
+
 				// this is where the magic happens, the add function
 				add: function (values, opt_quiet) {
 					var info		= values || {},
@@ -512,11 +520,17 @@
 			 *******************************************************************/
 			simpleCart.extend({
 
+				totalMinusTax: function () {
+					var totalToTax = simpleCart.total(),
+						cost = simpleCart.total() - simpleCart.taxRate() * totalToTax;
+					return parseFloat(cost);
+				},
+
 				// TODO: tax and shipping
 				tax: function () {
 					var totalToTax = settings.taxShipping ? simpleCart.total() + simpleCart.shipping() : simpleCart.total(),
 						cost = simpleCart.taxRate() * totalToTax;
-					
+
 					simpleCart.each(function (item) {
 						if (item.get('tax')) {
 							cost += item.get('tax');
@@ -526,7 +540,7 @@
 					});
 					return parseFloat(cost);
 				},
-				
+
 				taxRate: function () {
 					return settings.taxRate || 0;
 				},

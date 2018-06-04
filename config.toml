@@ -1,15 +1,35 @@
 baseURL = "http://rubyongo.org/"
 languageCode = "en-us"
-title = "My New Rog Site"
+title = "Ruby On Go"
 
+#theme = "gridshop"
 theme = "default"
+[author]
+  name = "a webshop framework"
+  shortBio = "team kitschmaster"
+
+[[menu.main]]
+    name = "Stream"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
+
+[[menu.main]]
+    name = "Shop"
+    url = "/item"
+    weight = 5
 
 [params]
     title = "Ruby On Go"
     subtitle = "A webshop framework."
     author = "Miha Plohl"
     description = ""
-    keywords = ""
+    keywords = "ruby, go, webshop, framework, ecommerce"
+    logo = "/img/rog_logo_1.png"
 
     #Site settings
     currency = "EUR"

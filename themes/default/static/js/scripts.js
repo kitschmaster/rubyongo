@@ -1,21 +1,5 @@
 jQuery(function($) {
 
-    /* ============================================================ */
-    /* Responsive Videos */
-    /* ============================================================ */
-
-    $(".post-content").fitVids();
-
-    /* ============================================================ */
-    /* Scroll To Top */
-    /* ============================================================ */
-
-    $('.js-jump-top').on('click', function(e) {
-        e.preventDefault();
-
-        $('html, body').animate({'scrollTop': 0});
-    });
-
     var simpleCartURL = "http://localhost:8080/w/o";
     var simpleCartRedirectURL = "http://localhost:8080/w/d";
     if (woURL !== undefined) {
@@ -43,9 +27,20 @@ jQuery(function($) {
 
     simpleCart.bind( 'afterAdd' , function( item ){
         //alert( item.name + " has been added to the cart!");
+        /*ga('send', {
+          hitType: 'event',
+          eventCategory: 'RokaviceBasket',
+          eventAction: 'add',
+          eventLabel: item.name
+        });*/
     });
-    simpleCart.bind( 'beforeCheckout' , function(){
-        alert( "Success!");
+    simpleCart.bind( 'beforeCheckout' , function(item){
+        /*ga('send', {
+          hitType: 'event',
+          eventCategory: 'RokaviceBasket',
+          eventAction: 'order',
+          eventLabel: item.name
+        });*/
     });
 
     var dialog = $('div.simpleCart_dialog');

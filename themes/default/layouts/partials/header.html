@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="{{ .Site.BaseURL }}css/normalize.css">
         <link rel="stylesheet" href="{{ .Site.BaseURL }}css/highlight.css">
         <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
+        <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/default.css" />
+        <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/component.css" />
+        <script src="{{ .Site.BaseURL }}js/modernizr.custom.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     </head>
@@ -23,16 +26,15 @@
             <header class="site-header">
                 <div class="container">
                     <div class="site-title-wrapper">
-                        {{ with .Site.Params.logo }}
+                        <div>
                             <a class="site-logo" title="{{ .Title }}" href="{{ .Site.BaseURL }}">
-                                <img src="{{ . }}" alt="{{ .Title }}" />
+                                <img src="{{ .Site.Params.logo }}" alt="{{ .Title }}"/>
                             </a>
-                        {{ else }}
-                            <h1 class="site-title">
-                                <a title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-                            </h1>
-                        {{ end }}
-                        <a class="button-square" href="{{ .Site.BaseURL }}index.xml"><i class="fa fa-rss"></i></a>
+                        </div>
+                        <h1 class="site-title">
+                            <a title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+                        </h1>
+                        <!--<a class="button-square" href="{{ .Site.BaseURL }}index.xml"><i class="fa fa-rss"></i></a>-->
                         {{ with .Site.Params.twitter }}
                             <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="{{ . }}">
                                 <i class="fa fa-twitter"></i>

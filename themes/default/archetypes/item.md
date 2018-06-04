@@ -1,15 +1,19 @@
-+++
-weight = ""
-measures = ""
-sku = ""
-title = ""
-date = ""
-description = ""
-author = ""
-price = ""
-shipping_price = ""
-tax = ""
-quantity = 1
+---
+title: ""
+date: ""
+price: ""
+sku: ""
 tags = []
 categories = []
-+++
+keywords: []
+description: ""
+author: ""
+image: ""
+thumb: ""
+alt: ""
+item_title: ""
+item_description: ""
+item_variants: ""
+item_weight = ""
+item_measures = ""
+---

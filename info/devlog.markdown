@@ -1,3 +1,13 @@
+started working on the Ruby On Go website.
+it's going to be part of the gem it self.
+but still have some miles to run, before ii can deploy...
+
+ii have been doing catching up with Hugo. when ii first worked with it, it was 0.14, now it is 0.42, so some things have changed, well not changed, just have even more options now...
+
+after this week ii should be able to deploy the Ruby On Go website, and then on to spinpaintings.shop...
+
+#04.06.2018 09:07:23 CodingSession::BEGIN
+
 #01.06.2018 23:27:46 ComSession::END
 
 after the quick morning commit session ii then took a test for a dayjob.
