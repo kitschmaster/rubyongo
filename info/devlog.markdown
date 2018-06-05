@@ -1,3 +1,5 @@
+#05.06.2018 19:20:10 CodingSession::END
+
 working on the logo...
 
 realised ii need to develop the theme with sass... so installing:
@@ -98,7 +100,6 @@ the difference from this:
       </div>
   </div>
   {{ partial "footer.html" . }}
-
 
 VS the shorter `.singlepage` version is in just a different layout. ii am confused, because ii am joining a few hugo themes into one and that is why ii have slightly different views setup. ii simply need to take the most recent one and evaluate against the older one, and then make a better and simpler one... haha... this should then work.
 
