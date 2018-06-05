@@ -147,7 +147,7 @@ table {
     margin: 0 auto;
     position: relative;
     width: 100%;
-    max-width: 889px;
+    max-width: 963px;
 }
 
 #wrapper {
@@ -231,7 +231,12 @@ table {
 .site-logo {
     display: block;
 
-    img { margin: 0; }
+    img {
+            padding: 10px;
+            margin: 0 auto;
+            width: 79px;
+            height: 79px;
+        }
 }
 
 .site-nav {
@@ -563,6 +568,7 @@ table {
 .simpleCart_item_add {
     text-align: right;
 }
+
 /* ============================================================ */
 /* Overlay */
 /* ============================================================ */
@@ -579,6 +585,7 @@ table {
         overflow: scroll;
     }
 }
+
 /* ============================================================ */
 /* NProgress */
 /* ============================================================ */

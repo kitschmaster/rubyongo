@@ -1,122 +1,38 @@
-.og-grid {
-	list-style: none;
-	padding: 20px 0;
-	margin: 0 auto;
-	text-align: center;
-	width: 100%;
+/* A very simple flexbox Grid
+	 This is the default Ruby On Go shop/items view. A flexible list of boxes for every Item.
+*/
+
+.grid {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+	  flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
-.og-grid li {
-	display: inline-block;
-	margin: 10px 5px 0 5px;
-	vertical-align: top;
-	height: 250px;
+.grid > div {
+  margin: 2px;
+  padding: 0;
 }
 
-.og-grid li > a,
-.og-grid li > a img {
-	border: none;
-	outline: none;
-	display: block;
-	position: relative;
-	border-radius: 3px;
-}
-
-.og-grid li > div.over {
-	display: block;
-	float: left;
-	position: absolute;
-	z-index: 20;
-	text-align: right;
-	color: white;
-	background-color: rgba(133, 133, 133, 0.35);
-	border-radius: 3px;
-	padding: 0.2em;
-}
-
-.og-grid li.og-expanded > a::after {
-	top: auto;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-bottom-color: #ddd;
-	border-width: 15px;
-	left: 50%;
-	margin: -20px 0 0 -15px;
-}
-
-.og-expander {
-	position: absolute;
-	background: #ddd;
-	top: auto;
-	left: 0;
-	width: 100%;
-	margin-top: 10px;
-	text-align: left;
-	height: 0;
-	overflow: hidden;
-	min-height: 701px;
-}
-
-.og-expander-inner {
-	padding: 50px 30px;
-	height: 100%;
-}
-
-.og-close {
-	position: absolute;
-	width: 40px;
-	height: 40px;
-	top: 20px;
-	right: 20px;
-	cursor: pointer;
-}
-
-.og-close::before,
-.og-close::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	top: 50%;
-	height: 1px;
-	background: #888;
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	transform: rotate(45deg);
-}
-
-.og-close::after {
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	transform: rotate(-45deg);
-}
-
-.og-close:hover::before,
-.og-close:hover::after {
-	background: #333;
-}
+/*
+	A single item detail view
+*/
 
 .og-fullimg,
 .og-details {
-	width: 50%;
-	float: left;
-	height: 100%;
-	overflow: hidden;
-	position: relative;
+	width: 49%;
 }
 
 .og-fullimg {
 	text-align: center;
 	padding: 0 20px 0;
-}
-
-.og-fullimg img {
-	display: inline-block;
-	max-height: 100%;
-	max-width: 100%;
 }
 
 .og-details h1 {
@@ -202,47 +118,12 @@ div.singlepage .og-details a:hover {
 	color: #999;
 }
 
-.og-loading {
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background: #ddd;
-	box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ccc;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -25px 0 0 -25px;
-	-webkit-animation: loader 0.5s infinite ease-in-out both;
-	-moz-animation: loader 0.5s infinite ease-in-out both;
-	animation: loader 0.5s infinite ease-in-out both;
-}
+.media screen and (max-width: 830px) {
 
-@-webkit-keyframes loader {
-	0% { background: #ddd; }
-	33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
-	66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
-}
-
-@-moz-keyframes loader {
-	0% { background: #ddd; }
-	33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
-	66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
-}
-
-@keyframes loader {
-	0% { background: #ddd; }
-	33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
-	66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
-}
-
-@media screen and (max-width: 830px) {
-
-	.og-expander h1 { font-size: 32px; }
-	.og-expander p { font-size: 13px; }
-	.og-expander a { font-size: 12px; }
 	div.singlepage {
 		padding: 0.5em;
 	}
+
 	div.singlepage .og-details .button {
 		width: 100%;
 		background-color: transparent;
@@ -256,9 +137,11 @@ div.singlepage .og-details a:hover {
 	.og-fullimg { width: 100%; }
 
 	.og-details { float: none; width: 100%; }
+
 	div.singlepage {
 		padding: 0.5em;
 	}
+
 	div.singlepage .og-details .button {
 		width: 100%;
 		background-color: transparent;
@@ -269,14 +152,6 @@ div.singlepage .og-details a:hover {
 	div.singlepage .og-details p.price {
 		text-align: center;
 	}
-}
-
-.og-flex {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: #F8F8F8;
-	border-radius: 6px;
 }
 
 .og-back {
@@ -296,4 +171,40 @@ div.singlepage .og-details a:hover {
     text-align: center;
     line-height: 140px;
     display: block;
+}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.item-container {
+  position: relative;
+  width: 100%;
+  min-width: 250px;
+  max-width: 250px;
+}
+
+/* Make the image to responsive */
+.item-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.item-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity: 1;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.item-container:hover .item-overlay {
+  opacity: 0;
 }

@@ -1,0 +1,16 @@
+<div class="grid">
+  {{ range (where .Data.Pages "Type" "item") }}
+  <div class="simpleCart_shelfItem">
+    <a class="item" href="{{.Permalink }}" data-largesrc="{{.Params.image}}" data-title="{{.Params.item_title}}" data-description="{{.Params.item_description }}" data-price="{{.Params.price}}" data-sku="{{.Params.sku}}">
+
+      <div class="item-container">
+        <img class="item-image" src="/{{.Params.thumb}}" alt="{{.Params.alt}}" width="220px" height="220px"/>
+        <div class="item-overlay">
+          <div class="item-text">{{.Params.item_title}} <b>{{.Params.price}}</b></div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  {{ end }}
+</div>

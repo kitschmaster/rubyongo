@@ -29,7 +29,7 @@ theme = "default"
     author = "Miha Plohl"
     description = ""
     keywords = "ruby, go, webshop, framework, ecommerce"
-    logo = "/img/rog_logo_1.png"
+    logo = "/img/rog_logo.png"
 
     #Site settings
     currency = "EUR"

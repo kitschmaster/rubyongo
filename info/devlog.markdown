@@ -1,3 +1,74 @@
+working on the logo...
+
+realised ii need to develop the theme with sass... so installing:
+
+  > brew install --devel sass/sass/sass
+
+nope, does not work!
+
+had to do it like this:
+
+  > brew install sass/sass/sass
+
+obviously this also installs dart. so if one wants to use sass in a theme, it's up to the theme developer.
+ii will not integrate sass, just provide some examples on how to use it in a theme...
+
+one could also do:
+
+  > gem install sass
+
+which would install the ruby sass... but the newest sass is dart-sass, so using that one.
+
+watching files during theme development:
+
+  > sass --watch themes/default/assets/:themes/default/static/css/
+
+what? that gives me: `Could not find an option named "watch".`
+
+oh, surely dart-sass does not support the --watch flag yet: https://github.com/sass/dart-sass/issues/264
+
+so changing plan here... let's just use the ruby sass for now...
+
+and nope:
+
+  Fetching: sass-3.5.6.gem (100%)
+  ERROR:  Error installing sass:
+    sass requires Ruby version >= 2.0.0.
+
+so what can I do to stay on ruby 1.9.3? just ditch the damn thing? nah, ii need to move on,... so ok, ii'll use the dart-sass and run it manually for now...
+
+more trouble... after generating, ii get the following subfolder: `themes/default/css/sass`, why is it doing this?
+
+because ii need to write:
+
+  > sass themes/default/assets/sass:themes/default/static/css/
+
+and this finally worked.
+
+for some reason, Chrome does not load the new stylesheet, what is going on? clearing the cache helped.
+
+created a quick build command for my editor... when ii make a change in the sass file ii can hit `cmd+b` which runs this:
+
+  {
+    "cmd": ["sass", "--update", "$file:${file_path}/../../static/css/${file_base_name}.css"],
+  }
+
+this is enough for now, ii can quickly edit the sass and generate too.
+
+btw, [seeing golang variables in a hugo template is a matter of printing them out](https://discourse.gohugo.io/t/howto-show-what-values-are-passed-to-a-template/41)
+
+
+plus... after plenty of re-evaluating and cleaning up the initial code ii had from before, removing, removing... less is more...
+
+at this point ii don't care what you think about this software, ii am writing it to make money with it.
+
+let me do a quick commit, before ii continue...
+
+
+#05.06.2018 10:01:19 CodingSession::BEGIN
+
+#04.06.2018 11:20:35 CodingSession::END
+
 started working on the Ruby On Go website.
 it's going to be part of the gem it self.
 but still have some miles to run, before ii can deploy...
@@ -44,8 +115,8 @@ have it working at #31.05.2018 17:44:15, two public folders, the one from the us
 
 ii can now make some plans... ii could now work on (probably in this order):
 
-+ add ansible scripts and setup deployment commands
 + create the initial rubyongo website
++ add ansible scripts and setup deployment commands
 + deploy the initial rubyongo website
 + add and fixup the Mauler (MVP: be able to send emails from the deployed app)
 + finish and fixup the default theme (MVP: blog, shop, contact, about, pp, tc, sitemap)
