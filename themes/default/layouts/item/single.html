@@ -1,7 +1,19 @@
 {{ partial "header.html" . }}
+
+<!-- Uncomment to include the cart on the single item view -->
+<!--{{ partial "cart.html" . }}-->
+
 <div class="singlepage">
-  {{ partial "item-content.html" . }}
+        <!-- item-content.html alternative, replace for a blog like singlepage -->
+        <!--{{ partial "item-header.html" . }}-->
+
+        {{ partial "item-content.html" . }}
+
+        <!-- Uncomment to include an item footer with social links, etc... -->
+        <!--{{ partial "item-footer.html" . }}-->
+
+        <!-- Uncomment to include disqus -->
+        <!--{{ partial "disqus.html" . }}-->
+
 </div>
 {{ partial "footer.html" . }}
-
-

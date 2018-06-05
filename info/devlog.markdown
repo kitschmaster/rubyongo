@@ -64,6 +64,61 @@ at this point ii don't care what you think about this software, ii am writing it
 
 let me do a quick commit, before ii continue...
 
+it is amazing how much investigation ii have to go through before ii can combine my old code with improvements.
+
+but that is how programming works.
+
+ii am attempting to understang what this .singlepage concept is. ii can not remember, ii did not document it.
+
+so what is this:
+
+  {{ partial "header.html" . }}
+  <div class="singlepage">
+    {{ partial "item-content.html" . }}
+  </div>
+  {{ partial "footer.html" . }}
+
+why did ii have to do this in the mojerokavice.com webshlop... ii have to investigate...
+
+the difference from this:
+
+  {{ partial "header.html" . }}
+
+  {{ partial "cart.html" . }}
+
+  <div class="container">
+      <div class="">
+          <!--{{ partial "item-header.html" . }}-->
+
+          {{ partial "item-content.html" . }}
+
+          {{ partial "item-footer.html" . }}
+
+          {{ partial "disqus.html" . }}
+      </div>
+  </div>
+  {{ partial "footer.html" . }}
+
+
+VS the shorter `.singlepage` version is in just a different layout. ii am confused, because ii am joining a few hugo themes into one and that is why ii have slightly different views setup. ii simply need to take the most recent one and evaluate against the older one, and then make a better and simpler one... haha... this should then work.
+
+So visit yum/yum/:
+
+  http://localhost:1313/yum/yum/
+
+and see where this is rendered from.
+
+It is rendered via the default type "_default".
+
+Ever folder you create inside `content`, is a "type".
+
+A type of content one might say. Or a type of item.
+
+The possible arbitrary types are all rendered with the _default/ templates.
+
+So simply create all possible types in your theme and get different behavior based on the type of the data being viewed.
+
+The content folder reflects the theme/layout folder, and also vice versa.
 
 #05.06.2018 10:01:19 CodingSession::BEGIN
 

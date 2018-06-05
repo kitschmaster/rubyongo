@@ -3,7 +3,7 @@ title: "Simple shop"
 date: 2018-06-03T12:19:51+02:00
 price: "€99/mo"
 sku: "ROG02"
-title: "Ruby On Rog Small Shop"
+title: "Ruby On Go Small Shop"
 category: "webshop"
 keywords: ["webshop", "ecommerce"]
 description: "A webshop framework"
