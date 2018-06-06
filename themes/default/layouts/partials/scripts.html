@@ -49,7 +49,7 @@
                   var name = item.get("name");
                   var price = item.get("price");
                   var quant = item.get("quantity");
-                  mailto += name + "%20" + quant + "pieces%20" + price + currency_string + "%0A";
+                  mailto += quant + "%20" + name + "%20for%20" + price + currency_string + "%0A";
                 });
                 var grandTotal = simpleCart.total() + simpleCart.shipping();
                 mailto += "%0APrice%20without%20DDV%3A%20" + simpleCart.totalMinusTax()  + currency_string;
