@@ -1,4 +1,8 @@
+#06.06.2018 09:39:39 CodingSession::END
+
 ii am heading out for a walk in the mountains, can't help my self not to do some quick edits...
+
+little steps can climb mountains. :) and off for an epic walk..
 
 #06.06.2018 08:30:07 CodingSession::BEGIN
 
