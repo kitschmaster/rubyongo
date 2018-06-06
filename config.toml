@@ -38,6 +38,7 @@ theme = "default"
     shippingTotalRate = 0
     shippingQuantityRate = 0
     shippingFreeQuantity = 2
+    order_email = "kitschmaster@gmail.com"
 
     # Body background color
     bodybgcolor = "#f9f9f9"

@@ -1,3 +1,7 @@
+ii am heading out for a walk in the mountains, can't help my self not to do some quick edits...
+
+#06.06.2018 08:30:07 CodingSession::BEGIN
+
 #05.06.2018 19:20:10 CodingSession::END
 
 working on the logo...
