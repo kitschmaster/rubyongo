@@ -111,13 +111,13 @@ and see where this is rendered from.
 
 It is rendered via the default type "_default".
 
-Ever folder you create inside `content`, is a "type".
+Every folder you create inside `content`, is a "type".
 
 A type of content one might say. Or a type of item.
 
 The possible arbitrary types are all rendered with the _default/ templates.
 
-So simply create all possible types in your theme and get different behavior based on the type of the data being viewed.
+So simply create all possible types in your theme and get different behavior based on the type of the data being viewed/rendered.
 
 The content folder reflects the theme/layout folder, and also vice versa.
 
