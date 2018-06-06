@@ -3,7 +3,6 @@ title: "Big shop"
 date: 2018-06-03T16:28:10+02:00
 price: "€199/mo"
 sku: "ROG01"
-title: "Ruby On Go Big Shop"
 category: "webshop"
 keywords: ["webshop", "ecommerce"]
 description: "A webshop framework"
