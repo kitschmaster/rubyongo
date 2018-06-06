@@ -31,8 +31,9 @@
 }
 
 .item-fullimage {
-	text-align: center;
-	padding: 0 20px 0;
+  display: inline;
+  text-align: center;
+  padding: 0 20px 0;
 }
 
 .item-details h1 {
