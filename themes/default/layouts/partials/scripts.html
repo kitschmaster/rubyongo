@@ -38,8 +38,8 @@
             currency: "{{ .Site.Params.currency }}",
             taxRate: {{ .Site.Params.taxRate }},
             shippingFlatRate: shippingFlatRate,
-        shippingTotalRate: {{ .Site.Params.shippingTotalRate }},
-        shippingQuantityRate: {{ .Site.Params.shippingQuantityRate }},
+            shippingTotalRate: {{ .Site.Params.shippingTotalRate }},
+            shippingQuantityRate: {{ .Site.Params.shippingQuantityRate }},
             checkout: {
               type: "custom",
               fn: function(){
@@ -101,7 +101,7 @@
             dialog.addClass('hidden');
         });
 
-      $('span.og-back').on( 'click', function() {
+      $('span.item-details-back').on( 'click', function() {
         window.location.href = '/item'
         return false;
       });

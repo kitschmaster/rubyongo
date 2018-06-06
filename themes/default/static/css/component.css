@@ -25,24 +25,24 @@
 	A single item detail view
 */
 
-.og-fullimg,
-.og-details {
+.item-fullimage,
+.item-details {
 	width: 49%;
 }
 
-.og-fullimg {
+.item-fullimage {
 	text-align: center;
 	padding: 0 20px 0;
 }
 
-.og-details h1 {
+.item-details h1 {
 	font-weight: 300;
 	font-size: 62px;
 	padding: 0;
 	border-bottom: 1px solid grey;
 }
 
-.og-details h2 {
+.item-details h2 {
 	font-weight: normal;
 	font-size: 18px;
 	padding: 0 4px 0;
@@ -50,20 +50,20 @@
 	color: grey;
 }
 
-div.singlepage .og-details h1 {
+div.singlepage .item-details h1 {
 	font-weight: 300;
 	font-size: 62px;
 	margin: 0;
 }
 
-.og-details p {
+.item-details p {
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 22px;
 	color: #999;
 }
 
-div.singlepage .og-details .button {
+div.singlepage .item-details .button {
 	border-radius: 6px;
 	padding: 10%;
 	width: 100%;
@@ -71,7 +71,7 @@ div.singlepage .og-details .button {
 	text-align: center;
 }
 
-div.singlepage .og-details .button a {
+div.singlepage .item-details .button a {
 	font-weight: 700;
 	font-size: 16px;
 	color: #fff;
@@ -90,30 +90,30 @@ div.singlepage .og-details .button a {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 );
 }
 
-div.singlepage .og-details p.price {
+div.singlepage .item-details p.price {
 	font-weight: bold;
 	font-size: 2em;
 	padding-top: 0;
 	margin-bottom: 0;
 }
 
-div.singlepage .og-details p.description {
+div.singlepage .item-details p.description {
 	padding-top: 2em;
 	margin-bottom: 0;
 }
 
-div.singlepage .og-details p.variants {
+div.singlepage .item-details p.variants {
 	padding-top: 0.5em;
 	font-size: 1.0em;
 }
 
-div.singlepage .og-details a::before {
+div.singlepage .item-details a::before {
 	content: '\2192';
 	display: inline-block;
 	margin-right: 10px;
 }
 
-div.singlepage .og-details a:hover {
+div.singlepage .item-details a:hover {
 	border-color: #999;
 	color: #999;
 }
@@ -124,7 +124,7 @@ div.singlepage .og-details a:hover {
 		padding: 0.5em;
 	}
 
-	div.singlepage .og-details .button {
+	div.singlepage .item-details .button {
 		width: 100%;
 		background-color: transparent;
 		padding: 0;
@@ -134,27 +134,27 @@ div.singlepage .og-details a:hover {
 
 @media screen and (max-width: 650px) {
 
-	.og-fullimg { width: 100%; }
+	.item-fullimage { width: 100%; }
 
-	.og-details { float: none; width: 100%; }
+	.item-details { float: none; width: 100%; }
 
 	div.singlepage {
 		padding: 0.5em;
 	}
 
-	div.singlepage .og-details .button {
+	div.singlepage .item-details .button {
 		width: 100%;
 		background-color: transparent;
 		padding: 0;
 		text-align: center;
 	}
 
-	div.singlepage .og-details p.price {
+	div.singlepage .item-details p.price {
 		text-align: center;
 	}
 }
 
-.og-back {
+.item-details-back {
 	float: right;
 	color: #E2E2E2;
 	padding-right: 5px;
@@ -181,7 +181,7 @@ div.singlepage .og-details a:hover {
   max-width: 250px;
 }
 
-/* Make the image to responsive */
+/* Make the item list image responsive */
 .item-image {
   display: block;
   width: 100%;
