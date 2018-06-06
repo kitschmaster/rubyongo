@@ -1,0 +1,18 @@
+<div id='flash' class='flash'>
+  <% if flash[:success] %>
+    <div class='flash_success' style="color:green;">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class='flash_error' style="color:red;">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+  <div id='messages' class='messages'>
+    <% if @message %>
+      <%= @message %>
+    <% end %>
+  </div>
+</div>

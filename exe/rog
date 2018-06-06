@@ -1,0 +1,155 @@
+#!/usr/bin/env ruby
+
+require 'benchmark'
+
+# Colors
+class String
+  def red; colorize(self, "\e[1m\e[31m"); end
+  def green; colorize(self, "\e[1m\e[32m"); end
+  def dark_green; colorize(self, "\e[32m"); end
+  def yellow; colorize(self, "\e[1m\e[33m"); end
+  def blue; colorize(self, "\e[1m\e[34m"); end
+  def dark_blue; colorize(self, "\e[34m"); end
+  def pur; colorize(self, "\e[1m\e[35m"); end
+  def colorize(text, color_code) "#{color_code}#{text}\e[0m" end
+  def say(with_color = :blue); puts "#{self.send(with_color.to_sym)}"; end
+end
+
+# gem source path
+@gem_path = File.join(File.dirname(__FILE__))
+
+# just read two arguments (we will do full option parsing later)
+$:.unshift @gem_path
+@command = ARGV[0]
+@name = ARGV[1] if ARGV.length > 0
+
+# code generation path
+@gen_path = Dir.pwd
+
+# load rubyongo
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require "rubyongo/version"
+
+version = ::Rubyongo.version
+
+USAGE = <<-EOF
+#
+# Welcome to #{'RubyOnGo'.dark_blue} v#{version}
+#
+# This software is intended to help you with everyday webshop building.
+#
+# Use it as you #{'dodo'.green}.
+#
+
+Usage:
+
+  rog new Name   # generates a new webshop in the current folder
+  rog start      # starts the Panel backend (rackup)
+
+
+EOF
+
+def print_backtrace(exception)
+  exception.backtrace.join("\n\t").to_s.blue
+end
+
+def print_usage
+  puts USAGE
+end
+
+def set_env
+  if @name == '--production'
+    ENV['RACK_ENV'] = :production.to_s
+  else
+    ENV['RACK_ENV'] = :development.to_s
+  end
+end
+
+# Generate a file by copying
+def gen(to, *from)
+  src = File.join(@gem_path, '..', *from)
+  FileUtils.cp_r(src, to)
+end
+
+# Create rog folder with `hugo new site`
+def new_rog_dir(name, path)
+  if Dir.exists?(path)
+    "#{name} exists at #{path}.".say(:red)
+    exit(1)
+  else
+    r = `hugo new site #{name}`
+    if r =~ //
+      "Created #{path}.".say(:green)
+    else
+      r.say(:red)
+    end
+  end
+end
+
+def generate_rog_dir(name, path)
+  if Dir.exists?(path)
+    # Hugo
+    gen(path, 'themes')
+
+    #Panel
+    gen(path, 'panel')
+    gen(path, 'panel', 'views')
+    #gen(path, 'panel.yml')
+    #gen(path, 'config.ru')
+    gen(path, 'gen', 'Rakefile')
+    gen(path, 'gen', 'Gemfile')
+    gen(path, 'gen', 'test')
+    gen(path, 'gen', 'panel.yml')
+    gen(path, 'gen', 'config.ru')
+  else
+    "#{name} does not exist".say(:red)
+    exit(1)
+  end
+end
+
+def new_rog(name)
+  if name == nil || name == ""
+    "Please supply a name for the webshop.".say(:red)
+    return
+  end
+  path = File.join(@gen_path, name)
+  new_rog_dir(name, path)
+  generate_rog_dir(name, path)
+  "Success".say(:green)
+end
+
+def run_rog
+  set_env
+  require 'rubyongo'
+  "Rubyongo #{ENV['RACK_ENV']}".say(:dark_blue)
+  Rubyongo::Kit.run!
+end
+
+def run_hugo_server
+  set_env
+  args = "" # TODO
+  exec("hugo server #{args}")
+end
+
+def dodo
+  #time = Benchmark.realtime do
+    if @command == 'help' || @command == nil || @command == ""
+      print_usage
+    elsif @command == 'new'
+      new_rog(@name)
+    elsif @command == 's' || @command == 'start'
+      run_rog
+    elsif @command == 'h' || @command == 'hugo'
+      run_hugo_server
+    end
+  #end
+  #"Realtime: #{time}sec\n".say(:yellow)
+end
+
+# run
+begin
+  dodo
+rescue StandardError => e
+  "Runtime exception: #{e.message.to_s.blue}\nBacktrace:\n#{print_backtrace(e)}".say(:red)
+  print_usage
+end

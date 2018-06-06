@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="atejas" />
+	<title><%= settings.app_name %></title>
+
+	<link rel="stylesheet" href="/kit/css/pure-min.css">
+	<link rel="stylesheet" href="/kit/css/panel.css">
+	<link rel="stylesheet" href="/kit/css/themes/default/style.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+
+<!--[if lte IE 8]>
+		<link rel="stylesheet" href="/css/grids-responsive-old-ie-min.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="/kit/css/grids-responsive-min.css">
+<!--<![endif]-->
+
+	<script src="//code.jquery.com/jquery-1.12.2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+	<script src="/kit/js/jstree.min.js"></script>
+	<script src="/kit/js/showdown.min.js"></script>
+	<script src="/kit/js/panel.js"></script>
+
+	</head>
+
+
+	<body class="site s">
+
+		<%= erb :_header %>
+
+		<div class='main'>
+			<div id='content'>
+				<%= yield %>
+			</div>
+		</div>
+
+		<%= erb :_footer %>
+
+	</body>
+</html>

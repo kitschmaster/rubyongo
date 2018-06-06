@@ -1,0 +1,112 @@
+    <script src="{{ .Site.BaseURL }}js/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+    <script src="{{ .Site.BaseURL }}js/jquery.fitvids.js"></script>
+
+    <script type="text/javascript">
+      var woRedirectURL = "{{ .Site.Params.wo.redirect }}";
+      var woURL = "{{ .Site.Params.wo.url }}";
+    </script>
+
+    <script src="{{ .Site.BaseURL }}js/simpleCart.js"></script>
+
+    <script>
+      $(function() {
+        //Grid.init();
+        var simpleCartURL = "http://localhost:8080/w/o";
+        var simpleCartRedirectURL = "http://localhost:8080/w/d";
+        if (woURL !== undefined) {
+            simpleCartURL = woURL;
+        }
+        if (woRedirectURL !== undefined) {
+            simpleCartRedirectURL = woRedirectURL;
+        }
+
+        var currency_string = "%E2%82%AC";
+        var shippingFreeQuantity = {{ .Site.Params.shippingFreeQuantity }};
+        var shippingFlatRate = {{ .Site.Params.shippingFlatRate }};
+        //get JWT token if not yet having one
+        simpleCart({
+            //checkout: {
+            //    type: "SendForm" ,
+            //    url: simpleCartURL,
+            //    method: "POST",
+            //    extra_data: {
+            //        redirect_url: simpleCartRedirectURL
+            //        //send jwt token with the post
+            //    }
+            //},
+            currency: "{{ .Site.Params.currency }}",
+            taxRate: {{ .Site.Params.taxRate }},
+            shippingFlatRate: shippingFlatRate,
+        shippingTotalRate: {{ .Site.Params.shippingTotalRate }},
+        shippingQuantityRate: {{ .Site.Params.shippingQuantityRate }},
+            checkout: {
+              type: "custom",
+              fn: function(){
+                var mailto = "mailto:mojerokavice@gmail.com?subject=Naročilo&body=";
+                simpleCart.each( function (item, x, val) {
+                  //var item = simpleCart.find(val);
+                  var name = item.get("name");
+                  var price = item.get("price");
+                  var quant = item.get("quantity");
+                  mailto += name + "%20" + quant + "kos%20" + price + currency_string + "%0A";
+                });
+                var grandTotal = simpleCart.total() + simpleCart.shipping();
+                mailto += "%0ACena%20brez%20DDV%3A%20" + simpleCart.totalMinusTax()  + currency_string;
+                mailto += "%0ACena%20z%20DDV%3A%20" + simpleCart.total()  + currency_string;
+                mailto += "%0ADostava%3A%20" + simpleCart.shipping() + currency_string;
+                mailto += "%0ASkupaj%3A%20" + grandTotal + currency_string;
+                mailto += "%0A%0AVa%C5%A1%20naslov%3A";
+                mailto += "%0A%0A";
+                console.log("generated: " + mailto);
+                window.location.href = mailto;
+                return false;
+              }
+            },
+            cartStyle: 'table',
+            cartColumns: [
+              { attr: "name", label: "Ime" },
+              { attr: "price", label: "Cena", view: 'currency' },
+              { view: "decrement", label: false },
+              { attr: "quantity", label: "Količina" },
+              { view: "increment", label: false },
+              { attr: "total", label: "Vsota", view: 'currency' },
+              { view: "remove", text: "Odstrani", label: false }
+          ]
+        });
+
+        simpleCart.bind( 'update' , function( item ){
+            //alert( item.name + " has been added to the cart!");
+            //console.log("udpate");
+            if ( simpleCart.quantity() >= shippingFreeQuantity) {
+              //console.log("update quantity over shipping");
+              simpleCart.set('shippingFlatRate', 0);
+            } else {
+              //console.log("update quantity under shipping");
+              simpleCart.set('shippingFlatRate', shippingFlatRate);
+            }
+        });
+
+        simpleCart.bind( 'beforeCheckout' , function(){
+            alert( "Success!");
+        });
+
+        var dialog = $('div.simpleCart_dialog');
+
+        $('a.simpleCart_toggle_button').on('click', function(e) {
+            e.preventDefault();
+            dialog.removeClass('hidden');
+        });
+        $('button.simpleCart_dialog_close').on('click', function() {
+            dialog.addClass('hidden');
+        });
+
+      $('span.og-back').on( 'click', function() {
+        window.location.href = '/item'
+        return false;
+      });
+    });
+
+    hljs.initHighlightingOnLoad();
+
+    </script>

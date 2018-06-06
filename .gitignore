@@ -1,0 +1,49 @@
+#----------------------------------------------------------------------------
+# Ignore these files.
+#----------------------------------------------------------------------------
+
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*~
+*.gem
+
+# Mac finder artifacts
+.DS_Store
+
+# Passenger restart file
+restart.txt
+
+# Sass
+.sass-cache
+
+# Database
+db.sqlite
+
+# Content
+content/*
+
+# Settings
+#config.toml
+#rog.yml
+#panel.yml
+
+Gemfile.lock
+
+# Public
+public/*
+
+# Ruby
+.ruby-version
+.ruby-gemset
+
+# Go source
+lib/gosrc/src/github.com
+lib/gosrc/src/golang.org
+lib/gosrc/src/gopkg.in
+lib/gosrc/pkg/darwin_amd64/*

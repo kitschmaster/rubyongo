@@ -1,0 +1,35 @@
+<div class="menu-wrapper pure-g" id="menu">
+  <div class="pure-u-1 pure-u-md-1-3">
+    <div class="pure-menu">
+      <a href="/panel" class="pure-menu-heading menu-brand">Guru Panel<div id="spinner" class="spinner hidden"></div>
+
+      </a>
+      <a href="#" class="menu-toggle" id="toggle"><s class="bar"></s><s class="bar"></s></a>
+    </div>
+  </div>
+  <div class="pure-u-1 pure-u-md-1-3" style="text-align: center">
+    <div class="pure-menu pure-menu-horizontal menu-can-transform">
+      <ul class="pure-menu-list">
+        <% if guru_tunedin? %>
+          <%= menu_item "Shop", "Customers & orders", "fa-eye", "shop_editor" %>
+          <%= menu_item "Stream", "Stream upload", "fa-upload", "stream_editor" %>
+          <%= menu_item "Content", "Site editor", "fa-edit", "content_editor" %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="pure-u-1 pure-u-md-1-3">
+    <div class="pure-menu pure-menu-horizontal menu-menu-3 menu-can-transform">
+      <ul class="pure-menu-list">
+        <% if guru_tunedin? %>
+          <li class="pure-menu-item"><a title="You" class="pure-menu-link" href="/panel"><i class="fa fa-eye"></i> <%=current_guru.username%></a></li>
+          <li class="pure-menu-item"><a title="Logout" class="pure-menu-link"  href="/auth/out"><i class="fa fa-sign-out"></i> Drop out</a></li>
+        <% else %>
+          <% if !tuningin? %>
+            <li class="pure-menu-item"><a title="Login" class="pure-menu-link" href="/auth/in"><i class="fa fa-sign-in"></i> Tune in</a></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
