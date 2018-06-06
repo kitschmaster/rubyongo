@@ -10,7 +10,7 @@ image: "item/rog_logo.png"
 thumb: "item/rog_logo.png"
 alt: "ROG02"
 item_title: "ROG Small Shop"
-item_description: "A small and simple webshop for your needs."
+item_description: "A small webshop for your needs."
 item_variants: ""
 ---
 
