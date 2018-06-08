@@ -1,3 +1,17 @@
+#08.06.2018 22:44:16 ComSession::END
+
+the mountain was epic, now let's build an epic shop.
+
+am thinking about bitcoin payments... if ii use the transaction id ii will be vulnerable to malleability. requesting the transaction id from the customer is also reducing privacy for both parties. so am thinking it is better to generate a new address for each possible transaction (shop item with a price) and check that enough bitcoin was transfered to that address in some timeframe.
+
+...
+
+so many options to choose from, APIs all over, but nothing quite what I want.
+
+need to do more research.
+
+#08.06.2018 08:41:14 ComSession::BEGIN
+
 #06.06.2018 09:39:39 CodingSession::END
 
 ii am heading out for a walk in the mountains, can't help my self not to do some quick edits...
@@ -57,16 +71,15 @@ and this finally worked.
 
 for some reason, Chrome does not load the new stylesheet, what is going on? clearing the cache helped.
 
-created a quick build command for my editor... when ii make a change in the sass file ii can hit `cmd+b` which runs this:
+created a quick build command for my Sublime Text 3 editor... when ii make a change in the sass file ii can hit `cmd+b` which runs this:
 
   {
     "cmd": ["sass", "--update", "$file:${file_path}/../../static/css/${file_base_name}.css"],
   }
 
-this is enough for now, ii can quickly edit the sass and generate too.
+this is enough for now, ii can quickly edit the sass and generate the css too.
 
 btw, [seeing golang variables in a hugo template is a matter of printing them out](https://discourse.gohugo.io/t/howto-show-what-values-are-passed-to-a-template/41)
-
 
 plus... after plenty of re-evaluating and cleaning up the initial code ii had from before, removing, removing... less is more...
 
