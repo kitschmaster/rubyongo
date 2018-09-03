@@ -1,3 +1,9 @@
+back at it. re-focusing. what to do first.
+
+ii want to start spinning up the first shop, but have not yet done the deployment stuff... so doing it today...
+
+#03.09.2018 09:18:18 CodingSession::BEGIN
+
 #08.06.2018 22:44:16 ComSession::END
 
 the mountain was epic, now let's build an epic shop.
