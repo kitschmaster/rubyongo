@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# Initialize a fresh repo.
+#
+# Full example:
+#   cd sys; roginit rubyongo rubyongo.org kitschmaster@kitschmaster.com:~/kit.org.git
+# Using default github hosted repository (git@github.com:kitschmaster/rubyongo.git):
+#   cd sys; roginit username domain.name
+
+# Args
+name="$1@$2" # => rubyongo@rubyongo.org
+repo="$2"    # => rubyongo.org
+repo_check="$2/.git"
+CLONE_DEFAULT="https://github.com/kitschmaster/rubyongo.git" # "git@github.com:kitschmaster/rubyongo.git"
+CLONE="${3:-$CLONE_DEFAULT}"       # => kitschmaster@kitschmaster.com:~/kit.org.git
+DEPLOY_KEY="keys/deploy_$name.pub" # => keys/deploy_rubyongo@rubyongo.org.pub
+LOCAL_PUB_KEY="$HOME/.ssh/id_rsa.pub"
+PUB_KEY=$(<$LOCAL_PUB_KEY)         # Fetch the local public key into a variable
+
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied, please provide full repo name, example: roginit rubyongo@rubyongo.org"
+    exit 1
+fi
+
+if [ -f "$DEPLOY_KEY" ] # if the deploy key exists in the keys folder?
+then
+  echo "$DEPLOY_KEY exists, $name is already configured. (Delete the deploy key to re-init.)"
+  exit 1
+else
+  if [ -f "$LOCAL_PUB_KEY" ]
+  then
+    if ssh $name "grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys"
+    then
+      echo
+    else
+      echo Setting up SSH access for $name, please pass your SSH user password when doing this for the first time.
+      echo Adding local public key $LOCAL_PUB_KEY to $name:~/.ssh/authorized_keys
+      # Now create the .ssh dir on the remote host, copy the local public key into authorized_keys to get passwordless SSH access, while avoiding duplicate key entry.
+      ssh $name "umask 0077 ; mkdir -p ~/.ssh ; grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys 2>/dev/null || echo \"$PUB_KEY\" >> ~/.ssh/authorized_keys"
+    fi
+
+    if ssh $name test -d $repo_check
+    then
+      echo A repository already exists, nothing to init. Please run 'rogup' to upgrade libs.
+      exit 1
+    else
+      echo Cloning from $CLONE
+      ssh $name "rm -rf $repo && git clone $CLONE $repo && cd $repo && git pull"
+
+      echo Done rog init. Please run 'rogup' to complete lib setup.
+    fi
+  else
+    echo Missing public SSH key $LOCAL_PUB_KEY, please generate one https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+    exit 1
+  fi
+fi
+

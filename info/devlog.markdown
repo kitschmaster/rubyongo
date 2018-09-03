@@ -1,3 +1,18 @@
+#03.09.2018 17:00:27 CodingSession::END
+
+back at it. re-focusing. what to do first.
+
+ii want to start spinning up the first shop, but have not yet done the deployment stuff... so doing it today...
+
+have the init script up and running. ii did a run on rubyongo.org, as expected ii am seeing this:
+
+    Undefined local variable or method `git_source' for Gemfile
+        from /home/rubyongo/rubyongo.org/Gemfile:3 (Bundler::GemfileError)
+
+so tomorrow will be continuing with the "rogup" script, which will run Ansible scripts and setup ruby, go, etc...
+
+#03.09.2018 09:18:18 CodingSession::BEGIN
+
 #08.06.2018 22:44:16 ComSession::END
 
 the mountain was epic, now let's build an epic shop.
