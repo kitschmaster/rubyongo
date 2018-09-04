@@ -6,6 +6,19 @@ adding deploy script "rogd".
 
 right now, all these scripts need to be run from the "sys" folder. later these will be spawned from the main "rog" CLI. something like: "rog deploy", "rog init", "rog up"...
 
+oh yes, javascript loading fixed from config.toml by adjusting the baseURL = "https://rubyongo.org/" to "https".
+
+we now have a working rubyongo.org static site, with a backend panel running nicely... nope, the ruby part is not yet up, getting:
+
+  Undefined local variable or method `git_source' for Gemfile
+          from /home/rubyongo/rubyongo.org/Gemfile:3 (Bundler::GemfileError)
+
+am deploying to ruby1.9.3, and bundler is too old:
+  bundle -v
+  Bundler version 1.3.5
+
+added an ansible task to install bundler on "rogup". also added a "bundle" command to the "rogd" deployment script.
+
 #04.09.2018 09:00:26 CodingSession::BEGIN
 
 #03.09.2018 17:00:27 CodingSession::END

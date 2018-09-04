@@ -69,6 +69,9 @@ else
       echo Cloning from $CLONE
       ssh $NAME "rm -rf $REPO && git clone $CLONE $REPO && cd $REPO && git pull"
 
+      #echo Installing bundler and gems
+      #ssh $NAME "cd $REPO && gem install bundler --no-rdoc --no-ri && bundle"
+
       echo Done rog init. Please run 'rogup' to complete lib setup.
     fi
   else
