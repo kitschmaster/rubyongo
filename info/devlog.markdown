@@ -19,6 +19,8 @@ am deploying to ruby1.9.3, and bundler is too old:
 
 added an ansible task to install bundler on "rogup". also added a "bundle" command to the "rogd" deployment script.
 
+but still no go with the "git_source" method, since we're too old... so let's get rid of it for now.
+
 #04.09.2018 09:00:26 CodingSession::BEGIN
 
 #03.09.2018 17:00:27 CodingSession::END
