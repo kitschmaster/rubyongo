@@ -37,6 +37,9 @@ must be some kind of server problem, checking my .htaccess... nah, the problem w
       url = "/item/"
       weight = 5
 
+exploring further, the images in the shop section do not appear ~ checking.
+
+the rog_logo.png image was missing. added and now it works nicely.
 
 #04.09.2018 15:04:54 CodingSession::BEGIN
 
