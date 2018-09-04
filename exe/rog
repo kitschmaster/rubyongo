@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'benchmark'
+require 'yaml'
 
 # Colors
 class String
@@ -45,7 +46,7 @@ Usage:
 
   rog new Name   # generates a new webshop in the current folder
   rog start      # starts the Panel backend (rackup)
-
+  rog deploy     # deploys code and publishes
 
 EOF
 
@@ -63,6 +64,10 @@ def set_env
   else
     ENV['RACK_ENV'] = :development.to_s
   end
+end
+
+def settings
+  @settings ||= YAML.load_file('panel.yml')
 end
 
 # Generate a file by copying
@@ -125,6 +130,17 @@ def run_rog
   Rubyongo::Kit.run!
 end
 
+def deploy_rog
+  name = settings['production']['usr']
+  host = settings['production']['host']
+  r = `cd sys; ./rogd #{name} #{host}`
+  if r =~ //
+    "Deployed #{name}@#{host}.".say(:green)
+  else
+    r.say(:red)
+  end
+end
+
 def run_hugo_server
   set_env
   args = "" # TODO
@@ -139,6 +155,8 @@ def dodo
       new_rog(@name)
     elsif @command == 's' || @command == 'start'
       run_rog
+    elsif @command == 'd' || @command == 'deploy'
+      deploy_rog
     elsif @command == 'h' || @command == 'hugo'
       run_hugo_server
     end

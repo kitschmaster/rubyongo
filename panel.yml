@@ -1,5 +1,6 @@
 development: &common_settings
   app_name: rubyongo
+  host: rubyongo.org
   usr: rubyongo
   pas: shop1111
   ss: 369736hkkfs98u39fjot4b98u089vdgnndkjg1044
