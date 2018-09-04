@@ -198,7 +198,7 @@ module Rubyongo
     end
 
     def self.extract_setting(name, line)
-      if line =~ /#{name} =/
+      if line =~ /\A#{name} =/
         split_line = line.split '='
         return split_line.last.chomp.gsub(/\"/, '').strip
       end
