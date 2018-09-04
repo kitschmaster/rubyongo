@@ -1,3 +1,5 @@
+#04.09.2018 19:53:40 CodingSession::END
+
 the about page on rubyongo.org is missing, let's add that...
 
 in order to add a page, all ii need to do is add a file inside "content/page/", give it a front matter and run hugo to regenerate the static.
@@ -40,6 +42,8 @@ must be some kind of server problem, checking my .htaccess... nah, the problem w
 exploring further, the images in the shop section do not appear ~ checking.
 
 the rog_logo.png image was missing. added and now it works nicely.
+
+and yes, there is still plenty of little details to work through. little steps and the larger picture will come alive...
 
 #04.09.2018 15:04:54 CodingSession::BEGIN
 
