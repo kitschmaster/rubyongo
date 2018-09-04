@@ -1,11 +1,13 @@
 - stat: path=~/go
   register: golang
+
 - name: Download the Go tarball
   get_url:
     url: "{{ go_download_location }}"
     dest: ~/
     checksum: "{{ go_tarball_checksum }}"
   when: golang.stat.exists == False
+
 - name: Install golang
   unarchive:
     src: ~/{{ go_tarball }}

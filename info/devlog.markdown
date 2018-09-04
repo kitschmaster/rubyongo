@@ -22,6 +22,8 @@ and yes, now it works. adding the upgraded binaries to sys/src and then ii'll "r
 nope, got this while pushing: remote: error: File sys/src/go1.11.linux-amd64.tar.gz is 121.27 MB; this exceeds GitHub's file size limit of 100.00 MB
 let's see, if ii can get this downloading with ansible...
 
+got it installed on rubyongo.org. the ansible scripts are very rough right now, I can improve that later, let's move on with the panel..
+
 #04.09.2018 15:04:54 CodingSession::BEGIN
 
 #04.09.2018 13:44:27 CodingSession::END
