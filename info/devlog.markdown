@@ -24,6 +24,20 @@ let's see, if ii can get this downloading with ansible...
 
 got it installed on rubyongo.org. the ansible scripts are very rough right now, I can improve that later, let's move on with the panel..
 
+nope, after the upgrade the path /item returns: Not found
+but only on the web host, locally it works. this is one of those moments in programming when you want to destroy something...
+
+if ii access https://rubyongo.org/item, it does not find it,
+but adding a trailing slash https://rubyongo.org/item/, works?
+
+must be some kind of server problem, checking my .htaccess... nah, the problem was in config.toml, ii added the slash there:
+
+  [[menu.main]]
+      name = "Shop"
+      url = "/item/"
+      weight = 5
+
+
 #04.09.2018 15:04:54 CodingSession::BEGIN
 
 #04.09.2018 13:44:27 CodingSession::END

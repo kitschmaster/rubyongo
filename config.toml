@@ -20,7 +20,7 @@ theme = "default"
 
 [[menu.main]]
     name = "Shop"
-    url = "/item"
+    url = "/item/"
     weight = 5
 
 [params]
