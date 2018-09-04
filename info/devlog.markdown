@@ -1,3 +1,11 @@
+good morning, working on the "rogup" script...
+
+at #04.09.2018 11:33:29 I can access rubyongo.org static site. but it seems to not load javascript correctly, investigating...
+
+adding deploy script...
+
+#04.09.2018 09:00:26 CodingSession::BEGIN
+
 #03.09.2018 17:00:27 CodingSession::END
 
 back at it. re-focusing. what to do first.
