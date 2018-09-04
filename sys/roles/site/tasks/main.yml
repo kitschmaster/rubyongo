@@ -1,0 +1,3 @@
+- include: ../../../tasks/environment.yml
+- include: ../../../tasks/rails.yml
+- include: ../../../tasks/hugo.yml

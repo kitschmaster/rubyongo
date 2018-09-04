@@ -1,0 +1,9 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+export TMPDIR=$HOME/tmp/
+export GOROOT=$HOME/go
+export GOPATH={{ deploy_path }}/lib/gosrc
+export PATH=$PATH:$GOROOT/bin:$HOME/hugo/bin
+export RAILS_ENV=production
+export RACK_ENV=production
+export PANEL_GURU={{ panel_guru }}
+export PANEL_PASS={{ panel_pass }}

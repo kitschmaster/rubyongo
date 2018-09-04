@@ -1,0 +1,8 @@
+[rubyongo]
+rubyongo.org ansible_connection=ssh ansible_ssh_user=rubyongo
+
+[prod:children]
+rubyongo
+
+[all:children]
+rubyongo

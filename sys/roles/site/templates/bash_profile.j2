@@ -1,0 +1,10 @@
+# ~/.bash_profile: executed by bash(1) for login shells.
+umask 002
+source .alias
+export TMPDIR=$HOME/tmp/
+export GOROOT=$HOME/go
+export GOPATH={{ deploy_path }}/lib/gosrc
+export PATH=$PATH:$GOROOT/bin:$HOME/hugo/bin
+export RAILS_ENV=production
+export RACK_ENV=production
+PS1='\[\033[00;33m\]\h:\[\033[00m\]\w> '

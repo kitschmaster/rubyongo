@@ -1,0 +1,25 @@
+- name: Copy alias
+  template: src={{ templates_path }}/alias.j2 dest=~/.alias
+
+- name: Copy bashrc
+  template: src={{ templates_path }}/bashrc.j2 dest=~/.bashrc
+
+- name: Copy bash_profile
+  template: src={{ templates_path }}/bash_profile.j2 dest=~/.bash_profile
+
+- name: Create content path
+  file: path={{ deploy_path }}/content state=directory mode=0755
+
+- name: Create public path
+  file: path={{ deploy_path }}/public state=directory mode=0755
+
+- name: Create public htaccess file
+  template: src={{ templates_path }}/htaccess.j2 dest={{ deploy_path }}/public/.htaccess mode="u=rw,g=r,o=r"
+
+- name: Get public
+  local_action: stat path="{{ templates_path }}/../../../host_files/{{ deploy_url }}"
+  register: public_content
+
+- name: Copy public
+  copy: src={{ templates_path }}/../../../host_files/{{ deploy_url }}/public/ dest={{ deploy_path }}/public/
+  when: public_content.stat.exists
