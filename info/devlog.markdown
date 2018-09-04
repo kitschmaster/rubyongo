@@ -43,6 +43,23 @@ actually, just printing out with export shows this path: GEM_PATH="/usr/lib/ruby
 
 forced the proper paths, but still getting the above problem. removing the bundler version from gemspec, and let's see if that makes a change...
 
+it worked, and it is using bundler 1.3.5 during bundle, crazy... sshing in and doing gem list bundler, it shows:
+
+  *** LOCAL GEMS ***
+
+  bundler (1.16.4)
+
+so where does bundler 1.3.5 come from, during ssh script run? it's here: /usr/lib/ruby/vendor_ruby/gems/bundler-1.3.5/lib
+
+hitting the next problem:
+
+No such file or directory - log/production.log (Errno::ENOENT)
+  /home/rubyongo/rubyongo.org/lib/rubyongo/panel/kit.rb:27:in `initializ
+
+ok, let's create the log dir...
+
+panel is up at #04.09.2018 13:43:06.
+
 #04.09.2018 09:00:26 CodingSession::BEGIN
 
 #03.09.2018 17:00:27 CodingSession::END

@@ -13,6 +13,9 @@
 - name: Create public path
   file: path={{ deploy_path }}/public state=directory mode=0755
 
+- name: Create log path
+  file: path={{ deploy_path }}/log state=directory mode=0755
+
 - name: Create public htaccess file
   template: src={{ templates_path }}/htaccess.j2 dest={{ deploy_path }}/public/.htaccess mode="u=rw,g=r,o=r"
 

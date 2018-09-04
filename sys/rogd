@@ -13,7 +13,7 @@ DEPLOY_KEY="keys/deploy_$NAME.pub"
 if [ -f "$DEPLOY_KEY" ]
 then
   echo Deploying rog code for $NAME
-  ssh $NAME "whoami && cd $REPO && git stash && git pull && export && bundle && hugo && touch ~/$REPO/tmp/restart.txt"
+  ssh $NAME "whoami && cd $REPO && git stash && git pull && bundle && hugo && touch ~/$REPO/tmp/restart.txt"
   touch $DEPLOY_KEY
 else
   echo "$NAME is not yet configured, please run: roginit $1 $2 && rogup $1 $2"
