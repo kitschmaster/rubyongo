@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Deploy a repo.
+#
+# Example (passing: username, host):
+#   cd sys; rogd rubyongo rubyongo.org
+
+# Args
+NAME="$1@$2" # => rubyongo@rubyongo.org
+REPO="$2"    # => rubyongo.org
+DEPLOY_KEY="keys/deploy_$NAME.pub"
+
+if [ -f "$DEPLOY_KEY" ]
+then
+  echo Deploying rog code for $NAME
+  ssh $NAME "cd $REPO && git stash && git pull && hugo && touch ~/$REPO/tmp/restart.txt"
+  touch $DEPLOY_KEY
+else
+  echo "$NAME is not yet configured, please run: roginit $1 $2 && rogup $1 $2"
+fi

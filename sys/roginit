@@ -2,51 +2,72 @@
 #
 # Initialize a fresh repo.
 #
-# Full example:
-#   cd sys; roginit rubyongo rubyongo.org kitschmaster@kitschmaster.com:~/kit.org.git
+# Full example (passing: username, host, repo, repo_provider):
+#   cd sys; roginit rubyongo rubyongo.org kitschmaster@kitschmaster.com:~/kit.org.git kitschmaster@kitschmaster.com
+#
 # Using default github hosted repository (git@github.com:kitschmaster/rubyongo.git):
 #   cd sys; roginit username domain.name
 
 # Args
-name="$1@$2" # => rubyongo@rubyongo.org
-repo="$2"    # => rubyongo.org
-repo_check="$2/.git"
+NAME="$1@$2" # => rubyongo@rubyongo.org
+REPO="$2"    # => rubyongo.org
+REPO_CHECK="$2/.git"
 CLONE_DEFAULT="https://github.com/kitschmaster/rubyongo.git" # "git@github.com:kitschmaster/rubyongo.git"
 CLONE="${3:-$CLONE_DEFAULT}"       # => kitschmaster@kitschmaster.com:~/kit.org.git
-DEPLOY_KEY="keys/deploy_$name.pub" # => keys/deploy_rubyongo@rubyongo.org.pub
+PROVIDER_NAME="$4" # => kitschmaster@kitschmaster.com - when not working with github, pass the repo provider
+DEPLOY_KEY="keys/deploy_$NAME.pub" # => keys/deploy_rubyongo@rubyongo.org.pub
 LOCAL_PUB_KEY="$HOME/.ssh/id_rsa.pub"
 PUB_KEY=$(<$LOCAL_PUB_KEY)         # Fetch the local public key into a variable
 
 if [ $# -eq 0 ]
-  then
-    echo "No arguments supplied, please provide full repo name, example: roginit rubyongo@rubyongo.org"
-    exit 1
+then
+  echo "No arguments supplied, please provide full repo name, example: roginit rubyongo rubyongo.org"
+  exit 1
+else
+  echo Initializing rog for $NAME
 fi
 
 if [ -f "$DEPLOY_KEY" ] # if the deploy key exists in the keys folder?
 then
-  echo "$DEPLOY_KEY exists, $name is already configured. (Delete the deploy key to re-init.)"
+  echo "$DEPLOY_KEY exists, $NAME is already configured. (Delete the deploy key to re-init.)"
   exit 1
 else
   if [ -f "$LOCAL_PUB_KEY" ]
   then
-    if ssh $name "grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys"
+    if ! ssh $NAME "grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys"
     then
-      echo
-    else
-      echo Setting up SSH access for $name, please pass your SSH user password when doing this for the first time.
-      echo Adding local public key $LOCAL_PUB_KEY to $name:~/.ssh/authorized_keys
+      echo Setting up SSH access for $NAME, please pass your SSH user password when doing this for the first time.
+      echo Adding local public key $LOCAL_PUB_KEY to $NAME:~/.ssh/authorized_keys
       # Now create the .ssh dir on the remote host, copy the local public key into authorized_keys to get passwordless SSH access, while avoiding duplicate key entry.
-      ssh $name "umask 0077 ; mkdir -p ~/.ssh ; grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys 2>/dev/null || echo \"$PUB_KEY\" >> ~/.ssh/authorized_keys"
+      ssh $NAME "umask 0077 ; mkdir -p ~/.ssh ; grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys 2>/dev/null || echo \"$PUB_KEY\" >> ~/.ssh/authorized_keys"
     fi
 
-    if ssh $name test -d $repo_check
+    if ssh $NAME test -d $REPO_CHECK
     then
       echo A repository already exists, nothing to init. Please run 'rogup' to upgrade libs.
       exit 1
     else
+
+      # Create and save the remote hosts deploy key, if it does not exist
+      if ! ssh $NAME test -d ~/.ssh/id_rsa
+      then
+        echo Generating public deploy key for $NAME
+        ssh $NAME "ssh-keygen -t rsa -b 4096 -N '' -C '$NAME' -f ~/.ssh/id_rsa"
+      fi
+
+      echo Saving public deploy key to $DEPLOY_KEY
+      scp $NAME:~/.ssh/id_rsa.pub $DEPLOY_KEY
+
+      # When a repository provider is present, attempt to provision the key
+      if ! [ -z "${PROVIDER_NAME}" ]
+      then
+        echo Provisioning deploy key: $PROVIDER_NAME
+        cat $DEPLOY_KEY | ssh $PROVIDER_NAME "cat >> ~/.ssh/authorized_keys"
+        ssh $NAME "ssh -o StrictHostKeyChecking=no $PROVIDER_NAME uname -a"
+      fi
+
       echo Cloning from $CLONE
-      ssh $name "rm -rf $repo && git clone $CLONE $repo && cd $repo && git pull"
+      ssh $NAME "rm -rf $REPO && git clone $CLONE $REPO && cd $REPO && git pull"
 
       echo Done rog init. Please run 'rogup' to complete lib setup.
     fi

@@ -1,0 +1,12 @@
+- stat: path=~/go
+  register: golang
+- name: Install golang
+  unarchive: src=src/go1.6.linux-amd64.tar.gz dest=~/
+  when: golang.stat.exists == False
+- stat: path=~/go/bin/hugo
+  register: gohugo
+- name: Install hugo
+  unarchive: src=src/hugo_0.15_linux_amd64.tar.gz dest=~/
+  when: gohugo.stat.exists == False
+- name: Symlink hugo in go/bin
+  file: src=~/hugo_0.15_linux_amd64/hugo_0.15_linux_amd64 dest=~/go/bin/hugo state=link

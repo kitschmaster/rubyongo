@@ -1,0 +1,9 @@
+- name: Create temp path
+  file: path={{ deploy_path }}/tmp state=directory mode=0755
+
+- name: Ensure restart.txt exists
+  copy:
+    content: ""
+    dest: "{{ deploy_path }}/tmp/restart.txt"
+    force: no
+    mode: 0666

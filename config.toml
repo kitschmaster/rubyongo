@@ -1,4 +1,4 @@
-baseURL = "http://rubyongo.org/"
+baseURL = "https://rubyongo.org/"
 languageCode = "en-us"
 title = "Ruby On Go"
 

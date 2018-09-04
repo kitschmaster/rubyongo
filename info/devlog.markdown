@@ -1,3 +1,13 @@
+good morning, working on the "rogup" script...
+
+at #04.09.2018 11:33:29 I can access rubyongo.org static site. but it seems to not load javascript correctly, investigating...
+
+adding deploy script "rogd".
+
+right now, all these scripts need to be run from the "sys" folder. later these will be spawned from the main "rog" CLI. something like: "rog deploy", "rog init", "rog up"...
+
+#04.09.2018 09:00:26 CodingSession::BEGIN
+
 #03.09.2018 17:00:27 CodingSession::END
 
 back at it. re-focusing. what to do first.

@@ -1,0 +1,2 @@
+- name: Touch restart.txt
+  file: path={{ deploy_path }}/tmp/restart.txt state=touch

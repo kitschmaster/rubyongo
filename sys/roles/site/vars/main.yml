@@ -1,0 +1,2 @@
+current_role: site
+templates_path: roles/{{ current_role }}/templates/
