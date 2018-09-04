@@ -133,12 +133,7 @@ end
 def deploy_rog
   name = settings['production']['usr']
   host = settings['production']['host']
-  r = `cd sys; ./rogd #{name} #{host}`
-  if r =~ //
-    "Deployed #{name}@#{host}.".say(:green)
-  else
-    r.say(:red)
-  end
+  exec("cd sys; ./rogd #{name} #{host}")
 end
 
 def run_hugo_server
