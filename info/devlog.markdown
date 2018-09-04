@@ -21,6 +21,28 @@ added an ansible task to install bundler on "rogup". also added a "bundle" comma
 
 but still no go with the "git_source" method, since we're too old... so let's get rid of it for now.
 
+okay, now ii see this piece of garbage:
+
+  Bundler could not find compatible versions for gem "bundler":
+    In Gemfile:
+      bundler (~> 1.16) ruby
+
+    Current Bundler version:
+      bundler (1.3.5)
+
+  This Gemfile requires a different version of Bundler.
+  Perhaps you need to update Bundler by running `gem install bundler`?
+
+but it only happens when running "bundle" command via ssh script. if ii try to gem install bundler from the rogd script, ii get:
+
+  ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions into the /var/lib/gems/1.9.1 directory.
+
+so am thinking some path is not properly set during ssh script... let's check bashrc and bash_profile...
+actually, just printing out with export shows this path: GEM_PATH="/usr/lib/ruby/gems/1.8", but it should be something else...
+
+forced the proper paths, but still getting the above problem. removing the bundler version from gemspec, and let's see if that makes a change...
+
 #04.09.2018 09:00:26 CodingSession::BEGIN
 
 #03.09.2018 17:00:27 CodingSession::END
