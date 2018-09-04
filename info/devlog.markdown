@@ -1,3 +1,29 @@
+the about page on rubyongo.org is missing, let's add that...
+
+in order to add a page, all ii need to do is add a file inside "content/page/", give it a front matter and run hugo to regenerate the static.
+all of this can be done via the panel UI.
+
+hm, having some issues with the panel UI, which was kinda expected, now reviewing and fixing...
+
+not sure why, but this frontmatter entry in an archetype errors out:
+
+  title: "{{ replace .Name "-" " " | title }}"
+
+saying:  line 1: did not find expected key. ii guess .Name should be simply "new", but it's not...
+am now upgrading golang and hugo, let's see if the problem persists on the latest and greatest.
+
+golang is now 1.11, and hugo is at 0.48.
+
+installing golang is a matter of extracting a zip: /usr/local> sudo tar -C /usr/local -xzf ~/Downloads/go1.11.darwin-amd64.tar.gz
+installing hugo is similar, unzip hugo_0.48_macOS-64bit.tar, then copy the hugo binary to /usr/local/bin.
+
+and yes, now it works. adding the upgraded binaries to sys/src and then ii'll "rogup" and we should have the new stuff online.
+
+nope, got this while pushing: remote: error: File sys/src/go1.11.linux-amd64.tar.gz is 121.27 MB; this exceeds GitHub's file size limit of 100.00 MB
+let's see, if ii can get this downloading with ansible...
+
+#04.09.2018 15:04:54 CodingSession::BEGIN
+
 #04.09.2018 13:44:27 CodingSession::END
 
 good morning, working on the "rogup" script...

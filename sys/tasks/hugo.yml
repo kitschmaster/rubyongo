@@ -1,12 +1,18 @@
 - stat: path=~/go
   register: golang
+- name: Download the Go tarball
+  get_url:
+    url: "{{ go_download_location }}"
+    dest: ~/
+    checksum: "{{ go_tarball_checksum }}"
+  when: golang.stat.exists == False
 - name: Install golang
-  unarchive: src=src/go1.6.linux-amd64.tar.gz dest=~/
+  unarchive: src=~/{{ go_tarball }} dest=~/
   when: golang.stat.exists == False
 - stat: path=~/go/bin/hugo
   register: gohugo
 - name: Install hugo
-  unarchive: src=src/hugo_0.15_linux_amd64.tar.gz dest=~/
+  unarchive: src=src/hugo_0.48_Linux-64bit.tar dest=~/
   when: gohugo.stat.exists == False
 - name: Symlink hugo in go/bin
-  file: src=~/hugo_0.15_linux_amd64/hugo_0.15_linux_amd64 dest=~/go/bin/hugo state=link
+  file: src=~/hugo_0.48_Linux-64bit/hugo dest=~/go/bin/hugo state=link
