@@ -1,3 +1,43 @@
+#05.09.2018 17:04:08 CodingSession::END
+
+working on the default theme, which is a very important building block for the initial webshop framework.
+in the future there will be more themes for rog, but first need to get this one going strong.
+
+having fun learning more about Hugo templating, as well as golang.
+
+here's a nice snippet for listing all the taxonomy of a site:
+  <section>
+    <ul id="all-taxonomies">
+      {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+        <li><a href="{{ "/" | relLangURL}}{{ $taxonomyname | urlize }}">{{ $taxonomyname }}</a>
+          <ul>
+            {{ range $key, $value := $taxonomy }}
+            <li> {{ $key }} </li>
+                  <ul>
+                  {{ range $value.Pages }}
+                      <li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}"> {{ .LinkTitle }} </a> </li>
+                  {{ end }}
+                  </ul>
+            {{ end }}
+          </ul>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+
+am playing with the idea that on the SHOP menu ii want to display only up to N items, if there are more, ii want to show a list of categories instead...
+
+am upgrading my setup, installing Go Guru first:
+  go get -u golang.org/x/tools/cmd/guru
+
+the above command did not do anything? where's my GOPATH? since it is not explicitly set, go assumes ~/go.
+
+https://alvarolm.github.io/GoGuru/
+
+ctrl+shift+g works, but there is no output from the command. ii'll keep playing with it.
+
+#05.09.2018 10:10:35 CodingSession::BEGIN
+
 #04.09.2018 19:53:40 CodingSession::END
 
 the about page on rubyongo.org is missing, let's add that...
