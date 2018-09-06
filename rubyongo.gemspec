@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'dm-transactions'
   s.add_dependency 'dm-types'
   s.add_dependency 'dm-validations'
+  s.add_dependency 'sysrandom'
 
   s.add_development_dependency "bundler" #, ">= 1.16"
   s.add_development_dependency "rake", "~> 10.0"

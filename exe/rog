@@ -2,6 +2,7 @@
 
 require 'benchmark'
 require 'yaml'
+require 'fileutils'
 
 # Colors
 class String
@@ -21,8 +22,22 @@ end
 
 # just read two arguments (we will do full option parsing later)
 $:.unshift @gem_path
-@command = ARGV[0]
-@name = ARGV[1] if ARGV.length > 0
+@command  = ARGV[0]
+@name     = ARGV[1] if ARGV.length > 0
+
+# read deploy username and domain
+@username = nil
+@domain = nil
+if ARGV.length > 1
+  @username = ARGV[2]
+  @domain   = ARGV[3] if ARGV.length > 2
+
+  # defaults come from the Name argument:
+  # Name=rubyongo.org => DomainUsername: rubyongo, DomainHost: rubyongo.org
+  # Name=rubyongo => DomainUsername: rubyongo, DomainHost: rubyongo.com
+  @username ||= @name.split('.').first
+  @domain ||= @name =~ /\./ ? @name : "#{@name}.com"
+end
 
 # code generation path
 @gen_path = Dir.pwd
@@ -44,9 +59,9 @@ USAGE = <<-EOF
 
 Usage:
 
-  rog new Name   # generates a new webshop in the current folder
-  rog start      # starts the Panel backend (rackup)
-  rog deploy     # deploys code and publishes
+  rog new Name.ext [DeployUsername DeployDomainHost] # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
+  rog start                                          # starts the Panel backend (rackup)
+  rog deploy                                         # deploys code and publishes
 
 EOF
 
@@ -76,6 +91,14 @@ def gen(to, *from)
   FileUtils.cp_r(src, to)
 end
 
+# Generate a file by copying and modifying some data along the way
+def genmod(replacements, to, *from)
+  src = File.join(@gem_path, '..', *from)
+  content = File.read(src)
+  replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
+  File.open(File.join(to, File.basename(src)), 'w') {|f| f.write content }
+end
+
 # Create rog folder with `hugo new site`
 def new_rog_dir(name, path)
   if Dir.exists?(path)
@@ -91,35 +114,36 @@ def new_rog_dir(name, path)
   end
 end
 
-def generate_rog_dir(name, path)
+def generate_rog_dir(name, path, replacements={})
   if Dir.exists?(path)
-    # Hugo
+    # Generate static generator paths
     gen(path, 'themes')
 
-    #Panel
+    # Generate Panel paths and files
     gen(path, 'panel')
     gen(path, 'panel', 'views')
-    #gen(path, 'panel.yml')
-    #gen(path, 'config.ru')
     gen(path, 'gen', 'Rakefile')
     gen(path, 'gen', 'Gemfile')
     gen(path, 'gen', 'test')
-    gen(path, 'gen', 'panel.yml')
     gen(path, 'gen', 'config.ru')
+
+    # Modify and generate Panel settings file
+    genmod(replacements, path, 'gen', 'panel.yml')
+
   else
     "#{name} does not exist".say(:red)
     exit(1)
   end
 end
 
-def new_rog(name)
+def new_rog(name, settings={})
   if name == nil || name == ""
     "Please supply a name for the webshop.".say(:red)
     return
   end
   path = File.join(@gen_path, name)
   new_rog_dir(name, path)
-  generate_rog_dir(name, path)
+  generate_rog_dir(name, path, settings)
   "Success".say(:green)
 end
 
@@ -138,7 +162,7 @@ end
 
 def run_hugo_server
   set_env
-  args = "" # TODO
+  args = "" # TODO: allow passing arguments, which?
   exec("hugo server #{args}")
 end
 
@@ -147,7 +171,7 @@ def dodo
     if @command == 'help' || @command == nil || @command == ""
       print_usage
     elsif @command == 'new'
-      new_rog(@name)
+      new_rog(@name, { 'rog-usr' => @username, 'rog-host' => @domain })
     elsif @command == 's' || @command == 'start'
       run_rog
     elsif @command == 'd' || @command == 'deploy'

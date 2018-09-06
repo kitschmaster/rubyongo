@@ -1,8 +1,8 @@
 development: &common_settings
-  app_name: rog
-  usr: rubyongo
+  app_name: My Webshop
+  host: rog-host
+  usr: rog-usr
   pas: shop1111
-  ss: 219736hkkfs96u39fkot4b98u089vdgnndkjg9033
   sendform_to_business: rubyongo@gmail.com
   sendform_subject: Order
   sendform_from: rubyongo@gmail.com

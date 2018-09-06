@@ -17,6 +17,7 @@ require 'fileutils'
 require 'warden'
 require 'json'
 require 'rack/contrib/try_static'
+require 'sysrandom/securerandom' # Replace the userspace Ruby (OpenSSL) RNG with `/dev/urandom`
 
 module Rubyongo
 
@@ -73,7 +74,11 @@ module Rubyongo
     set :bind, '0.0.0.0'
     set :port, 9393
     set :views, Rubyongo::PANEL_VIEWS_PATH # File.join(Rubyongo::EXEC_PATH, 'views')
-    set :session_secret, settings.ss
+
+    # calls `/dev/urandom`
+    # or an appropriate OS kernel alternative
+    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+
     enable :sessions
 
     #************************************************************************************************

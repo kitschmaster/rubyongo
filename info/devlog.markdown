@@ -1,3 +1,21 @@
+some issues ii want to go through soon:
+
+++ make the 'default' theme responsive. verify on multiple device sizes.
+++ improve the 'default' theme look & feel for responsivness and ease of use, do the same on the Panel level
+++ add BTC payments (scanning an address for a payment, generating an address on the fly, measuring time between the start of checkout and payment or not, when to send item)
+++ testing: find the best way to add the ability to test the static site rendering and behavior...(probably involves running the built in hugo server during the test run)
+++ testing: add tests for the Panel functionality
+++ testing: measure performance of the Panel and optimise accordingly
+
+did some security related improvements:
+ + removed the session secret from the panel.yml
+ + creating a new rog with deploy settings - can pass usr and host with rog new
+ + removed panel.yml from repo, replaced with panel.yml.example
+ + removed config.toml from repo, replaced with config.toml.example
+ + added a .gitignore entry for both settings files, so that one can have different settings locally and on deployment host
+
+#06.09.2018 11:12:02 CodingSession::BEGIN
+
 #05.09.2018 17:04:08 CodingSession::END
 
 working on the default theme, which is a very important building block for the initial webshop framework.
