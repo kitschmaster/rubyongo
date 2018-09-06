@@ -14,6 +14,8 @@ did some security related improvements:
  + removed config.toml from repo, replaced with config.toml.example
  + added a .gitignore entry for both settings files, so that one can have different settings locally and on deployment host
 
+now ii have a small problem, need to make sure, during Travis CI test the config files are present.
+
 #06.09.2018 11:12:02 CodingSession::BEGIN
 
 #05.09.2018 17:04:08 CodingSession::END

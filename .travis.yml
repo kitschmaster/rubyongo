@@ -6,3 +6,6 @@ before_install:
   - wget -O /tmp/hugo.deb https://github.com/spf13/hugo/releases/download/v0.41/hugo_0.41_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
   - gem install bundler -v 1.16.2
+  - cp config.toml.example config.toml
+  - cp panel.yml.example panel.yml
+
