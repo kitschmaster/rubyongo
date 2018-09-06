@@ -29,9 +29,8 @@ db.sqlite
 content/*
 
 # Settings
-#config.toml
-#rog.yml
-#panel.yml
+config.toml
+panel.yml
 
 Gemfile.lock
 
