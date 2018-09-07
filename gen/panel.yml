@@ -3,9 +3,9 @@ development: &common_settings
   host: rog-host
   usr: rog-usr
   pas: shop1111
-  sendform_to_business: rubyongo@gmail.com
+  sendform_to_business: rog-usr@rog-host
+  sendform_from: rog-usr@rog-host
   sendform_subject: Order
-  sendform_from: rubyongo@gmail.com
   thumbnail_resize: '250x250!'
 
 test:
