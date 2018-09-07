@@ -1,3 +1,149 @@
+#07.09.2018 14:32:43 CodingSession::END
+
+let me pretend ii am a framework user and start building the spin paintings store...
+
+since the gem is not yet published ii will build it locally and install that first.
+
+did: gem build rubyongo.gemspec
+
+and got these warnings:
+
+  WARNING:  pessimistic dependency on rack (~> 1.6.4) may be overly strict
+    if rack is semantically versioned, use:
+      add_runtime_dependency 'rack', '~> 1.6', '>= 1.6.4'
+  WARNING:  open-ended dependency on sinatra (>= 0) is not recommended
+    if sinatra is semantically versioned, use:
+      add_runtime_dependency 'sinatra', '~> 0'
+  WARNING:  open-ended dependency on sinatra-contrib (>= 0) is not recommended
+    if sinatra-contrib is semantically versioned, use:
+      add_runtime_dependency 'sinatra-contrib', '~> 0'
+  WARNING:  open-ended dependency on sinatra-flash (>= 0) is not recommended
+    if sinatra-flash is semantically versioned, use:
+      add_runtime_dependency 'sinatra-flash', '~> 0'
+  WARNING:  open-ended dependency on bcrypt-ruby (>= 0) is not recommended
+    if bcrypt-ruby is semantically versioned, use:
+      add_runtime_dependency 'bcrypt-ruby', '~> 0'
+  WARNING:  open-ended dependency on warden (>= 0) is not recommended
+    if warden is semantically versioned, use:
+      add_runtime_dependency 'warden', '~> 0'
+  WARNING:  open-ended dependency on json (>= 0) is not recommended
+    if json is semantically versioned, use:
+      add_runtime_dependency 'json', '~> 0'
+  WARNING:  open-ended dependency on dm-core (>= 0) is not recommended
+    if dm-core is semantically versioned, use:
+      add_runtime_dependency 'dm-core', '~> 0'
+  WARNING:  open-ended dependency on dm-sqlite-adapter (>= 0) is not recommended
+    if dm-sqlite-adapter is semantically versioned, use:
+      add_runtime_dependency 'dm-sqlite-adapter', '~> 0'
+  WARNING:  open-ended dependency on dm-migrations (>= 0) is not recommended
+    if dm-migrations is semantically versioned, use:
+      add_runtime_dependency 'dm-migrations', '~> 0'
+  WARNING:  pessimistic dependency on dm-serializer (~> 1.2.2) may be overly strict
+    if dm-serializer is semantically versioned, use:
+      add_runtime_dependency 'dm-serializer', '~> 1.2', '>= 1.2.2'
+  WARNING:  open-ended dependency on dm-timestamps (>= 0) is not recommended
+    if dm-timestamps is semantically versioned, use:
+      add_runtime_dependency 'dm-timestamps', '~> 0'
+  WARNING:  open-ended dependency on dm-transactions (>= 0) is not recommended
+    if dm-transactions is semantically versioned, use:
+      add_runtime_dependency 'dm-transactions', '~> 0'
+  WARNING:  open-ended dependency on dm-types (>= 0) is not recommended
+    if dm-types is semantically versioned, use:
+      add_runtime_dependency 'dm-types', '~> 0'
+  WARNING:  open-ended dependency on dm-validations (>= 0) is not recommended
+    if dm-validations is semantically versioned, use:
+      add_runtime_dependency 'dm-validations', '~> 0'
+  WARNING:  open-ended dependency on sysrandom (>= 0) is not recommended
+    if sysrandom is semantically versioned, use:
+      add_runtime_dependency 'sysrandom', '~> 0'
+  WARNING:  open-ended dependency on bundler (>= 0, development) is not recommended
+    if bundler is semantically versioned, use:
+      add_development_dependency 'bundler', '~> 0'
+  WARNING:  See http://guides.rubygems.org/specification-reference/ for help
+    Successfully built RubyGem
+    Name: rubyongo
+    Version: 0.1.0.alpha
+    File: rubyongo-0.1.0.alpha.gem
+
+doing it (on ruby 2.4): gem install rubyongo/rubyongo-0.1.0.alpha.gem
+and it worked. CLI command also works, so let's try creating the thing.
+
+ok, so ii went and created a folder "rogs" and ii put .ruby-version and .ruby-gemset in there so that ii can match the dreamhost setup. then ii run: "rog new spinpaintings.shop". and it's ready. it says Success :)
+
+investigating the generated code, ii got this panel.yml:
+
+  development: &common_settings
+    app_name: My Webshop
+    host: spinpaintings.shop
+    usr: spinpaintings
+    pas: shop1111
+    sendform_to_business: rubyongo@gmail.com
+    sendform_subject: Order
+    sendform_from: rubyongo@gmail.com
+    thumbnail_resize: '250x250!'
+
+  test:
+    <<: *common_settings
+
+  production:
+    <<: *common_settings
+
+
+the emails should also be adjusted during new shop gen. let me quickly code that up...
+now ii get:
+
+  development: &common_settings
+    app_name: My Webshop
+    host: spinpaintings.shop
+    usr: spinpaintings
+    pas: shop1111
+    sendform_to_business: spinpaintings@spinpaintings.shop
+    sendform_from: spinpaintings@spinpaintings.shop
+    sendform_subject: Order
+    thumbnail_resize: '250x250!'
+
+  test:
+    <<: *common_settings
+
+  production:
+    <<: *common_settings
+
+
+which makes more sense right now, but those sendform vars may be moved into the UI and become framework user adjustable from the Panel UI...
+
+ii am used to always do "git status", so ii did it in the newly created spinpainting.shop folder and bummer, ii get:
+
+  fatal: Not a git repository (or any of the parent directories): .git
+
+which is good actually. the plan is to be able to create a new rog shop from the kitschmaster.com platform. which would then also handle the git init... so in order to be able to "roginit", one must:
+
++ init the git repo within spinpainting.shop folder
++ push the repo somewhere
++ run script: roginit with the pushed repo
++ run script: rogup with the pushed repo
++ and finally rog deploy
+
+ii am going to be using kitschmaster.com to push the repo. so let's do it... initing the repo and adding files:
+
+  git init
+  git status
+
+am thinking this step can easily be part of the "rog new" CLI command. so let's do that right now...
+am adding a quick and dirty method to the rog CLI:
+
+  def init_and_populate_local_git_repo(path)
+    `cd #{path}; git init; git add *; git commit -am "Add generated rog"`
+  end
+
+that worked. am now noticing some discrepancies:
++ missing the .gitignore file
++ missing the config file examples
++ when deploying, need to be smart about the config files and if they are not present on the remote, copy the examples in place, so that the framework user can easily adjust them
+
+maybe it would be simpler to skip the last two adjustments. not create config examples and have the settings fully commited into code. it would make deployment simpler. yup, ii am only adding the .gitignore, but it will not ignore the config files... then next need to think about deployment init. when the repo is not publicly accessible one needs to create a bare repo, move that to the remote host, add the remote bare to the local repo for pushing, and then deploy from the bare...
+
+#07.09.2018 10:23:34 CodingSession::BEGIN
+
 #06.09.2018 17:28:21 CodingSession::END
 
 some issues ii want to go through soon:
