@@ -126,6 +126,7 @@ def generate_rog_dir(name, path, replacements={})
     gen(path, 'gen', 'Gemfile')
     gen(path, 'gen', 'test')
     gen(path, 'gen', 'config.ru')
+    gen(path, 'gen', '.gitignore')
 
     # Modify and generate Panel settings file
     genmod(replacements, path, 'gen', 'panel.yml')
@@ -136,6 +137,10 @@ def generate_rog_dir(name, path, replacements={})
   end
 end
 
+def init_and_populate_local_git_repo(path)
+  `cd #{path}; git init; git add .; git commit -am "Add generated rog"`
+end
+
 def new_rog(name, settings={})
   if name == nil || name == ""
     "Please supply a name for the webshop.".say(:red)
@@ -144,6 +149,7 @@ def new_rog(name, settings={})
   path = File.join(@gen_path, name)
   new_rog_dir(name, path)
   generate_rog_dir(name, path, settings)
+  init_and_populate_local_git_repo(path)
   "Success".say(:green)
 end
 

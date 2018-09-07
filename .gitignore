@@ -32,6 +32,7 @@ content/*
 config.toml
 panel.yml
 
+# Gem lock
 Gemfile.lock
 
 # Public
