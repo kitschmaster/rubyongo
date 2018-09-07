@@ -1,0 +1,44 @@
+#----------------------------------------------------------------------------
+# Ignore these files.
+#----------------------------------------------------------------------------
+
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*~
+*.gem
+
+# Mac finder artifacts
+.DS_Store
+
+# Passenger restart file
+restart.txt
+
+# Sass
+.sass-cache
+
+# Database
+db.sqlite
+
+# Content
+content/*
+
+# Settings
+#config.toml
+#panel.yml
+
+# Gem lock
+Gemfile.lock
+
+# Public
+public/*
+
+# Ruby
+.ruby-version
+.ruby-gemset
+
