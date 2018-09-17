@@ -14,8 +14,10 @@ Gem::Specification.new do |s|
   s.homepage      = "http://rubyongo.org"
   s.license       = "MIT"
 
-  s.files         = Dir['LICENSE', 'README.md', 'ROG_VERSION', 'lib/**/*',  'exe/**/*', 'gen/**/*', 'gen/.gitignore',
-                        'themes/**/*', 'views/**/*', 'panel/**/*', 'panel.yml', 'config.ru']
+  s.files         = Dir['LICENSE', 'README.md', 'ROG_VERSION',
+                        'lib/**/*',  'exe/**/*', 'gen/**/*', 'gen/.gitignore',
+                        'themes/**/*', 'views/**/*', 'panel/**/*', 'panel.yml', 'config.ru',
+                        'sys/**/*', 'sys/host_vars/.gitignore', 'sys/host_files/.gitignore', 'sys/keys/.gitignore']
   s.bindir        = "exe"
   s.executables   = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]

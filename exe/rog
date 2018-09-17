@@ -3,6 +3,7 @@
 require 'benchmark'
 require 'yaml'
 require 'fileutils'
+require 'pathname'
 
 # Colors
 class String
@@ -39,7 +40,8 @@ if ARGV.length > 1
   @domain ||= @name =~ /\./ ? @name : "#{@name}.com"
 end
 
-# code generation path
+# code generation path, where to put generate files
+# just take the current folder for now
 @gen_path = Dir.pwd
 
 # load rubyongo
@@ -96,7 +98,14 @@ def genmod(replacements, to, *from)
   src = File.join(@gem_path, '..', *from)
   content = File.read(src)
   replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
-  File.open(File.join(to, File.basename(src)), 'w') {|f| f.write content }
+
+  dest_pathname = Pathname.new(to)
+  puts "Destination pathname #{dest_pathname} #{dest_pathname.directory?}"
+
+  # when copying to a directory, use the src's basename, else just copy to file
+  destination =  dest_pathname.directory? ? File.join(to, File.basename(src)) : to
+
+  File.open(destination, 'w') {|f| f.write content }
 end
 
 # Create rog folder with `hugo new site`
@@ -114,22 +123,27 @@ def new_rog_dir(name, path)
   end
 end
 
-def generate_rog_dir(name, path, replacements={})
-  if Dir.exists?(path)
+def generate_rog_dir(name, to_path, replacements={})
+  if Dir.exists?(to_path)
     # Generate static generator paths
-    gen(path, 'themes')
+    gen(to_path, 'themes')
 
     # Generate Panel paths and files
-    gen(path, 'panel')
-    gen(path, 'panel', 'views')
-    gen(path, 'gen', 'Rakefile')
-    gen(path, 'gen', 'Gemfile')
-    gen(path, 'gen', 'test')
-    gen(path, 'gen', 'config.ru')
-    gen(path, 'gen', '.gitignore')
+    gen(to_path, 'panel')
+    gen(to_path, 'panel', 'views')
+    gen(to_path, 'gen', 'Rakefile')
+    gen(to_path, 'gen', 'Gemfile')
+    gen(to_path, 'gen', 'test')
+    gen(to_path, 'gen', 'config.ru')
+    gen(to_path, 'gen', '.gitignore')
+    gen(to_path, 'sys')
 
     # Modify and generate Panel settings file
-    genmod(replacements, path, 'gen', 'panel.yml')
+    genmod(replacements, to_path, 'gen', 'panel.yml')
+
+    # Modify and generate sys/host_vars settings
+    to_file = File.join(to_path, 'sys', 'host_vars', "#{replacements['rog-host']}.yml")
+    genmod(replacements, to_file, 'gen', 'sys', 'host_vars', 'example.com.yml')
 
   else
     "#{name} does not exist".say(:red)

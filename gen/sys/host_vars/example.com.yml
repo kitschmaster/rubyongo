@@ -1,0 +1,14 @@
+---
+deploy_path: /home/rog-usr/rog-host
+panel_guru: rog-usr
+panel_pass: rog-usr!
+deploy_user: rog-usr
+deploy_url: rog-host
+
+go_tarball: "go1.11.linux-amd64.tar.gz"
+go_tarball_checksum: "sha256:b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499"
+go_download_location: "https://storage.googleapis.com/golang/{{ go_tarball }}"
+
+hugo: "hugo_0.48_Linux-64bit"
+hugo_tarball: "{{ hugo }}.tar.gz"
+hugo_download_location: "https://github.com/gohugoio/hugo/releases/download/v0.48/{{ hugo_tarball }}"
