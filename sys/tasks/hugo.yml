@@ -18,11 +18,11 @@
 - stat: path=~/go/bin/hugo
   register: gohugo
 
-- name: Download the Hugo tarball
-  get_url:
-    url: "{{ hugo_download_location }}"
-    dest: ~/
-  when: gohugo.stat.exists == False
+#- name: Download the Hugo tarball
+#  get_url:
+#    url: "{{ hugo_download_location }}"
+#    dest: ~/
+#  when: gohugo.stat.exists == False
 
 - name: Install hugo
   unarchive:
