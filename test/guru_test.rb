@@ -13,4 +13,10 @@ class GuruTest < Minitest::Test
 
     assert guru
   end
+
+  def test_listing_archetypes
+    guru = Rubyongo::Guru.new
+    assert_equal ['item', 'page', 'post', 'project'].sort, guru.archetypes.sort
+  end
+
 end
