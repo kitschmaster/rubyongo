@@ -93,17 +93,25 @@ def gen(to, *from)
   FileUtils.cp_r(src, to)
 end
 
+# Run some shell command, print success message in green, on fail print error in red
+def run_cmd(command, success_message)
+  r = `#{command}`
+  if r =~ //
+    "#{success_message}".say(:green)
+  else
+    r.say(:red)
+  end
+end
+
 # Generate a file by copying and modifying some data along the way
 def genmod(replacements, to, *from)
   src = File.join(@gem_path, '..', *from)
   content = File.read(src)
   replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
 
+  # when copying a file to a directory, use the src's basename, else just copy to file
   dest_pathname = Pathname.new(to)
-  puts "Destination pathname #{dest_pathname} #{dest_pathname.directory?}"
-
-  # when copying to a directory, use the src's basename, else just copy to file
-  destination =  dest_pathname.directory? ? File.join(to, File.basename(src)) : to
+  destination   = dest_pathname.directory? ? File.join(to, File.basename(src)) : to
 
   File.open(destination, 'w') {|f| f.write content }
 end
@@ -114,12 +122,7 @@ def new_rog_dir(name, path)
     "#{name} exists at #{path}.".say(:red)
     exit(1)
   else
-    r = `hugo new site #{name}`
-    if r =~ //
-      "Created #{path}.".say(:green)
-    else
-      r.say(:red)
-    end
+    run_cmd("hugo new site #{name}", "Created #{path}.")
   end
 end
 
@@ -137,6 +140,10 @@ def generate_rog_dir(name, to_path, replacements={})
     gen(to_path, 'gen', 'config.ru')
     gen(to_path, 'gen', '.gitignore')
     gen(to_path, 'sys')
+    gen(to_path, 'static')
+
+    #Modify and generate Hugo config file
+    genmod(replacements, to_path, 'gen', 'config.toml')
 
     # Modify and generate Panel settings file
     genmod(replacements, to_path, 'gen', 'panel.yml')
@@ -152,21 +159,40 @@ def generate_rog_dir(name, to_path, replacements={})
 end
 
 def init_and_populate_local_git_repo(path)
-  `cd #{path}; git init; git add .; git commit -am "Add generated rog"`
+  run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Inited git repository #{path}/.git."
 end
 
+def first_publish(path)
+  run_cmd "cd #{path}; hugo", "Published #{path}."
+end
+
+def ensure_bundler_and_bundle(path)
+  r = `gem list -ie bundler`
+  if r =~ /true/
+    "Bundler is present.".say(:green)
+  else
+    "Missing bundler, installing...".say(:red)
+    `cd #{path}; gem install bundler`
+  end
+  run_cmd "cd #{path}; bundle", "Bundled gems."
+end
+
+# Create a new rog site
 def new_rog(name, settings={})
   if name == nil || name == ""
     "Please supply a name for the webshop.".say(:red)
     return
   end
   path = File.join(@gen_path, name)
-  new_rog_dir(name, path)
-  generate_rog_dir(name, path, settings)
-  init_and_populate_local_git_repo(path)
+  new_rog_dir(name, path) # run hugo new site
+  generate_rog_dir(name, path, settings) # populate the generated site with rog
+  first_publish(path) # publish the site to static generate the public folder for the first time (prevent an empty site)
+  ensure_bundler_and_bundle(path) # check if bundler is installed, if not install it now, then bundle
+  init_and_populate_local_git_repo(path) # set up an initial repo
   "Success".say(:green)
 end
 
+# Run the Panel's backend
 def run_rog
   set_env
   require 'rubyongo'
@@ -178,6 +204,12 @@ def deploy_rog
   name = settings['production']['usr']
   host = settings['production']['host']
   exec("cd sys; ./rogd #{name} #{host}")
+end
+
+def init_rog
+  name = settings['production']['usr']
+  host = settings['production']['host']
+  exec("cd sys; ./roginit #{name} #{host}; ./rogup #{name} #{host}")
 end
 
 def run_hugo_server
@@ -196,6 +228,8 @@ def dodo
       run_rog
     elsif @command == 'd' || @command == 'deploy'
       deploy_rog
+    elsif @command == 'i' || @command == 'init'
+      init_rog
     elsif @command == 'h' || @command == 'hugo'
       run_hugo_server
     end
