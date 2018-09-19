@@ -155,6 +155,12 @@ def generate_rog_dir(name, to_path, replacements={})
     to_file = File.join(to_path, 'sys', 'host_vars', "#{replacements['rog-host']}.yml")
     genmod(replacements, to_file, 'gen', 'sys', 'host_vars', 'example.com.yml')
 
+    # Modify and generate host lists for sys
+    {"env.yml"     => File.join(to_path, 'sys', "env.yml"),
+     "restart.yml" => File.join(to_path, 'sys', "restart.yml"),
+      "rogs" => File.join(to_path, 'sys', "rogs")}.each do |filename, to_file|
+      genmod(replacements, to_file, 'gen', 'sys', filename)
+    end
   else
     "#{name} does not exist".say(:red)
     exit(1)
@@ -219,6 +225,13 @@ def init_rog
   exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogup #{usr} #{host}")
 end
 
+# Upgrade the setup.
+def upgrade_rog
+  usr = settings['production']['usr']
+  host = settings['production']['host']
+  exec("cd sys; ./rogup #{usr} #{host}")
+end
+
 def run_hugo_server
   set_env
   args = "" # TODO: allow passing arguments, which? let's add proper arguments parsing much later, when we know exactly what the CLI interface should do and achieve tasks.
@@ -237,6 +250,8 @@ def dodo
       deploy_rog
     elsif @command == 'i' || @command == 'init'
       init_rog
+    elsif @command == 'up' || @command == 'upgrade'
+      upgrade_rog
     elsif @command == 'h' || @command == 'hugo'
       run_hugo_server
     end

@@ -74,13 +74,14 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
       then
         BARE_CLONE=$CLONE
 
-        #if ! [ "$PROVIDER_NAME" == "$NAME" ]
-        #then
+        if ! [ "$PROVIDER_NAME" == "$NAME" ]
+          BARE_CLONE="~/${BARE_REPO}"
+        then
           # Auto provision SSH key in case the provider is not the same as rog-usr@rog-host. This is a convention, so we get automatic provisioning, if we host the repo on a different host than the deploy host.
           echo Provisioning deploy key: $PROVIDER_NAME
           cat $DEPLOY_KEY | ssh $PROVIDER_NAME "cat >> ~/.ssh/authorized_keys"
           #ssh $NAME "ssh -o StrictHostKeyChecking=no $PROVIDER_NAME uname -a"
-        #fi
+        fi
 
         echo Creating bare repository from local repo
         cd ../..

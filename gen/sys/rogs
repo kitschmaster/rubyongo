@@ -1,0 +1,8 @@
+[rog-usr]
+rog-host ansible_connection=ssh ansible_ssh_user=rog-usr
+
+[prod:children]
+rog-usr
+
+[all:children]
+rog-usr

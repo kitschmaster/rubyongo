@@ -31,6 +31,49 @@ ruby on go, should be always backwards compatible.
 
 am designing it for the poor artist. it should be small, easy to work with and powered by obsolete hardware.
 
+am currently dealing with something with the following flavour:
+
+The authenticity of host 'spinpaintings.shop (69.163.220.209)' can't be established.
+ECDSA key fingerprint is f2:fe:c0:d8:9f:76:b1:61:ed:85:56:ca:9b:65:4a:f2.
+Are you sure you want to continue connecting (yes/no)?
+
+after doing this on the remote deployment target:
+
+  $ git clone spintpaintings@spinpaintings.shop:~/spinpaintings.shop.git spin
+  Cloning into 'spin'...
+  The authenticity of host 'spinpaintings.shop (69.163.220.209)' can't be established.
+  ECDSA key fingerprint is f2:fe:c0:d8:9f:76:b1:61:ed:85:56:ca:9b:65:4a:f2.
+  Are you sure you want to continue connecting (yes/no)?
+
+let's check .ssh/authorized_keys, did we provision it right?
+
+ok, now it worked, but "rog up" did not follow properly, ii am seeing this:
+
+ERROR: provided hosts list is empty
+
+checking sys folder... a detail not generated properly?, let's see...
+
+yes, sys/env.yml and sys/restart.yml need to be generated as well. they hold references to the "rog-usr" and "rog-host" variables. these two variables are a part of a larger convention scheme which will reveal it self after some more refactoring and improving... going for it...
+
+...
+
+got it working. am getting close to publishing the gem:
+
+  om:~/rogs/spinpaintings.shop( master )> rog d
+  Deploying rog code for spinpaintings@spinpaintings.shop
+  spinpaintings
+  No local changes to save
+  Already up-to-date.
+  Fetching gem metadata from https://rubygems.org/..............
+  Resolving dependencies...
+  Could not find gem 'rubyongo (>= 0) ruby' in the gems available on this machine.
+
+one can now init and/or upgrade his deployment.
+
+well, first we need to provide the gem without releasing it.
+
+so how to do that? need to install it manually from github during the init process.
+
 #19.09.2018 15:15:29 CodingSession::BEGIN
 
 #19.09.2018 11:12:41 CodingSession::END

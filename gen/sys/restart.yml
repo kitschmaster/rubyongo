@@ -1,0 +1,5 @@
+---
+- hosts: rog-host
+  remote_user: rog-usr
+  tasks:
+    - include: tasks/restartrails.yml
