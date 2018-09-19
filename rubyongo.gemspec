@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage      = "http://rubyongo.org"
   s.license       = "MIT"
 
-  s.files         = Dir['LICENSE', 'README.md', 'ROG_VERSION', 'rubyongo-0.1.0.alpha.gem',
+  s.files         = Dir['LICENSE', 'README.md', 'ROG_VERSION',
                         'lib/**/*',  'exe/**/*', 'gen/**/*', 'gen/.gitignore',
                         'themes/**/*', 'views/**/*', 'panel/**/*', 'panel.yml', 'config.ru',
                         'static/**/*',
