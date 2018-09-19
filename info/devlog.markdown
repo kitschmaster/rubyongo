@@ -1,3 +1,5 @@
+#20.09.2018 00:29:37 CodingSession::END
+
 btw, it is a good practice to commit the devlog in separate commits, ii have been breaking my good practice lately, haha...
 
 anyway, ii am now at the point of almost being ready to init the spinpaintings.shop.
@@ -73,6 +75,18 @@ one can now init and/or upgrade his deployment.
 well, first we need to provide the gem without releasing it.
 
 so how to do that? need to install it manually from github during the init process.
+
+haha, look what ii did:
+
+ rubyongo-0.1.0.alpha contains itself (rubyongo-0.1.0.alpha.gem), check your files list
+
+obviously this is a "which was first, the chicken or the the egg" problem.
+
+build it, then add it to it self, and build it again? lol, it is late, more tomorrow...
+
+this stalls:  ssh $NAME "cd $REPO && gem install ../rubyongo-0.1.0.alpha.gem"
+
+have to stop here and work on it later.
 
 #19.09.2018 15:15:29 CodingSession::BEGIN
 
