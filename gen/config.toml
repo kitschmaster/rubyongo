@@ -1,0 +1,49 @@
+baseURL = "https://rog-host/"
+languageCode = "en-us"
+title = "rog-host"
+theme = "default"
+
+[author]
+  name = "a webshop framework"
+  shortBio = "team kitschmaster"
+
+[[menu.main]]
+    name = "Stream"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
+
+[[menu.main]]
+    name = "Shop"
+    url = "/item/"
+    weight = 5
+
+[params]
+    title = "Ruby On Go"
+    subtitle = "A webshop framework."
+    author = "rog-usr"
+    description = ""
+    keywords = "webshop"
+    logo = "/img/rog_logo.png"
+
+    # Site settings
+    currency = "EUR"
+    taxRate = 0.22
+    shippingFlatRate = 3
+    shippingTotalRate = 0
+    shippingQuantityRate = 0
+    shippingFreeQuantity = 2
+    order_email = "rog-usr@gmail.com"
+
+    # Body background color
+    bodybgcolor = "#f9f9f9"
+
+    # Order button
+    buttontext = "Add to basket"
+
+    # Footer text
+    footertext = "<a href='https://rog-host'>rog-host</a>"

@@ -1,3 +1,7 @@
+
+
+#19.09.2018 15:15:29 CodingSession::BEGIN
+
 #19.09.2018 11:12:41 CodingSession::END
 
 forgot one more little, but very important detail, on "rog new" need to also generate the Hugo config.toml...
