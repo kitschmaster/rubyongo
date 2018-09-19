@@ -1,4 +1,35 @@
+btw, it is a good practice to commit the devlog in separate commits, ii have been breaking my good practice lately, haha...
 
+anyway, ii am now at the point of almost being ready to init the spinpaintings.shop.
+
+my workflow is like this:
+
+1. build the gem with: gem build rubyongo.gemspec
+2. in a separate folder location with separate rvm gemset:
+  rm -rf spinpaintings.shop
+  gem uninstall rubyongo
+  gem install ../opensource/rubyongo/rubyongo-0.1.0.alpha.gem --no-rdoc --no-ri
+  rog new spinpaintings.shop
+
+this gives me a nice folder: spinpaintings.shop
+ii can cd into it and run: "rog s", then visit http://localhost:9393/panel where ii can sign into the backend Panel and edit content. at the same time, in another terminal window, ii can also run "rog h", which will run hugo's integrated web server, which gives me instant rendering. ii like this easy setup. in the world of Ruby On Rails, one gets much less and it is all mixed up, non-DB content is initially inside the views and so forth. with Ruby On Go, one gets content and code separation from the ground up...
+
+enough smalltalk, let's build this marvelous framework some more...
+
+ii also have a git repo inited by default after running the "rog new" command. next step is to automatically push this repo to the remote. that is what the "rog init" command needs to do, but right now it is not, so working on it...
+
+the current rog init script has the default code deployment set to this opensource repository. while this works well for the opensource demo site rubyongo.org, it does not work well for the framework user. as a framework user ii usually want to be able to modify my code and use that, so am now refactoring the init script to have the default be smart and use the "rog new"'s "rog-usr" and "rog-host" arguments to setup the remote deploy repo...
+
+so from a framework developers perspective my goal is this CLI experience: "rog i spinpaintings spinpaintings.shop"
+and then visit the host on a mobile phone and see the webshop and be able to start grabbing attention with a real website and a real person behind it.
+
+it says: i. this command lets the Eye see the finished product on the target Dreamhost account.
+
+right now ii am only Dreamhost. shared. ii am not like the other companies, ii will forever be backwards compatible.
+
+ruby on go, should be always backwards compatible.
+
+am designing it for the poor artist. it should be small, easy to work with and powered by obsolete hardware.
 
 #19.09.2018 15:15:29 CodingSession::BEGIN
 

@@ -3,17 +3,22 @@
 # Deploy a repo.
 #
 # Example (passing: username, host):
-#   cd sys; rogd rubyongo rubyongo.org
+#   cd sys; rogd rubyongo rubyongo.org [deployment command]
 
 # Args
 NAME="$1@$2" # => rubyongo@rubyongo.org
 REPO="$2"    # => rubyongo.org
 DEPLOY_KEY="keys/deploy_$NAME.pub"
 
+# This default command works at Dreamhost in September 2018 on ruby-1.9.3 and hugo 0.48.
+DEFAULT_COMMAND="whoami && cd $REPO && git stash && git pull && bundle && hugo && touch ~/$REPO/tmp/restart.txt"
+DEPLOYMENT_COMMAND = "{$3:-DEFAULT_COMMAND}" # configuration of the deploy command itself
+
 if [ -f "$DEPLOY_KEY" ]
 then
   echo Deploying rog code for $NAME
-  ssh $NAME "whoami && cd $REPO && git stash && git pull && bundle && hugo && touch ~/$REPO/tmp/restart.txt"
+  # Allow configuring this line with and extra argument
+  ssh $NAME $DEPLOYMENT_COMMAND
   touch $DEPLOY_KEY
 else
   echo "$NAME is not yet configured, please run: roginit $1 $2 && rogup $1 $2"

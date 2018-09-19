@@ -1,23 +1,30 @@
 #!/bin/bash
 #
-# Initialize a fresh repo.
+# Initialize a fresh remote repo for deploying to.
+#
+# The idea is to have a bare git code repository hosted on the deploy server it self.
+# Deploying is then a matter of pushing to the remote, then pulling from deployed clone.
+# The bare repo gives one the ability to have multiple people work on either the content, or the backend microservices.
+# Folllow the advice here to give access to people: https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server)
 #
 # Full example (passing: username, host, repo, repo_provider):
-#   cd sys; roginit rubyongo rubyongo.org kitschmaster@kitschmaster.com:~/kit.org.git kitschmaster@kitschmaster.com
+#   cd sys; roginit rubyongo rubyongo.org rubyongo@rubyongo.org:~/rubyongo.org.git rubyongo@rubyongo.org
 #
-# Using default github hosted repository (git@github.com:kitschmaster/rubyongo.git):
+# Using default github hosted repository (git@github.com:kitschmaster/rubyongo.git) (unless you are working on rog, you probably won't need to run the default):
 #   cd sys; roginit username domain.name
 
 # Args
-NAME="$1@$2" # => rubyongo@rubyongo.org
-REPO="$2"    # => rubyongo.org
+NAME="$1@$2"          # => rubyongo@rubyongo.org <= this is actually: rog-usr@rog-host
+REPO="$2"             # => rubyongo.org
+BARE_REPO="$2.git"    # => rubyongo.org.git
 REPO_CHECK="$2/.git"
+BARE_REPO_CHECK="$2.git/.git"
 CLONE_DEFAULT="https://github.com/kitschmaster/rubyongo.git" # "git@github.com:kitschmaster/rubyongo.git"
-CLONE="${3:-$CLONE_DEFAULT}"       # => kitschmaster@kitschmaster.com:~/kit.org.git
-PROVIDER_NAME="$4" # => kitschmaster@kitschmaster.com - when not working with github, pass the repo provider
-DEPLOY_KEY="keys/deploy_$NAME.pub" # => keys/deploy_rubyongo@rubyongo.org.pub
+CLONE="${3:-$CLONE_DEFAULT}"                                 # => kitschmaster@kitschmaster.com:~/kit.org.git
+PROVIDER_NAME="$4"                                           # => kitschmaster@kitschmaster.com - when not working with github, pass the repo provider
+DEPLOY_KEY="keys/deploy_$NAME.pub"                           # => keys/deploy_rubyongo@rubyongo.org.pub
 LOCAL_PUB_KEY="$HOME/.ssh/id_rsa.pub"
-PUB_KEY=$(<$LOCAL_PUB_KEY)         # Fetch the local public key into a variable
+PUB_KEY=$(<$LOCAL_PUB_KEY)                                   # Fetch the local public key into a variable
 
 if [ $# -eq 0 ]
 then
@@ -27,11 +34,11 @@ else
   echo Initializing rog for $NAME
 fi
 
-if [ -f "$DEPLOY_KEY" ] # if the deploy key exists in the keys folder?
+if [ -f "$DEPLOY_KEY" ] # When the deploy key exists in the sys/keys folder, assume all has been done already.
 then
   echo "$DEPLOY_KEY exists, $NAME is already configured. (Delete the deploy key to re-init.)"
   exit 1
-else
+else # Otherwise establish a simple deployment pipeline (currently proven to work on Dreamhost shared 2018).
   if [ -f "$LOCAL_PUB_KEY" ]
   then
     if ! ssh $NAME "grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys"
@@ -58,21 +65,50 @@ else
       echo Saving public deploy key to $DEPLOY_KEY
       scp $NAME:~/.ssh/id_rsa.pub $DEPLOY_KEY
 
-      # When a repository provider is present, attempt to provision the key
+      # When a repository provider is present, attempt to:
+      # 1. provision the deploy key to the provider
+      # 2. create a bare git repo and place it at the providers server
+      # 3. git configure the remote bare repo for pushing
+      # 4. read the code please
       if ! [ -z "${PROVIDER_NAME}" ]
       then
-        echo Provisioning deploy key: $PROVIDER_NAME
-        cat $DEPLOY_KEY | ssh $PROVIDER_NAME "cat >> ~/.ssh/authorized_keys"
-        ssh $NAME "ssh -o StrictHostKeyChecking=no $PROVIDER_NAME uname -a"
+        BARE_CLONE=$CLONE
+
+        #if ! [ "$PROVIDER_NAME" == "$NAME" ]
+        #then
+          # Auto provision SSH key in case the provider is not the same as rog-usr@rog-host. This is a convention, so we get automatic provisioning, if we host the repo on a different host than the deploy host.
+          echo Provisioning deploy key: $PROVIDER_NAME
+          cat $DEPLOY_KEY | ssh $PROVIDER_NAME "cat >> ~/.ssh/authorized_keys"
+          #ssh $NAME "ssh -o StrictHostKeyChecking=no $PROVIDER_NAME uname -a"
+        #fi
+
+        echo Creating bare repository from local repo
+        cd ../..
+        if [ -f "$BARE_REPO" ]
+        then
+          rm -rf $BARE_REPO
+        fi
+        git clone --bare $REPO $BARE_REPO
+        if ssh $PROVIDER_NAME test -d $BARE_REPO_CHECK
+        then
+          echo A bare repository already exists at $PROVIDER_NAME.
+        else
+          scp -r $BARE_REPO $PROVIDER_NAME:~/
+          echo Adding git remote $PROVIDER_NAME:/$BARE_REPO to local repository and setting upstream push
+          cd $REPO
+          git remote add origin $PROVIDER_NAME:~/$BARE_REPO
+          git push -u origin master
+          cd ..
+          rm -rf $BARE_REPO
+        fi
+        echo Cloning on the remote from $BARE_CLONE
+        ssh $NAME "rm -rf $REPO && git clone $BARE_CLONE $REPO && cd $REPO && git pull"
+      else
+        echo Cloning on the remote from $CLONE
+        ssh $NAME "rm -rf $REPO && git clone $CLONE $REPO && cd $REPO && git pull"
       fi
 
-      echo Cloning from $CLONE
-      ssh $NAME "rm -rf $REPO && git clone $CLONE $REPO && cd $REPO && git pull"
-
-      #echo Installing bundler and gems
-      #ssh $NAME "cd $REPO && gem install bundler --no-rdoc --no-ri && bundle"
-
-      echo Done rog init. Please run 'rogup' to complete lib setup.
+      echo Done rog init. Please run 'rogup' to complete deployment install.
     fi
   else
     echo Missing public SSH key $LOCAL_PUB_KEY, please generate one https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/

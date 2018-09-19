@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# This intentionally simple to comprehend script acts as the current Ruby On Go CLI.
+# Run "rog" in the command line to see available options.
 
 require 'benchmark'
 require 'yaml'
@@ -27,17 +29,17 @@ $:.unshift @gem_path
 @name     = ARGV[1] if ARGV.length > 0
 
 # read deploy username and domain
-@username = nil
-@domain = nil
+@rog_usr = nil
+@rog_host = nil
 if ARGV.length > 1
-  @username = ARGV[2]
-  @domain   = ARGV[3] if ARGV.length > 2
+  @rog_usr = ARGV[2]
+  @rog_host   = ARGV[3] if ARGV.length > 2
 
-  # defaults come from the Name argument:
+  # Conventionally, defaults come from the Name argument:
   # Name=rubyongo.org => DomainUsername: rubyongo, DomainHost: rubyongo.org
-  # Name=rubyongo => DomainUsername: rubyongo, DomainHost: rubyongo.com
-  @username ||= @name.split('.').first
-  @domain ||= @name =~ /\./ ? @name : "#{@name}.com"
+  # Name=rubyongo => DomainUsername: rubyongo, DomainHost: rubyongo.shop
+  @rog_usr ||= @name.split('.').first
+  @rog_host ||= @name =~ /\./ ? @name : "#{@name}.shop"
 end
 
 # code generation path, where to put generate files
@@ -62,6 +64,7 @@ USAGE = <<-EOF
 Usage:
 
   rog new Name.ext [DeployUsername DeployDomainHost] # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
+  rog init                                           # automated deployment pipeline installation
   rog start                                          # starts the Panel backend (rackup)
   rog deploy                                         # deploys code and publishes
 
@@ -158,8 +161,8 @@ def generate_rog_dir(name, to_path, replacements={})
   end
 end
 
-def init_and_populate_local_git_repo(path)
-  run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Inited git repository #{path}/.git."
+def populate_local_git_repo(path)
+  run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Development and/or content git repository #{path}/.git."
 end
 
 def first_publish(path)
@@ -188,7 +191,7 @@ def new_rog(name, settings={})
   generate_rog_dir(name, path, settings) # populate the generated site with rog
   first_publish(path) # publish the site to static generate the public folder for the first time (prevent an empty site)
   ensure_bundler_and_bundle(path) # check if bundler is installed, if not install it now, then bundle
-  init_and_populate_local_git_repo(path) # set up an initial repo
+  populate_local_git_repo(path) # set up an initial repo
   "Success".say(:green)
 end
 
@@ -200,21 +203,25 @@ def run_rog
   Rubyongo::Kit.run!
 end
 
+# Deploy this rog site
 def deploy_rog
-  name = settings['production']['usr']
+  usr = settings['production']['usr']
   host = settings['production']['host']
-  exec("cd sys; ./rogd #{name} #{host}")
+  exec("cd sys; ./rogd #{usr} #{host}")
 end
 
+# Run deployment install.
 def init_rog
-  name = settings['production']['usr']
+  usr = settings['production']['usr']
   host = settings['production']['host']
-  exec("cd sys; ./roginit #{name} #{host}; ./rogup #{name} #{host}")
+  provider = "#{usr}@#{host}"
+  # cd sys; roginit rubyongo rubyongo.org rubyongo@rubyongo.org:~/rubyongo.org.git rubyongo@rubyongo.org
+  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogup #{usr} #{host}")
 end
 
 def run_hugo_server
   set_env
-  args = "" # TODO: allow passing arguments, which?
+  args = "" # TODO: allow passing arguments, which? let's add proper arguments parsing much later, when we know exactly what the CLI interface should do and achieve tasks.
   exec("hugo server #{args}")
 end
 
@@ -223,7 +230,7 @@ def dodo
     if @command == 'help' || @command == nil || @command == ""
       print_usage
     elsif @command == 'new'
-      new_rog(@name, { 'rog-usr' => @username, 'rog-host' => @domain })
+      new_rog(@name, { 'rog-usr' => @rog_usr, 'rog-host' => @rog_host })
     elsif @command == 's' || @command == 'start'
       run_rog
     elsif @command == 'd' || @command == 'deploy'
