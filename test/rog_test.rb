@@ -17,7 +17,7 @@ class RogTest < Minitest::Test
     assert_equal true, File.exist?(settings_file)
     settings = YAML.load_file(settings_file)
     assert_equal 'spin', settings['development']['usr']
-    assert_equal 'spin.com', settings['development']['host']
+    assert_equal 'spin.shop', settings['development']['host']
   end
 
   def test_rog_new_with_default_settings
