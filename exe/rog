@@ -145,6 +145,9 @@ def generate_rog_dir(name, to_path, replacements={})
     gen(to_path, 'sys')
     gen(to_path, 'static')
 
+    # Use development gem build, no rubygems dependency right now
+    gen(to_path, 'rubyongo-0.1.0.alpha.gem')
+
     #Modify and generate Hugo config file
     genmod(replacements, to_path, 'gen', 'config.toml')
 
@@ -175,14 +178,18 @@ def first_publish(path)
   run_cmd "cd #{path}; hugo", "Published #{path}."
 end
 
-def ensure_bundler_and_bundle(path)
-  r = `gem list -ie bundler`
+def ensure_gem(name, path)
+  r = `gem list -ie #{name}`
   if r =~ /true/
-    "Bundler is present.".say(:green)
+    "#{name} is present.".say(:green)
   else
-    "Missing bundler, installing...".say(:red)
-    `cd #{path}; gem install bundler`
+    "Missing #{name}, installing...".say(:red)
+    `cd #{path}; gem install #{name}`
   end
+end
+
+def ensure_bundler_and_bundle(path)
+  ensure_gem('bundler', path)
   run_cmd "cd #{path}; bundle", "Bundled gems."
 end
 
