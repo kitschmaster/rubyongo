@@ -1,3 +1,11 @@
+forgot one more little, but very important detail, on "rog new" need to also generate the Hugo config.toml...
+
+hugo generates only a basic config file, which does not even set a theme, which then results in an empty render instead of a nice rog site without posts... fixing that now...
+
+#19.09.2018 10:30:43 CodingSession::BEGIN
+
+#17.09.2018 12:45:10 CodingSession::END
+
 had a strange experience with my iPhone 5 over the weekend. took it apart to clean the camera lense, and whilst doing that the freaking motherboard grounding terminals broke off and device did not turn on again. was already looking for a new phone over the last few days, feeling a bit sad. why should ii be buying a new phone when my old one is built out of Al and glass. some dirty poor black guy probably wasted hours on collecting minerals for my piece.
 
 ii got lucky in the morning. ii remembered that ii actually did not try plugging the charging cable back in. what a rookie iPhone repair guy ii am. the phone turned on as soon as it felt the juice again. and it seems to be charging just fine, even without grounding.
@@ -9,6 +17,12 @@ anyway, ii also decided not to deal with fully reading archetypes, right now ii 
 generating a new shop works fine, and after installing gems one can run "rake" inside a new shop. but now ii want to init and deploy a remote site. working on setting up the sys...
 
 on generating the new site, need to generate the sys folder as well, so that the framework user gets their very own Ansible scripts for their project right after running "rog new"...
+
+seems to work at #17.09.2018 12:36:15, after running "rog new ..." ii tried "rog deploy", and ii got this:
+
+  spinpaintings@spinpaintings.shop is not yet configured, please run: roginit spinpaintings spinpaintings.shop && rogup spinpaintings spinpaintings.shop
+
+ii am now moving these two commands into the rog CLI to make things consistent...
 
 #17.09.2018 07:13:12 CodingSession::BEGIN
 
