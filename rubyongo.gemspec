@@ -46,5 +46,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 1"
   s.add_development_dependency "rake", "~> 10.0"
   s.add_development_dependency "minitest", "~> 5.0"
+  #s.add_development_dependency "minitest-capybara", "~> 0.8"
+  s.add_development_dependency "capybara", "~> 2.18"
+  s.add_development_dependency "selenium-webdriver", "~>2"
 
 end
