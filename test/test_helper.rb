@@ -16,6 +16,7 @@ require 'capybara/dsl'
 #Capybara.app = Rubyongo::Kit
 Capybara.app = Rack::Builder.parse_file(File.expand_path('../../config.ru', __FILE__)).first
 
+# Unfortunately this is required to get it running, FF 48 works, but not the latest one.
 Selenium::WebDriver::Firefox::Binary.path="/Users/mihael/opensource/Firefox.app/Contents/MacOS/firefox-bin"
 
 Capybara.server_host = '0.0.0.0'
