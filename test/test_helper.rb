@@ -8,20 +8,19 @@ require 'rubyongo'
 require 'rubyongo/panel/test'
 require 'selenium-webdriver'
 
-#Capybara.default_driver = :selenium
-
-
 require 'capybara'
 require 'capybara/dsl'
-#Capybara.app = Rubyongo::Kit
-Capybara.app = Rack::Builder.parse_file(File.expand_path('../../config.ru', __FILE__)).first
 
-# Unfortunately this is required to get it running, FF 48 works, but not the latest one.
-Selenium::WebDriver::Firefox::Binary.path="/Users/mihael/opensource/Firefox.app/Contents/MacOS/firefox-bin"
+# Unfortunately this is required to get js tests running, FF 48 works, but not the latest one.
+begin
+  Selenium::WebDriver::Firefox::Binary.path= File.expand_path "~/opensource/Firefox.app/Contents/MacOS/firefox-bin"
+rescue
+end
 
+Capybara.app = Rubyongo::Kit
 Capybara.server_host = '0.0.0.0'
 Capybara.server_port = 9393
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => 'firefox'.to_sym)
+  Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
 Capybara.default_driver = :selenium
