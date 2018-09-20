@@ -2,3 +2,4 @@ public/* linguist-vendored=true
 themes/* linguist-vendored=true
 lib/rubyongo/panel/public/* linguist-vendored=true
 lib/rubyongo/panel/public/kit/js/panel.js linguist-vendored=false
+lib/rubyongo/panel/public/kit/css/panel.css linguist-vendored=false
