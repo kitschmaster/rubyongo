@@ -13,4 +13,4 @@ Rake::TestTask.new(:spec) do |t|
   t.test_files = FileList["test/**/*_spec.rb"]
 end
 
-task :default => :test
+task :default => [:test, :spec]
