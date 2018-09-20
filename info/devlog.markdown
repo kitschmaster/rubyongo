@@ -1,3 +1,14 @@
+#20.09.2018 15:39:29 CodingSession::END
+
+for some reason ii am having trouble installing the gem from a file. need to publish the gem, but before ii can do that, want to make sure to add at least one test for the Panel javascript. working on it...
+
+hm, does not look pretty right now, had to use an older version of FF 48, to get it working. so how to test?
+need to find something that works without a head.
+
+switched to poltergeist and works. can now test the Panel's javascript.
+
+#20.09.2018 08:15:23 CodingSession::BEGIN
+
 #20.09.2018 00:29:37 CodingSession::END
 
 btw, it is a good practice to commit the devlog in separate commits, ii have been breaking my good practice lately, haha...

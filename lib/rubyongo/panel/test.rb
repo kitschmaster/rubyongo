@@ -6,4 +6,7 @@ module Rubyongo
       Rubyongo::Kit
     end
   end
+
+  class Spec <  Minitest::Capybara::Spec
+  end
 end

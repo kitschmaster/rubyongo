@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rack', '~>1.6'
   s.add_dependency 'rack-contrib', '~>1.6'
-  s.add_dependency 'rack-test', '~>0.6'
+  s.add_dependency 'rack-test', '~>0.7.0'
   s.add_dependency 'sinatra', '~>1'
   s.add_dependency 'sinatra-contrib', '~>1'
   s.add_dependency 'sinatra-flash', '~>0.3'
@@ -43,8 +43,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'dm-validations', '~>1.2'
   s.add_dependency 'sysrandom', '~>1.0'
 
-  s.add_development_dependency "bundler", "~> 1"
-  s.add_development_dependency "rake", "~> 10.0"
-  s.add_development_dependency "minitest", "~> 5.0"
+  s.add_development_dependency "bundler", "~>1"
+  s.add_development_dependency "rake", "~>10.0"
+  s.add_development_dependency "minitest", "~>5.0"
+  s.add_development_dependency "minitest-capybara", "~>0.8"
+  s.add_development_dependency "nokogiri", "~>1.6"
+  s.add_development_dependency "capybara", "~>2.18"
+  s.add_development_dependency "poltergeist", "~>1"
 
 end
