@@ -20,8 +20,8 @@ rescue
 end
 
 Capybara.app = Rubyongo::Kit
-Capybara.server_host = '0.0.0.0'
-Capybara.server_port = 9393
+#Capybara.server_host = '0.0.0.0'
+#Capybara.server_port = 9393
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
