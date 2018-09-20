@@ -2,8 +2,9 @@ require "test_helper"
 
 class PanelSpec < Rubyongo::Spec
 
-  def test_it_works
+  it "works" do
     visit "/panel"
-    assert page.has_content?('GURU PANEL')
+    page.must_have_content 'GURU PANEL'
+    page.must_have_content 'Tune in'
   end
 end

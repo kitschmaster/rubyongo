@@ -7,10 +7,6 @@ module Rubyongo
     end
   end
 
-  class Spec < Minitest::Test
-    include Capybara::DSL
-    def setup
-      Capybara.app = Rubyongo::Kit.new
-    end
+  class Spec <  Minitest::Capybara::Spec
   end
 end

@@ -1,12 +1,14 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'yaml'
 require 'minitest/autorun'
+require 'minitest/capybara'
 require "capybara"
 require "capybara/dsl"
 require 'rack/test'
+require 'selenium-webdriver'
+
 require 'rubyongo'
 require 'rubyongo/panel/test'
-require 'selenium-webdriver'
 
 require 'capybara'
 require 'capybara/dsl'
