@@ -1,3 +1,39 @@
+#21.09.2018 11:56:19 CodingSession::END
+
+a couple of days ii got stuck installing the spinpaintings.shop rog unto Dreamhost due to not being able to install this very nice gem.
+
+let me find a way, and if ii don't find it today, ii'll publish the gem... actually it would be smarter to publish the gem, right? haha, nope, ii would not publish an unfinished thing, just to get it working. has to be a way for me to do it...
+
+one option is to simply include the libs during the rog generation step and never include rubyongo as a gem at all... let's see...
+
+looks like the easy way is to simply copy the gem to the remote and install it without modifying the current framework config. here is my current "re-install" script for testing on the spinpaintings.shop domain (am running this from the ~/rogs folder):
+    rm -rf spinpaintings.shop
+    gem uninstall rubyongo
+    cd ~/opensource/rubyongo; rake build; scp pkg/rubyongo-0.1.0.alpha.gem spinpaintings@spinpaintings.shop:~/
+    cd ~/rogs; gem install ../opensource/rubyongo/pkg/rubyongo-0.1.0.alpha.gem --no-rdoc --no-ri
+    ssh spinpaintings@spinpaintings.shop "gem uninstall rubyongo; gem install rubyongo-0.1.0.alpha.gem --no-rdoc --no-ri; rm -rf spinpaintings.shop; rm -rf spinpaintings.shop.git"
+    rog new spinpaintings.shop
+
+and nope, installing on the remote does not work:
+
+  INFO:  gem "rubyongo" is not installed
+  ERROR:  Could not find a valid gem '/home/rubyongo/rubyongo-0.1.0.alpha.gem' (>= 0) in any repository
+
+so ii did this on the remote:
+
+  mkdir repo
+  mkdir repo/gems
+  cp rubyongo-0.1.0.alpha.gem repo/gems
+  cd repo; gem generate_index
+
+then point bundler to this location by adding the following line to the generated Gemfile "gen/Gemfile":
+
+  source 'file:///home/spinpaintings/repo'
+
+and yes, at #21.09.2018 11:09:38 the spinpaintings.shop/panel is running like a charm. now let's repeat and rinse...
+
+#21.09.2018 08:30:13 CodingSession::BEGIN
+
 #20.09.2018 15:39:29 CodingSession::END
 
 for some reason ii am having trouble installing the gem from a file. need to publish the gem, but before ii can do that, want to make sure to add at least one test for the Panel javascript. working on it...
