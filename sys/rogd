@@ -21,5 +21,5 @@ then
   ssh $NAME $DEPLOYMENT_COMMAND
   touch $DEPLOY_KEY
 else
-  echo "$NAME is not yet configured, please run: rog init $1 $2 && rog up $1 $2"
+  echo "$NAME is not yet configured, please run: rog init $1 $2"
 fi

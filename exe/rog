@@ -64,9 +64,16 @@ USAGE = <<-EOF
 Usage:
 
   rog new Name.ext [DeployUsername DeployDomainHost] # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
-  rog init                                           # automated deployment pipeline installation
   rog start                                          # starts the Panel backend (rackup)
-  rog deploy                                         # deploys code and publishes
+  rog hugo                                           # starts the Hugo development server
+  rog init                                           # automated deployment pipeline installation
+  rog deploy                                         # deploys code and publishes site
+  rog content                                        # deploys content and publishes site
+  rog upgrade                                        # run sys playbooks on the remote (installs go, hugo, libs, etc.)
+
+One can use the first letter of a command to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
+
+Good luck!
 
 EOF
 
@@ -228,7 +235,7 @@ def init_rog
   host = settings['production']['host']
   provider = "#{usr}@#{host}"
   # cd sys; roginit rubyongo rubyongo.org rubyongo@rubyongo.org:~/rubyongo.org.git rubyongo@rubyongo.org
-  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogup #{usr} #{host}")
+  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogup #{usr} #{host}; ./roginitcontent #{usr} #{host}")
 end
 
 # Upgrade the setup.
@@ -236,6 +243,13 @@ def upgrade_rog
   usr = settings['production']['usr']
   host = settings['production']['host']
   exec("cd sys; ./rogup #{usr} #{host}")
+end
+
+# Sync the content.
+def content_rog
+  usr = settings['production']['usr']
+  host = settings['production']['host']
+  exec("cd content; git push; cd ../sys; ./rogc #{usr} #{host}")
 end
 
 def run_hugo_server
@@ -248,7 +262,7 @@ def dodo
   #time = Benchmark.realtime do
     if @command == 'help' || @command == nil || @command == ""
       print_usage
-    elsif @command == 'new'
+    elsif @command == 'n' || @command == 'new'
       new_rog(@name, { 'rog-usr' => @rog_usr, 'rog-host' => @rog_host })
     elsif @command == 's' || @command == 'start'
       run_rog
@@ -256,8 +270,10 @@ def dodo
       deploy_rog
     elsif @command == 'i' || @command == 'init'
       init_rog
-    elsif @command == 'up' || @command == 'upgrade'
+    elsif @command == 'u' || @command == 'upgrade'
       upgrade_rog
+    elsif @command == 'c' || @command == 'content'
+      content_rog
     elsif @command == 'h' || @command == 'hugo'
       run_hugo_server
     end

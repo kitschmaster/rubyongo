@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Deploy the content repo.
+#
+# Example (passing: username, host):
+#   cd sys; rogc rubyongo rubyongo.org [deployment command]
+
+# Args
+NAME="$1@$2"         # => rubyongo@rubyongo.org
+REPO="$2/content"    # => rubyongo.org
+DEPLOY_KEY="keys/deploy_$NAME.pub"
+
+DEFAULT_COMMAND="cd $REPO; git pull; cd ..; hugo"
+DEPLOYMENT_COMMAND="${3:-$DEFAULT_COMMAND}"
+
+if [ -f "$DEPLOY_KEY" ]
+then
+  echo Deploying content for $NAME
+  ssh $NAME $DEPLOYMENT_COMMAND
+else
+  echo "$NAME is not yet configured, please run: rog init $1 $2"
+fi

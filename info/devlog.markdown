@@ -33,7 +33,12 @@ right now, ii am playing all three roles.
 
 anyway, am thinking of using the same strategy for the content folder as ii did for the code. create a bare repo on the remote, check it out on the remote into the content folder, and also check it out on the local dev machine.
 
-#21.09.2018 12:06:11 ComSession::BEGIN
+script is ready at #21.09.2018 14:46:05, now have the ability to undo changes, create content locally and push it online... a sort of a 'content deployment pipe', so that ii get these two CLI commands:
+
++ "rog d": deploy code
++ "rog c": deploy content (or better: sync content)
+
+#21.09.2018 12:06:11 CodingSession::BEGIN
 
 #21.09.2018 11:56:19 CodingSession::END
 
