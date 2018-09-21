@@ -1,3 +1,4 @@
+#21.09.2018 15:48:23 CodingSession::END
 
 need to do another important decision. during "rog init" ii am publishing the site for the first time, but only locally. plus the "content" folder is not checked in anywhere... when it gets committed/pushed to the remote, it will not push the content... ii guess there's two options:
 
