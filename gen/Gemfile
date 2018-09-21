@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
+source 'file:///home/rog-usr/repo' # TODO: remove before release, this line is TEMPORARY for testing purpose only!
 
 gem 'rubyongo'
 
 group :development, :test do
-  gem "bundler", "~> 1.16"
-  gem "rake", "~> 10.0"
-  gem "minitest", "~> 5.0"
+  gem "bundler", "~>1"
+  gem "rake", "~>10.0"
+  gem "minitest", "~>5.0"
 end
 
 group :development do

@@ -108,8 +108,8 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
         ssh $NAME "rm -rf $REPO && git clone $CLONE $REPO && cd $REPO && git pull"
       fi
 
-      #echo Development gem setup
-      #ssh $NAME "cd $REPO && gem install ../rubyongo-0.1.0.alpha.gem" # this stalls!
+      echo Bundling gems on the remote
+      ssh $NAME "cd $REPO && bundle install"
 
       echo Done rog init. Please run 'rogup' to complete deployment install.
     fi

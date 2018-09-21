@@ -134,28 +134,30 @@ def generate_rog_dir(name, to_path, replacements={})
     # Generate static generator paths
     gen(to_path, 'themes')
 
-    # Generate Panel paths and files
+    # Generate Panel paths and populate with files
     gen(to_path, 'panel')
     gen(to_path, 'panel', 'views')
     gen(to_path, 'gen', 'Rakefile')
-    gen(to_path, 'gen', 'Gemfile')
     gen(to_path, 'gen', 'test')
     gen(to_path, 'gen', 'config.ru')
     gen(to_path, 'gen', '.gitignore')
     gen(to_path, 'sys')
     gen(to_path, 'static')
 
-    #Modify and generate Hugo config file
+    # Generate the Gemfile
+    genmod(replacements, to_path, 'gen', 'Gemfile')
+
+    #Generate Hugo config file
     genmod(replacements, to_path, 'gen', 'config.toml')
 
-    # Modify and generate Panel settings file
+    # Generate Panel settings file
     genmod(replacements, to_path, 'gen', 'panel.yml')
 
-    # Modify and generate sys/host_vars settings
+    # Generate sys/host_vars settings
     to_file = File.join(to_path, 'sys', 'host_vars', "#{replacements['rog-host']}.yml")
     genmod(replacements, to_file, 'gen', 'sys', 'host_vars', 'example.com.yml')
 
-    # Modify and generate host lists for sys
+    # Generate host lists for sys
     {"env.yml"     => File.join(to_path, 'sys', "env.yml"),
      "restart.yml" => File.join(to_path, 'sys', "restart.yml"),
       "rogs" => File.join(to_path, 'sys', "rogs")}.each do |filename, to_file|
