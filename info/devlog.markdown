@@ -1,3 +1,40 @@
+
+need to do another important decision. during "rog init" ii am publishing the site for the first time, but only locally. plus the "content" folder is not checked in anywhere... when it gets committed/pushed to the remote, it will not push the content... ii guess there's two options:
+
++ add the content folder into version control: design and edit content locally, deploy it together with the code "rog deploy"
++ do not add the content folder into version control: deploy only code, have a separate content git repository, deploy only code with "rog deploy"
+
+content should be versioned, that's an end goal and a must. so at some point the content needs to be pushed somewhere...
+
+one idea ii am playing with is to simply manage the content folder from the Panel editor, let the framework automatically create commits into the very same repo... nah, will be conflicts... need to think about it some more... create commits into a sub-repo, or submodule, subtree... something like that would be much nicer...
+
+definitely need a separate and managed git repo for the content, this way the Panel can implement UNDO/REDO functionality...
+
+thinking...
+
+what about this:
+
++ since content/* is gitignored, why not simply have a repo in there
++ during "rog init", on the remote: init an empty git repo inside the content folder
++ clone the remote content repo into the local development content folder
++ have undo/redo inside the Panel
+
+one more idea... make the local development Panel be aware of the content repo. if ii press "Publish" inside the Panel at the live remote server, it will commit. but if ii press it in the local dev Panel, it should commit, pull from remote/merge any new remote stuff, and then push...
+
+but, what if there are conflicts? ii guess pushing content up and down is something that only developers can do, and not the end-user of the framework...
+
+btw, we have these users in rubyongo:
+
+1. framework developer: person building rubyongo gem
+2. framework user: person building a webshop like spinpaintings.shop, the rubyongo gem user
+3. end-user: person owning the webshop, the artist providing the content, using only the deployed Panel
+
+right now, ii am playing all three roles.
+
+anyway, am thinking of using the same strategy for the content folder as ii did for the code. create a bare repo on the remote, check it out on the remote into the content folder, and also check it out on the local dev machine.
+
+#21.09.2018 12:06:11 ComSession::BEGIN
+
 #21.09.2018 11:56:19 CodingSession::END
 
 a couple of days ii got stuck installing the spinpaintings.shop rog unto Dreamhost due to not being able to install this very nice gem.

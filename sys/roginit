@@ -3,8 +3,8 @@
 # Initialize a fresh remote repo for deploying to.
 #
 # The idea is to have a bare git code repository hosted on the deploy server it self.
-# Deploying is then a matter of pushing to the remote, then pulling from deployed clone.
-# The bare repo gives one the ability to have multiple people work on either the content, or the backend microservices.
+# Deploying is then a matter of pushing to the remote, then pulling from the deployed clone.
+# The bare repo gives one the ability to have multiple people work on the backend microservices or frontend layouts/themes.
 # Folllow the advice here to give access to people: https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server)
 #
 # Full example (passing: username, host, repo, repo_provider):

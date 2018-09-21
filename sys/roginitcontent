@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Initialize a fresh remote content repo for deploying content to.
+#
+# The idea is to have a bare git content repository hosted on the deploy server it self.
+# The bare repo gives one the ability to have multiple people work on the content while having full undo/redo functionality and an ability to develop content locally.
+#
+# Full example (passing: username, host, repo, repo_provider):
+#   cd sys; roginitcontent rubyongo rubyongo.org
+
+# Args
+NAME="$1@$2"                            # => rubyongo@rubyongo.org <= this is actually: rog-usr@rog-host
+REPO="$2"
+CONTENT_REPO="$2/content"               # => rubyongo.org/content
+CONTENT_REPO_CHECK="$CONTENT_REPO/.git" # => rubyongo.org/content/.git
+BARE_CONTENT_REPO="$2.content.git"      # => rubyongo.org.content.git
+BARE_CONTENT_REPO_CHECK="$BARE_CONTENT_REPO/.git"
+
+if [ $# -eq 0 ]
+then
+  echo "No arguments supplied, please provide full repo name, example: roginitcontent rubyongo rubyongo.org"
+  exit 1
+else
+  echo Initializing rog content for $NAME
+fi
+
+if ssh $NAME test -d $CONTENT_REPO_CHECK
+then
+  echo A remote content repository already exists, nothing to init. Remove $CONTENT_REPO_CHECK on the remote to init again.
+  exit 1
+else
+  echo Initing repo on the remote
+  ssh $NAME "cd $REPO; hugo new post/welcome.md; cd ..; cd $CONTENT_REPO; git config --global push.default simple; git config --global user.name '$1'; git config --global user.email $NAME; git init; git add .; git commit -am 'Setup commit'; cd ~; git clone --bare $CONTENT_REPO $BARE_CONTENT_REPO; cd $CONTENT_REPO; git remote add origin ~/$BARE_CONTENT_REPO; git push -u origin master"
+  echo Cloning to local...
+  cd ..; rm -rf content; git clone $NAME:~/$BARE_CONTENT_REPO content
+  echo Done!
+fi
