@@ -56,7 +56,7 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
     else
 
       # Create and save the remote hosts deploy key, if it does not exist
-      if ! ssh $NAME test -d ~/.ssh/id_rsa
+      if ! ssh $NAME [ -e .ssh/id_rsa ]
       then
         echo Generating public deploy key for $NAME
         ssh $NAME "ssh-keygen -t rsa -b 4096 -N '' -C '$NAME' -f ~/.ssh/id_rsa"
