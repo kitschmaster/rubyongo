@@ -69,8 +69,13 @@ module Rubyongo
     #************************************************************************************************
     register Sinatra::Flash
     register Sinatra::ConfigFile
-
-    config_file Rubyongo::PANEL_CONFIG_PATH
+    if ENV['RACK_ENV'] == 'test'
+      test_config = File.expand_path('../../../../test/panel_test.yml', __FILE__)
+      puts "Loading test config: #{test_config}"
+      config_file test_config
+    else
+      config_file Rubyongo::PANEL_CONFIG_PATH
+    end
     set :bind, '0.0.0.0'
     set :port, 9393
     set :views, Rubyongo::PANEL_VIEWS_PATH # File.join(Rubyongo::EXEC_PATH, 'views')
@@ -187,7 +192,7 @@ module Rubyongo
 
     post '/auth/in' do
       auth!
-      flash[:success] = "Successfully logged in"
+      flash[:success] = "Successfully tuned in"
       if session[:return_to].nil?
         redirect '/panel'
       else
@@ -198,7 +203,7 @@ module Rubyongo
     get '/auth/out' do
       env['warden'].raw_session.inspect
       env['warden'].logout
-      flash[:success] = 'Successfully logged out'
+      flash[:success] = 'Successfully tuned out'
       redirect '/panel'
     end
 

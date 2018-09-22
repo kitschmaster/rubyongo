@@ -24,6 +24,7 @@ restart.txt
 
 # Database
 db.sqlite
+test-db.sqlite
 
 # Content
 content/*
