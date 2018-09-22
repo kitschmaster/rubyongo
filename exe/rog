@@ -196,7 +196,7 @@ end
 
 def ensure_bundler_and_bundle(path)
   ensure_gem('bundler', path)
-  run_cmd "cd #{path}; bundle", "Bundled gems."
+  run_cmd "cd #{path}; bundle install", "Installed gems."
 end
 
 # Create a new rog site

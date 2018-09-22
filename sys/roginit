@@ -109,7 +109,7 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
       fi
 
       echo Bundling gems on the remote
-      ssh $NAME "cd $REPO && bundle install"
+      ssh $NAME "cd $REPO && bundle install --without development"
 
       echo Done rog init. Please run 'rogup' to complete deployment install.
     fi
