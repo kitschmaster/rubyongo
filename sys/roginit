@@ -13,6 +13,11 @@
 # Using default github hosted repository (git@github.com:kitschmaster/rubyongo.git) (unless you are working on rog, you probably won't need to run the default):
 #   cd sys; roginit username domain.name
 
+# What this does?
+#
+# 1. establish SSH key authorization via authorized keys
+# 2. create bare repo from local rog repo, copy it to the remote, add git remote to the local rog repo
+
 # Args
 NAME="$1@$2"          # => rubyongo@rubyongo.org <= this is actually: rog-usr@rog-host
 REPO="$2"             # => rubyongo.org
@@ -49,21 +54,21 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
       ssh $NAME "umask 0077 ; mkdir -p ~/.ssh ; grep -q -F \"$PUB_KEY\" ~/.ssh/authorized_keys 2>/dev/null || echo \"$PUB_KEY\" >> ~/.ssh/authorized_keys"
     fi
 
+    # Create and save the remote hosts deploy key, if it does not exist
+    if ! ssh $NAME [ -e .ssh/id_rsa ]
+    then
+      echo Generating public deploy key for $NAME
+      ssh $NAME "ssh-keygen -t rsa -b 4096 -N '' -C '$NAME' -f ~/.ssh/id_rsa"
+    fi
+
+    echo Saving public deploy key to $DEPLOY_KEY
+    scp $NAME:~/.ssh/id_rsa.pub $DEPLOY_KEY
+
     if ssh $NAME test -d $REPO_CHECK
     then
       echo A repository already exists, nothing to init. Please run 'rogup' to upgrade libs.
       exit 1
     else
-
-      # Create and save the remote hosts deploy key, if it does not exist
-      if ! ssh $NAME [ -e .ssh/id_rsa ]
-      then
-        echo Generating public deploy key for $NAME
-        ssh $NAME "ssh-keygen -t rsa -b 4096 -N '' -C '$NAME' -f ~/.ssh/id_rsa"
-      fi
-
-      echo Saving public deploy key to $DEPLOY_KEY
-      scp $NAME:~/.ssh/id_rsa.pub $DEPLOY_KEY
 
       # When a repository provider is present, attempt to:
       # 1. provision the deploy key to the provider
