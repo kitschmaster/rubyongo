@@ -11,7 +11,7 @@ REPO="$2"    # => rubyongo.org
 DEPLOY_KEY="keys/deploy_$NAME.pub"
 
 # This default command works at Dreamhost in September 2018 on ruby-1.9.3 and hugo 0.48.
-DEFAULT_COMMAND="whoami && cd $REPO && git stash && git pull && bundle && hugo && touch ~/$REPO/tmp/restart.txt"
+DEFAULT_COMMAND="whoami && cd $REPO && git stash && git pull && bundle install && hugo && touch ~/$REPO/tmp/restart.txt"
 DEPLOYMENT_COMMAND="${3:-$DEFAULT_COMMAND}" # configuration of the deploy command itself
 
 if [ -f "$DEPLOY_KEY" ]
