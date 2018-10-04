@@ -78,7 +78,11 @@ module Rubyongo
     end
     set :bind, '0.0.0.0'
     set :port, 9393
-    set :views, Rubyongo::PANEL_VIEWS_PATH # File.join(Rubyongo::EXEC_PATH, 'views')
+
+    # Set Sinatra views path.
+    # Supporting view overrides by the framework user here, see #find_template helper override.
+    # User can add/override files in panel/views/*.erb
+    set :views, [Rubyongo::PANEL_VIEWS_PATH, Rubyongo::VIEWS_PATH]
 
     # calls `/dev/urandom`
     # or an appropriate OS kernel alternative
@@ -90,7 +94,7 @@ module Rubyongo
     # Two public folders (the library one is being served before PANEL_PUBLIC_PATH)
     #************************************************************************************************
     set :public_folder, Rubyongo::PANEL_PUBLIC_PATH
-    use Rack::TryStatic, :root => PANEL_LIB_PUBLIC_PATH, :urls => %w[/]
+    use Rack::TryStatic, :root => Rubyongo::PANEL_LIB_PUBLIC_PATH, :urls => %w[/]
 
     #************************************************************************************************
     # Logging
@@ -99,6 +103,11 @@ module Rubyongo
     helpers do
       def logger
         request.logger
+      end
+
+      # Wrapping default #find_template to allow multiple views locations.
+      def find_template(views, name, engine, &block)
+        views.each { |v| super(v, name, engine, &block) }
       end
     end
 
@@ -181,6 +190,8 @@ module Rubyongo
       end
     end # helpers
 
+    # TODO(research): should backend UI mounting point be editable?
+    # Should all these routes be editable at all?
     get '/panel' do
       set_message "Welcome!"
       erb :index

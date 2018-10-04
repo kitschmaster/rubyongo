@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files         = Dir['LICENSE', 'README.md', 'ROG_VERSION',
                         'lib/**/*',  'exe/**/*', 'gen/**/*', 'gen/.gitignore',
-                        'themes/**/*', 'views/**/*', 'panel/**/*', 'panel.yml', 'config.ru',
+                        'themes/**/*', 'panel/**/*', 'panel.yml', 'config.ru',
                         'static/**/*',
                         'sys/**/*', 'sys/host_vars/.gitignore', 'sys/host_files/.gitignore', 'sys/keys/.gitignore']
   s.bindir        = "exe"
