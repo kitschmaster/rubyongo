@@ -42,7 +42,7 @@ if ARGV.length > 1
   @rog_host ||= @name =~ /\./ ? @name : "#{@name}.shop"
 end
 
-# code generation path, where to put generate files
+# code generation path, where to put generated files
 # just take the current folder for now
 @gen_path = Dir.pwd
 
