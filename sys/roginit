@@ -116,7 +116,7 @@ else # Otherwise establish a simple deployment pipeline (currently proven to wor
       echo Bundling gems on the remote
       ssh $NAME "cd $REPO && bundle install --without development"
 
-      echo Done rog init. Please run 'rogup' to complete deployment install.
+      echo Done rog init. Please run 'rog equip' to complete deployment install.
     fi
   else
     echo Missing public SSH key $LOCAL_PUB_KEY, please generate one https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
