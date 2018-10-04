@@ -67,9 +67,9 @@ Usage:
   rog start                                          # starts the Panel backend (rackup)
   rog hugo                                           # starts the Hugo development server
   rog init                                           # automated deployment pipeline installation
+  rog equip                                          # run sys playbooks on the remote (installs go, hugo, libs, etc.)
   rog deploy                                         # deploys code and publishes site
   rog content                                        # deploys content and publishes site
-  rog upgrade                                        # run sys playbooks on the remote (installs go, hugo, libs, etc.)
 
 One can use the first letter of a command to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
 
@@ -94,7 +94,13 @@ def set_env
 end
 
 def settings
-  @settings ||= YAML.load_file('panel.yml')
+  if File.exists?('panel.yml')
+    @settings ||= YAML.load_file('panel.yml')
+  else
+    print_usage
+    "No panel.yml present in current folder. Did you run 'rog new'? Or 'rog init'?".say(:red)
+    exit(1)
+  end
 end
 
 # Generate a file by copying
@@ -127,7 +133,7 @@ def genmod(replacements, to, *from)
 end
 
 # Create rog folder with `hugo new site`
-def new_rog_dir(name, path)
+def generate_rog_dir(name, path)
   if Dir.exists?(path)
     "#{name} exists at #{path}.".say(:red)
     exit(1)
@@ -136,7 +142,7 @@ def new_rog_dir(name, path)
   end
 end
 
-def generate_rog_dir(name, to_path, replacements={})
+def modify_rog_dir(name, to_path, replacements={})
   if Dir.exists?(to_path)
     # Generate static generator paths
     gen(to_path, 'themes')
@@ -205,8 +211,8 @@ def new_rog(name, settings={})
     return
   end
   path = File.join(@gen_path, name)
-  new_rog_dir(name, path) # run hugo new site
-  generate_rog_dir(name, path, settings) # populate the generated site with rog
+  generate_rog_dir(name, path) # run hugo new site
+  modify_rog_dir(name, path, settings) # populate the generated site with rog
   first_publish(path) # publish the site to static generate the public folder for the first time (prevent an empty site)
   ensure_bundler_and_bundle(path) # check if bundler is installed, if not install it now, then bundle
   populate_local_git_repo(path) # set up an initial repo
@@ -234,14 +240,22 @@ def init_rog
   host = settings['production']['host']
   provider = "#{usr}@#{host}"
   # cd sys; roginit rubyongo rubyongo.org rubyongo@rubyongo.org:~/rubyongo.org.git rubyongo@rubyongo.org
-  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogup #{usr} #{host}; ./roginitcontent #{usr} #{host}")
+  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogequip #{usr} #{host}; ./roginitcontent #{usr} #{host}")
 end
 
-# Upgrade the setup.
+# Equip the remote deployment server.
+def equip_rog
+  usr = settings['production']['usr']
+  host = settings['production']['host']
+  exec("cd sys; ./rogequip #{usr} #{host}")
+end
+
+# TODO: upgrading rog internals
 def upgrade_rog
   usr = settings['production']['usr']
   host = settings['production']['host']
-  exec("cd sys; ./rogup #{usr} #{host}")
+  #exec("cd sys; ./rogequip #{usr} #{host}")
+  "Sorry! Not yet implemented".say(:red)
 end
 
 # Sync the content.
@@ -269,12 +283,17 @@ def dodo
       deploy_rog
     elsif @command == 'i' || @command == 'init'
       init_rog
-    elsif @command == 'u' || @command == 'upgrade'
+    elsif ['upgrade', 'up', 'u'].include? @command
       upgrade_rog
+    elsif @command == 'e' || @command == 'equip'
+      equip_rog
     elsif @command == 'c' || @command == 'content'
       content_rog
     elsif @command == 'h' || @command == 'hugo'
       run_hugo_server
+    else
+      print_usage
+      "Uknown command: #{@command}".say(:red)
     end
   #end
   #"Realtime: #{time}sec\n".say(:yellow)
