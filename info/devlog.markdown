@@ -1,3 +1,39 @@
+#04.10.2018 17:05:53 CodingSession::END
+
+these days, we all need a webshop, or two.
+
+...
+
+
+ii did some minor improvements in the Panel UI and in the default theme and the framework...
+
+ii simplified the menu in the default theme and made it responsive. at 600px and less device width the menu changes into a tap/click and tap/click. two clicks for one,... ii literally copied the responsive menu example from W3C then made it use flexbox instead and ii like it so far, seems to work just fine for alpha software.
+
++ might need to make the hiding of the site title optional bellow 600px.
+
+ii also renamed the sys command "rogup" to "rogequip" to better represent what it does. it equips the remote server with ruby, golang, hugo,...
+
+before ii head on to the spinpaintings.shop ii also want to implement "rog upgrade" properly.
+
+when ii worked with Ruby on Rails, ii always bumped my head on upgrading the framework. ii would just do it all the time, update gems as soon as possible, and still they would run out of sight eventually.
+
+is this going to be very similar with rog? running "rog up" should:
+
++ 1. update the installed rubyongo gem
++ 2. generate/refresh Panel files from the new gem?
++ 3. copy over only if it does not exist, otherwise create a file like this:"panel/views/editor.erb.rubyongo.0.1.0-alpha"?
+
+ii don't like this idea. ii should be able to override. right now as a framework user ii get a subset of the Panel code, at the same time ii get the entire views folder with all the files simply copied from the gem location to the EXECUTION path. which was fine so far, but now ii want to upgrade my spinpaintings.shop to the latest improvements. ii want to cd into spinpainting.shop and run "rog up" and get the latest default theme updated, and the latest Panel basics updated as well. if fraser (fraser - fra mework u ser) overrides one of those files, his file should not be deleted or modified, which means rog can not simply copy the lib/panel/views into EXEC/views. so:
+
++ do not copy lib/panel/views
++ load lib/panel/views and EXEC/views, how to do that in sinatra? ...
+
+worked through this and at #04.10.2018 16:45:42 have finished refactoring and rog is now able to load views from two locations. a fraser (framework user) can now write Panel views inside "panel/views", and he can put static JS and CSS inside "panel/css". also added examples on how to override...
+
+so basically we now have the proper setup from a fraser standpoint, all that the "rog up" command will do for him, is update the gem and refresh some files... what about the Hugo generated stuff? well, for now let's focus on the Panel updates, ii have not had upgrade problems with Hugo content anyway.
+
+#04.10.2018 14:00:58 CodingSession::BEGIN
+
 #21.09.2018 15:48:23 CodingSession::END
 
 need to do another important decision. during "rog init" ii am publishing the site for the first time, but only locally. plus the "content" folder is not checked in anywhere... when it gets committed/pushed to the remote, it will not push the content... ii guess there's two options:
