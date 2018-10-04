@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# Upgrade an initialized repo.
+# Equip a remote initialized repo with libs and tools.
 #
 # Full examples:
-#   cd sys; rogup rubyongo rubyongo.org
-#   cd sys; rogup username domain.name
+#   cd sys; rogequip rubyongo rubyongo.org
+#   cd sys; rogequip username domain.name
 
 # Args
 NAME="$1@$2" # => rubyongo@rubyongo.org
@@ -13,11 +13,11 @@ DEPLOY_KEY="keys/deploy_$NAME.pub"
 
 if [ -f "$DEPLOY_KEY" ]
 then
-  echo Upgrading rog for $NAME
+  echo Equip remote rog for $NAME
   ansible-playbook -i rogs -l $1 env.yml # Setup the host environment
   ssh $NAME "cd $REPO && git stash && git pull && hugo"
   ansible-playbook -i rogs -l $1 restart.yml # Restart server
   touch $DEPLOY_KEY
 else
-  echo "$NAME is not yet configured, please run: roginit $1 $2"
+  echo "$NAME is not yet initialized, please run: roginit $1 $2"
 fi
