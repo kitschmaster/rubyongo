@@ -143,7 +143,6 @@ def generate_rog_dir(name, to_path, replacements={})
 
     # Generate Panel paths and populate with files
     gen(to_path, 'panel')
-    gen(to_path, 'panel', 'views')
     gen(to_path, 'gen', 'Rakefile')
     gen(to_path, 'gen', 'test')
     gen(to_path, 'gen', 'config.ru')
