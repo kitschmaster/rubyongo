@@ -1,8 +1,20 @@
 <div class="container">
-	<form action="/auth/in" method="post">
-	  <label>Name:</label> <input type="text" name="guru[username]" />
-	  <label>Pass:</label> <input type="password" name="guru[password]" />
-	  <input name="commit" type="submit" value="Tune in" />
-	</form>
+  <div>
+  	<form action="/auth/in" method="post" class="pure-form pure-form-aligned">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="guru[username]">Name</label>
+          <input name="guru[username]" type="text" placeholder="Username">
+        </div>
+        <div class="pure-control-group">
+          <label for="gurup[password]">Pass</label>
+          <input name="guru[password]" type="password" placeholder="Password">
+        </div>
+        <div class="pure-controls">
+          <button type="submit" class="pure-button button-secondary"><i class="fa fa-sign-in"></i> Tune in</button>
+        </div>
+      </fieldset>
+  	</form>
+  </div>
 </div>
 

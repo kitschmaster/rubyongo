@@ -9,7 +9,6 @@ class PanelSpec < Rubyongo::Spec
   end
 
   it "tunes a guru in and out" do
-    puts "what is app: #{page.driver.methods.sort}"
     tunein
     tuneout
   end
@@ -24,7 +23,7 @@ class PanelSpec < Rubyongo::Spec
       page.must_have_content 'Pass'
       fill_in 'guru[username]', :with => 'rubyongo'
       fill_in 'guru[password]', :with => '3shop6shop9'
-      find('input[name="commit"]').click
+      find('button[type="submit"]').click
       page.must_have_content 'Successfully tuned in'
     end
 
