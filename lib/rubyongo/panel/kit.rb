@@ -472,7 +472,8 @@ module Rubyongo
       erb :stream
     end
 
-    def self.stream_path(filename='')
+    def self.stream_path(archetype, filename='')
+      filename = archetype.empty? ? filename : File.join(archetype.downcase, filename)
       File.join(CONTENT_PATH, filename)
     end
 
@@ -484,38 +485,25 @@ module Rubyongo
       `convert #{path} -resize #{resize} #{thumbnail_path}`
     end
 
-    def self.stream_in(filename, tempfile, resize='250x250')
-      img_path = Kit.stream_path(filename)
+    def self.stream_in(archetype, filename, tempfile, resize='250x250')
+      img_path = Kit.stream_path(archetype, filename)
       thmb = thumbnail_filename(filename)
-      img_thumbnail_path = Kit.stream_path(thmb)
+      img_thumbnail_path = Kit.stream_path(archetype, thmb)
       File.open(img_path, 'wb') do |f|
         f.write(tempfile.read)
       end
-      #image = MiniMagick::Image.open(img_path)
-      #image.resize resize
-      #image.write img_thumbnail_path
       Kit.make_thumbnail(img_path, resize, img_thumbnail_path)
       [img_path, img_thumbnail_path]
     end
 
     post '/stream_editor/in' do
-      r = Kit.stream_in(params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
+      puts "PARAMS: #{params}"
+      title = params[:title] #TODO
+      archetype = params[:archetype]
+      r = Kit.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
       @img_path = r[0]
       @img_thumbnail_path = r[1]
       @img_tag = inline_image_tag(@img_thumbnail_path)
-=begin
-      @filename = params[:file][:filename]
-      file = params[:file][:tempfile]
-      @img_path = stream_path(@filename)
-      @img_thumbnail_path = stream_path(thumbnail_filename(@filename))
-      File.open(@img_path, 'wb') do |f|
-        f.write(file.read)
-      end
-      image = MiniMagick::Image.open(@img_path)
-      image.resize settings.thumbnail_resize
-      image.write @img_thumbnail_path
-      @img_tag = inline_image_tag(@img_thumbnail_path)
-=end
       erb :image
     end
 

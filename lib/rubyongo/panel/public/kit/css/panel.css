@@ -100,6 +100,10 @@ table {
   table tr {
     border-bottom: 1px dotted #AEADAD; }
 
+  label {
+    color: gray;
+  }
+
 ::selection {
   background: #FFF5B8;
   color: #000;
@@ -116,7 +120,7 @@ table {
 .hidden {
   text-indent: -9999px;
   visibility: hidden;
-  display: none; }
+  display: none !important; }
 
 .clearfix:after {
   content: "";
@@ -134,8 +138,11 @@ table {
           flex-direction: column;*/
   margin:0;
 }
-.s {
+.gray {
   background: rgba(0, 36, 138, 0.1);
+}
+.white {
+  background: white;
 }
 .main {
   /*-webkit-flex: 1;
@@ -146,7 +153,15 @@ table {
   margin: 0 auto 3em;
 }
 
-#content {
+#content {}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.container .pure-control-group {
+  padding: 0.3em 0 0 1em;
 }
 
 header {
@@ -169,7 +184,7 @@ footer {
 }
 
 /* ============================================================ */
-/* FileEditor */
+/* Editor */
 /* ============================================================ */
 .info {
   font-size: small;
@@ -481,3 +496,20 @@ footer {
     position: absolute;
     z-index: 99;
 }
+
+/* ============================================================ */
+/* File upload */
+/* ============================================================ */
+#holder { border: 10px dashed #ccc; width: 300px; min-height: 300px; margin: 20px auto; display: flex; justify-content: center; align-items: center;}
+#holder .inner { color: gray; }
+#holder.hover { border: 10px dashed #0c0; }
+#holder img { display: block; margin: 10px auto; }
+#holder p { margin: 10px; font-size: 14px; }
+progress { width: 100%; }
+progress:after { content: '%'; }
+.fail { background: #c00; padding: 2px; color: #fff; }
+#done { text-align: center; color: green; }
+/* ============================================================ */
+/* Misc */
+/* ============================================================ */
+
