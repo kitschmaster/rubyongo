@@ -1,3 +1,30 @@
+#05.10.2018 13:16:28 CodingSession::END
+
+Focusing on getting things work nicely on smaller screens... like making the upload work on mobile...
+
+got something working, now refining the ux...
+
+here's how it is going to work:
+
+1. enter title (the Type input appears and the dnd area appears only after entering a title, what is a piece of content without a title)
+2. select image and fileupload starts
+3. click on "One more" to do another upload
+
+anyway, pushed some of the changes, the rest will come in the next session.
+
+the idea of the Stream page is to have a form which can quickly create a draft and place an image next to it.
+this is the most common task ii found my self doing on live sites, creating a new Item or a Post together with a single image.
+
+ii will also add an upload context menu entry in the editor it self, but it will only upload files and not create drafts.
+
+#05.10.2018 11:01:36 CodingSession::BEGIN
+
+#04.10.2018 19:20:19 CodingSession::END
+
+The panel backend is using https://purecss.io/, am now enhancing the Stream form, to allow uploading of multiple files from various devices...
+
+#04.10.2018 18:49:31 CodingSession::BEGIN
+
 #04.10.2018 17:05:53 CodingSession::END
 
 these days, we all need a webshop, or two.
