@@ -284,11 +284,7 @@ module Rubyongo
       log "delete_node #{params[:id]}"
       r = {}
       path = params[:id]
-      if File.directory?(path)
-        FileUtils.rm_rf path
-        current_guru.mark_content_changed_now
-        fill_result r, 'status' => 'OK'
-      elsif File.exists?(path)
+      if File.directory?(path) || File.exists?(path)
         FileUtils.rm_rf path
         current_guru.mark_content_changed_now
         fill_result r, 'status' => 'OK'
@@ -447,9 +443,17 @@ module Rubyongo
 
     post '/content_editor/node_upload' do
       auth!
-      puts "PARAMS: #{params}\n"
+
+      path = params[:path]
+      files = params[:files]
+
+      uploads = {}
+      files.each do |file|
+        uploads[file[:filename]] = Guru.upload(path, file[:filename], file[:tempfile], settings.thumbnail_resize)
+      end
+
       r = {}
-      fill_result r, :content => params
+      fill_result r, :content => uploads
       json r
     end
 
@@ -480,34 +484,10 @@ module Rubyongo
       erb :stream
     end
 
-    def self.stream_path(archetype, filename='')
-      filename = archetype.empty? ? filename : File.join(archetype.downcase, filename)
-      File.join(CONTENT_PATH, filename)
-    end
-
-    def self.thumbnail_filename(filename='')
-      filename.gsub(/\./, "-thumb.")
-    end
-
-    def self.make_thumbnail(path, resize, thumbnail_path)
-      `convert #{path} -resize #{resize} #{thumbnail_path}`
-    end
-
-    def self.stream_in(archetype, filename, tempfile, resize='250x250')
-      img_path = Kit.stream_path(archetype, filename)
-      thmb = thumbnail_filename(filename)
-      img_thumbnail_path = Kit.stream_path(archetype, thmb)
-      File.open(img_path, 'wb') do |f|
-        f.write(tempfile.read)
-      end
-      Kit.make_thumbnail(img_path, resize, img_thumbnail_path)
-      [img_path, img_thumbnail_path]
-    end
-
     post '/stream_editor/in' do
       auth!
       archetype = params[:archetype]
-      r = Kit.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
+      r = Guru.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
       @img_path = r[0]
       @img_thumbnail_path = r[1]
       @img_tag = inline_image_tag(@img_thumbnail_path)

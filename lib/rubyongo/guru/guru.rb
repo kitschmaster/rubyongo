@@ -183,6 +183,47 @@ module Rubyongo
       DataMapper.auto_upgrade!
     end
 
+    # File uploads (TODO: eventually refactor out all file related operations)
+
+    def self.upload_filename(path, filename='')
+      path.empty? ? File.join(CONTENT_PATH, filename) : File.join(path, filename)
+    end
+
+    def self.stream_filename(archetype, filename='')
+      filename = archetype.empty? ? filename : File.join(archetype.downcase, filename)
+      File.join(CONTENT_PATH, filename)
+    end
+
+    def self.thumbnail_filename(filename='')
+      filename.gsub(/\./, "-thumb.")
+    end
+
+    def self.make_thumbnail(path, resize, thumbnail_path)
+      `convert #{path} -resize #{resize} #{thumbnail_path}`
+    end
+
+    def self.stream_in(archetype, filename, tempfile, resize='250x250')
+      img = Guru.stream_filename(archetype, filename)
+      thmb = thumbnail_filename(filename)
+      img_thumbnail_path = Guru.stream_filename(archetype, thmb)
+      File.open(img, 'wb') do |f|
+        f.write(tempfile.read)
+      end
+      Guru.make_thumbnail(img, resize, img_thumbnail_path)
+      [img, img_thumbnail_path]
+    end
+
+    def self.upload(path, filename, tempfile, resize='250x250')
+      img = Guru.upload_filename(path, filename)
+      thmb = thumbnail_filename(filename)
+      img_thumbnail_path = Guru.upload_filename(path, thmb)
+      File.open(img, 'wb') do |f|
+        f.write(tempfile.read)
+      end
+      Guru.make_thumbnail(img, resize, img_thumbnail_path)
+      [img, img_thumbnail_path]
+    end
+
     private
 
     def self.dir_entries(path)
