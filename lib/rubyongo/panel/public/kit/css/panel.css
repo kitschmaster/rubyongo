@@ -160,10 +160,6 @@ table {
   justify-content: center;
 }
 
-.container .pure-control-group {
-  padding: 0.3em 0 0 1em;
-}
-
 header {
   width:100%;
   margin: 0 auto;
@@ -180,7 +176,8 @@ footer {
 }
 
 .flash {
-  margin: 0 1em;
+  margin: 1em;
+  text-align: center;
 }
 
 /* ============================================================ */
@@ -237,6 +234,7 @@ footer {
   float: left;
   margin-right:0.1em;
   min-height: 30em;
+  border: 2px dashed lightgray;
 }
 
 .editor_preview {
@@ -509,7 +507,13 @@ progress { width: 100%; }
 progress:after { content: '%'; }
 .fail { background: #c00; padding: 2px; color: #fff; }
 #done { text-align: center; color: green; }
-/* ============================================================ */
-/* Misc */
-/* ============================================================ */
 
+/* ============================================================ */
+/* Auth form */
+/* ============================================================ */
+.auth-form {
+  padding: 0.3em 0 0 1em;
+}
+.auth-form button[type='submit'] {
+  margin: .7em 0 0;
+}
