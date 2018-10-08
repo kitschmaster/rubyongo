@@ -237,7 +237,11 @@ module Rubyongo
 
     get '/content_editor/data' do
       auth!
-      @entries = [Guru.directory_hash('./content', 'content'), Guru.directory_hash('./themes', 'themes'), Guru.directory_hash('./public', 'public')]
+      @entries = []
+      ['content', 'themes', 'public'].each do |name|
+        path = "./#{name}"
+        @entries << Guru.directory_hash(path, name) if File.directory? path
+      end
       json @entries
     end
 
