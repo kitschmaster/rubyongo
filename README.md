@@ -1,4 +1,4 @@
-![rog](static/img/rog_logo.png =69x)
+<img src="static/img/rog_logo.png" width="69">
 
 # Ruby On Go
 
