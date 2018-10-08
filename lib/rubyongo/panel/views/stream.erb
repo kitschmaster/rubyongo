@@ -1,10 +1,6 @@
 <div class="container">
   <div class="pure-form pure-form-stacked">
     <div class="pure-control-group">
-      <label for="title">Title:</label>
-      <input id="title" name="title" type="text" placeholder="Title">
-    </div>
-    <div class="pure-control-group">
       <label for="archetype">Type:</label>
       <select id="archetype" class="pure-input-1-2">
         <option>nothing</option>
@@ -16,7 +12,7 @@
     <p id="done" class="hidden">Upload done.</p>
     <div id="holder"><div class="inner">Tap/Click here for upload</div></div>
 
-    <p id="upload" class="hidden"><label>Drag & drop not supported, but you can still upload via this input field:<br><input multiple id="file" type="file" name="file" style="display: none"></label></p>
+    <p id="upload" class="hidden"><label>Drag & drop not supported, but you can still upload via this input field:<br><input id="file" type="file" name="file" style="display: none"></label></p>
     <p id="filereader">File API & FileReader API not supported</p>
     <p id="formdata">XHR2's FormData is not supported</p>
     <p id="progress">XHR2's upload progress isn't supported</p>
@@ -31,12 +27,6 @@ $("#holder").on("click", function() {
 
 
 var holder = document.getElementById('holder'),
-    tests = {
-      filereader: typeof FileReader != 'undefined',
-      dnd: 'draggable' in document.createElement('span'),
-      formdata: !!window.FormData,
-      progress: "upload" in new XMLHttpRequest
-    },
     support = {
       filereader: document.getElementById('filereader'),
       formdata: document.getElementById('formdata'),
@@ -51,7 +41,7 @@ var holder = document.getElementById('holder'),
     fileupload = document.getElementById('upload');
 
 "filereader formdata progress".split(' ').forEach(function (api) {
-  if (tests[api] === false) {
+  if (Tests[api] === false) {
     support[api].className = 'fail';
   } else {
     // FFS. I could have done el.hidden = true, but IE doesn't support
@@ -63,7 +53,7 @@ var holder = document.getElementById('holder'),
 });
 
 function previewfile(file) {
-  if (tests.filereader === true && acceptedTypes[file.type] === true) {
+  if (Tests.filereader === true && acceptedTypes[file.type] === true) {
     var reader = new FileReader();
     reader.onload = function (event) {
       var image = new Image();
@@ -82,25 +72,24 @@ function previewfile(file) {
 
 function readfiles(files) {
     console.log("readfiles ...")
-    var formData = tests.formdata ? new FormData() : null;
+    var formData = Tests.formdata ? new FormData() : null;
     for (var i = 0; i < files.length; i++) {
-      if (tests.formdata) {
+      if (Tests.formdata) {
         formData.append('file', files[i]);
-        formData.append('title', $('#title').val());
         formData.append('archetype', $('#archetype').val());
       }
       previewfile(files[i]);
     }
 
     // now post a new XHR request
-    if (tests.formdata) {
+    if (Tests.formdata) {
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '/stream_editor/in');
       xhr.onload = function() {
         progress.value = progress.innerHTML = 100;
       };
 
-      if (tests.progress) {
+      if (Tests.progress) {
         xhr.upload.onprogress = function (event) {
           if (event.lengthComputable) {
             var complete = (event.loaded / event.total * 100 | 0);
@@ -128,7 +117,7 @@ fileupload.querySelector('input#file').onchange = function () {
   readfiles(this.files);
 };
 
-if (tests.dnd) {
+if (Tests.dnd) {
   console.log("test.dnd")
   holder.ondragover = function () { this.className = 'hover'; return false; };
   holder.ondragend = function () { this.className = ''; return false; };

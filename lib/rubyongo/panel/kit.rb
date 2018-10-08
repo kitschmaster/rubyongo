@@ -254,12 +254,12 @@ module Rubyongo
         path = params[:id]
         old_basename = File.basename(path)
         new_path = File.join(path, new_basename)
-        current_archetype = path.split('/')[2] #FIX ME!
+        current_archetype = path.split('/')[2] #the archetypes are the folders within 'content'
         log "new path #{new_path} #{current_archetype}\n"
         if new_basename =~ /\./ && type == 'file'
           if current_guru.archetypes.include?(current_archetype)
             #use hugo to generate file
-            hugopath = new_path.gsub(/\.\/content\//, '')
+            hugopath = new_path.gsub(/\.\/content\//, '') # remove './content/' prefix from new_path!
             x = `#{HUGO_RUN_PATH} new #{hugopath}`
             if x =~ /created/
               current_guru.mark_content_changed_now
@@ -445,6 +445,14 @@ module Rubyongo
       json r
     end
 
+    post '/content_editor/node_upload' do
+      auth!
+      puts "PARAMS: #{params}\n"
+      r = {}
+      fill_result r, :content => params
+      json r
+    end
+
     #************************************************************************************************
     # Content publishing via hugo
     #************************************************************************************************
@@ -497,8 +505,7 @@ module Rubyongo
     end
 
     post '/stream_editor/in' do
-      puts "PARAMS: #{params}"
-      title = params[:title] #TODO
+      auth!
       archetype = params[:archetype]
       r = Kit.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
       @img_path = r[0]
