@@ -9,7 +9,13 @@ require "capybara/dsl"
 require 'capybara/poltergeist'
 require 'rubyongo'
 require 'rubyongo/panel/test'
+require 'spec_helpers'
+module Rubyongo
+  class Spec
+    include SpecHelpers
+  end
+end
 
-Capybara.javascript_driver = :poltergeist
+Capybara.default_driver = :poltergeist
 Capybara.app = Rubyongo::Kit
 
