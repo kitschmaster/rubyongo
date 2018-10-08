@@ -1,4 +1,4 @@
-![rog](static/img/rog_logo.png?raw=true "RoG")
+![rog](static/img/rog_logo.png =69x)
 
 # Ruby On Go
 
