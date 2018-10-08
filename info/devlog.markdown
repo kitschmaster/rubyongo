@@ -1,3 +1,31 @@
+#08.10.2018 22:37:16 CodingSession::END
+
+have the initial uploading from the context menu working... still needs some polishing.
+
+#08.10.2018 21:12:10 CodingSession::BEGIN
+
+#08.10.2018 12:25:00 CodingSession::END
+
+ii ran into the following problem yesterday while working on adding an upload test:
+
+  NoMethodError: undefined method `failure_message' for Capybara::Helpers:Module
+      (eval):11:in `block in assert_css'
+
+well, ii am not alone: https://github.com/wojtekmach/minitest-capybara/pull/17
+so it seems that the fix was released in 0.9.0 of minitest-capybara jsut 8 days ago... let's see... yup.
+
+fu$$ing Chrome, noticed the thing signed me in and had my google icon displaying on the upper right corner.
+ii never signed in, it just did it somehow without me doing anything. plus, am seeing weird problems when using the inspector mode, some of the Panel functionality just stops working completely without any errors or warnings, sucks... yes Chrome sucks these days for me...
+
+oh development sucks too... jsTree made the ids of the nodes look like this:
+  "Capybara::Poltergeist::InvalidSelector: The browser raised a syntax error while trying to evaluate css selector "./content_anchor""
+
+a html element with an id of "./something", why? :)
+solution was to use "find_by_id" instead of just "find".
+but this still is not right, after clicking on "Upload" in the context menu, the file input is populated with "./content", but no file is attached... solution was to temporarily unhide the upload form during test...
+
+#08.10.2018 08:04:18 CodingSession::BEGIN
+
 #05.10.2018 13:16:28 CodingSession::END
 
 Focusing on getting things work nicely on smaller screens... like making the upload work on mobile...
