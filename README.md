@@ -1,5 +1,6 @@
-<img src="static/img/rog_logo.png" width="69">
-
+<div style="text-align: right;">
+  <img src="static/img/rog_logo.png" width="69">
+</div>
 # Ruby On Go
 
 [![Build Status](https://travis-ci.org/kitschmaster/rubyongo.svg?branch=master)](https://travis-ci.org/kitschmaster/rubyongo)
