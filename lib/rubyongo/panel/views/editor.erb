@@ -1,3 +1,8 @@
+<form class="hidden upload-form" method="POST" enctype="multipart/form-data" action='/content_editor/upload'>
+  <input multiple type="file" id="upload" name='files[]' value="">
+  <input type="text" id="upload_path" name="path" value="">
+</form>
+
 <div class="info">
   <span class="content_changed_at">Changed <%=current_guru.content_changed_at%></span>
   <span class="content_published_at">Published <%=current_guru.content_published_at%></span>
