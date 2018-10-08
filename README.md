@@ -1,3 +1,5 @@
+![rog](static/img/rog_logo.png?raw=true "RoG")
+
 # Ruby On Go
 
 [![Build Status](https://travis-ci.org/kitschmaster/rubyongo.svg?branch=master)](https://travis-ci.org/kitschmaster/rubyongo)
