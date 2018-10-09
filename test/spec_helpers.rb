@@ -21,4 +21,15 @@ module SpecHelpers
     click_on 'Drop out'
     page.must_have_content 'Successfully tuned out'
   end
+
+  def find_by_id_and_open_node(html_id)
+    # locate the node
+    content_node = find_by_id(html_id)
+
+    # open the 'content' node subtree
+    content_node.sibling("i").click
+
+    # return node for further manipulation
+    content_node
+  end
 end

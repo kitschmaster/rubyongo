@@ -5,11 +5,8 @@ class ContentEditorSpec < Rubyongo::Spec
   it "uploads from context menu" do
     visit_content_editor
 
-    # locate the 'content' node
-    content_node = find_by_id('./content_anchor')
-
-    # open the 'content' node subtree
-    content_node.sibling("i").click
+    # get the 'content' node, and open it
+    content_node = find_by_id_and_open_node('./content_anchor')
 
     # right click on the 'content' node in the jstree
     content_node.right_click
@@ -42,6 +39,11 @@ class ContentEditorSpec < Rubyongo::Spec
       FileUtils.rm_r("./content/rog_logo-thumb.png")
       FileUtils.rm_r("./content/rog_logo.png")
     end
+  end
+
+  it "creating a new node" do
+    visit_content_editor
+
   end
 
 end
