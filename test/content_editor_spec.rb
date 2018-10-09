@@ -5,7 +5,6 @@ class ContentEditorSpec < Rubyongo::Spec
   it "uploads from context menu" do
     visit_content_editor
 
-
     # locate the 'content' node
     content_node = find_by_id('./content_anchor')
 
@@ -15,7 +14,9 @@ class ContentEditorSpec < Rubyongo::Spec
     # right click on the 'content' node in the jstree
     content_node.right_click
 
+    # select from the context menu
     click_link('Upload')
+
     # the input#upload_path should now be set to "./content"
     assert find_field('path', visible: false).value, './content'
 
