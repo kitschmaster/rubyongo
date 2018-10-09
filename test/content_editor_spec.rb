@@ -51,6 +51,9 @@ class ContentEditorSpec < Rubyongo::Spec
     item_node = find_by_id_and_open_node('./content/item_anchor')
 
     assert item_node
+    # TODO
+    # item_node.hover
+    # click_link('Item')
   end
 
 end
