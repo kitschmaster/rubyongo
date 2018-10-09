@@ -44,6 +44,13 @@ class ContentEditorSpec < Rubyongo::Spec
   it "creating a new node" do
     visit_content_editor
 
+    # get the 'content' node, and open it
+    content_node = find_by_id_and_open_node('./content_anchor')
+
+    # get the 'item' node and open it
+    item_node = find_by_id_and_open_node('./content/item_anchor')
+
+    assert item_node
   end
 
 end
