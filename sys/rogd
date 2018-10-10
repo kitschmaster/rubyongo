@@ -17,7 +17,7 @@ DEPLOYMENT_COMMAND="${3:-$DEFAULT_COMMAND}" # configuration of the deploy comman
 if [ -f "$DEPLOY_KEY" ]
 then
   echo Deploying rog code for $NAME
-  # Allow configuring this line with and extra argument
+  # Allow configuring this line with an extra argument
   ssh $NAME $DEPLOYMENT_COMMAND
   touch $DEPLOY_KEY
 else
