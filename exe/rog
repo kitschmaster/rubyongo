@@ -175,6 +175,11 @@ def modify_rog_dir(name, to_path, replacements={})
       "rogs" => File.join(to_path, 'sys', "rogs")}.each do |filename, to_file|
       genmod(replacements, to_file, 'gen', 'sys', filename)
     end
+
+    # Prepare archetype folders in content: content/item, content/post, content/project, content/page ...
+    #Rubyongo::Archetyper.archetypes.each do |archetype|
+    #  FileUtils::mkdir_p File.join(to_path, 'content', archetype)
+    #end
   else
     "#{name} does not exist".say(:red)
     exit(1)
