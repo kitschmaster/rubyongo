@@ -3,6 +3,7 @@
 
 require_relative 'rubyongo/paths'
 require_relative 'rubyongo/version'
+require_relative 'rubyongo/archetyper'
 
 # Load Guru lib files
 Dir.glob(Rubyongo::GURU_LIB, &method(:require))

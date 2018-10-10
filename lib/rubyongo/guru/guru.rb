@@ -80,12 +80,14 @@ module Rubyongo
       end
     end
 
-    def archetypes_path
-      File.join(EXEC_PATH, 'themes', self.theme || DEFAULT_THEME, 'archetypes')
+    # ./themes/default/archetypes + ./archetypes
+    def archetypes_paths
+      Archetyper.archetypes_paths_for_theme(self.theme)
     end
 
+    # list framework users archetypes, plus the theme ones
     def archetypes
-      @archetypes ||= Guru.file_entries(archetypes_path)
+      @archetypes = Archetyper.archetypes
     end
 
     def themes
@@ -96,13 +98,6 @@ module Rubyongo
     # TODO: Imagine a better way to do this update while avoiding file reading.
     def refresh_theme
       self.theme = Guru.extract_theme(CONFIG_PATH)
-    end
-
-    def create_content_structure
-      self.archetypes.each do |archetype|
-        content_archetype_dir = File.join(CONTENT_PATH, archetype)
-        Dir.mkdir(content_archetype_dir) unless File.exists?(content_archetype_dir)
-      end
     end
 
     # Create a Guru
@@ -228,11 +223,6 @@ module Rubyongo
 
     def self.dir_entries(path)
       Dir.entries(path).select {|entry| File.directory?(File.join(path,entry)) && !(entry =='.' || entry == '..') }
-    end
-
-    def self.file_entries(path)
-      fe = Dir.entries(path).select {|entry| !File.directory?(File.join(path, entry)) && !(entry =='.' || entry == '..' || entry == 'default.md') }
-      fe.collect{|e| File.basename(e, '.md')}
     end
 
     def self.extract_theme(config_toml_file)

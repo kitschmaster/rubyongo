@@ -6,6 +6,8 @@ require 'benchmark'
 require 'yaml'
 require 'fileutils'
 require 'pathname'
+require 'rubyongo/paths'
+require 'rubyongo/archetyper'
 
 # Colors
 class String
@@ -177,9 +179,7 @@ def modify_rog_dir(name, to_path, replacements={})
     end
 
     # Prepare archetype folders in content: content/item, content/post, content/project, content/page ...
-    #Rubyongo::Archetyper.archetypes.each do |archetype|
-    #  FileUtils::mkdir_p File.join(to_path, 'content', archetype)
-    #end
+    Rubyongo::Archetyper.create_content_structure(to_path)
   else
     "#{name} does not exist".say(:red)
     exit(1)
