@@ -235,10 +235,11 @@ module Rubyongo
       erb :editor
     end
 
+    # Populates the content editor file browser (jsTree)
     get '/content_editor/data' do
       auth!
       @entries = []
-      ['content', 'themes', 'public'].each do |name|
+      PANEL_ROOTS.each do |name|
         path = "./#{name}"
         @entries << Guru.directory_hash(path, name) if File.directory? path
       end
@@ -252,7 +253,7 @@ module Rubyongo
       type = params[:type]
       new_basename = params[:text]
       friendly_basename = Guru.friendly_filename(new_basename)
-      if new_basename!=friendly_basename
+      if new_basename != friendly_basename
         fill_result r, 'error' => "Please use something like >#{friendly_basename}< for the filename."
       else
         path = params[:id]
