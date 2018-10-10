@@ -1,3 +1,36 @@
+#10.10.2018 12:48:03 CodingSession::END
+
+meanwhile am also researching an issue with ENV vars not being picked up by Passenger at Dreamhost. I was under the impression that setting up ENV vars inside .bashrc works nicely. but recently noticed the Publish button at rubyongo.org stopped working. seems like the ENV['GOROOT'] variable is not picked up, and thus we get the wrong `HUGO_RUN_PATH` and nothing works... ii opened a support ticket with Dreamhost and they sent me Phusion Passenger documentation on the matter of environment vars: https://www.phusionpassenger.com/library/indepth/environment_variables.html#passenger-served-apps
+
+the docs state the following:
+
+  You can pass environment variables to Passenger-served apps through various methods:
+    Through your bashrc. Starting from version 4.0, Passenger 4.0 spawns applications through bash and inherit all bash environment variables. Passenger Standalone tends to be started from the shell and thus inherits all environment variables set by the shell.
+
+so something is not right, is Dreamhost running Passenger 4.0? we will see... waiting for Support's answer.
+
+ii also setup a minimal reproduction of the issue on a rubyongo subdomain: demo.rubyongo.org, hopefully this will help Dreamhost Support to give me a definite answer on ENV vars setup. ii just need to know: can ii use .bashrc to setup ENV vars or not?
+
+#10.10.2018 11:47:41 CodingSession::BEGIN
+
+#09.10.2018 22:59:24 CodingSession::END
+
+why rubyongo? because the CLI is shorter, just three letters: "rog".
+
+that's better than 'rails'. and btw, ra ills.. while rog heals :D
+
+it's shorter than 'rackup', rog is a nice pup.
+
+haha, ii was trying to avoid it, but now ii realy think ii need an Archetyper to help me build this framework.
+
+so let's bring back some of the work from that stalled idea.
+
+ii simply need to refactor out some raw coding from the Guru class and organise the code a bit better to be able to do things.
+
+so am first adding a test for this one...
+
+#09.10.2018 22:24:08 CodingSession::BEGIN
+
 #08.10.2018 22:37:16 CodingSession::END
 
 have the initial uploading from the context menu working... still needs some polishing.
