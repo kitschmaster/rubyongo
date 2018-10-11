@@ -7,7 +7,7 @@ class ArchetyperTest < Minitest::Test
   end
 
   def test_create_with_image
-    image = ['example.png', 'example-thumb.png']
+    image = ['item/example.png', 'item/example-thumb.png']
 
     Rubyongo::Archetyper.create_with_image('./', 'item', image)
 
@@ -16,7 +16,7 @@ class ArchetyperTest < Minitest::Test
     assert_equal true, file_exists, "#{file} file should exist"
 
     content = File.read(file)
-    assert_equal true, (content =~ /\(item\/example.png\)/) > 0, "#{file} should contain image tag"
+    assert_equal true, (content =~ /\(\/item\/example.png\)/) != nil, "#{file} should contain image tag"
 
     if file_exists
       FileUtils.rm_r(file)
