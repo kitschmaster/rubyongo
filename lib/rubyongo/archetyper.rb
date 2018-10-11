@@ -54,7 +54,7 @@ module Rubyongo
       imagefile = image[0]
       contentfile_name = File.basename(imagefile).split('.').first + ".md"
       contentfile_path = File.join(archetype, contentfile_name)
-      puts "create_with_image: #{imagefile} - #{contentfile_path}"
+
       success = Archetyper.run_silent_cmd("cd #{root_path}; hugo new #{contentfile_path}")
 
       if success
