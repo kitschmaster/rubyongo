@@ -1,10 +1,11 @@
 ---
-title: ""
-date: ""
+draft: true
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
 price: ""
 sku: ""
-tags = []
-categories = []
+tags: []
+categories: []
 keywords: []
 description: ""
 author: ""
@@ -14,6 +15,6 @@ alt: ""
 item_title: ""
 item_description: ""
 item_variants: ""
-item_weight = ""
-item_measures = ""
+item_weight: ""
+item_measures: ""
 ---
