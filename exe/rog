@@ -9,19 +9,6 @@ require 'pathname'
 require_relative '../lib/rubyongo/paths'
 require_relative '../lib/rubyongo/archetyper'
 
-# Colors
-class String
-  def red; colorize(self, "\e[1m\e[31m"); end
-  def green; colorize(self, "\e[1m\e[32m"); end
-  def dark_green; colorize(self, "\e[32m"); end
-  def yellow; colorize(self, "\e[1m\e[33m"); end
-  def blue; colorize(self, "\e[1m\e[34m"); end
-  def dark_blue; colorize(self, "\e[34m"); end
-  def pur; colorize(self, "\e[1m\e[35m"); end
-  def colorize(text, color_code) "#{color_code}#{text}\e[0m" end
-  def say(with_color = :blue); puts "#{self.send(with_color.to_sym)}"; end
-end
-
 # gem source path
 @gem_path = File.join(File.dirname(__FILE__))
 
@@ -111,16 +98,6 @@ def gen(to, *from)
   FileUtils.cp_r(src, to)
 end
 
-# Run some shell command, print success message in green, on fail print error in red
-def run_cmd(command, success_message)
-  r = `#{command}`
-  if r =~ //
-    "#{success_message}".say(:green)
-  else
-    r.say(:red)
-  end
-end
-
 # Generate a file by copying and modifying some data along the way
 def genmod(replacements, to, *from)
   src = File.join(@gem_path, '..', *from)
@@ -140,7 +117,7 @@ def generate_rog_dir(name, path)
     "#{name} exists at #{path}.".say(:red)
     exit(1)
   else
-    run_cmd("hugo new site #{name}", "Created #{path}.")
+    Rubyongo::Archetyper.run_cmd("hugo new site #{name}", "Created #{path}.")
   end
 end
 
@@ -187,11 +164,11 @@ def modify_rog_dir(name, to_path, replacements={})
 end
 
 def populate_local_git_repo(path)
-  run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Development and/or content git repository #{path}/.git."
+  Rubyongo::Archetyper.run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Development and/or content git repository #{path}/.git."
 end
 
 def first_publish(path)
-  run_cmd "cd #{path}; hugo", "Published #{path}."
+  Rubyongo::Archetyper.run_cmd "cd #{path}; hugo", "Published #{path}."
 end
 
 def ensure_gem(name, path)
@@ -206,7 +183,7 @@ end
 
 def ensure_bundler_and_bundle(path)
   ensure_gem('bundler', path)
-  run_cmd "cd #{path}; bundle install", "Installed gems."
+  Rubyongo::Archetyper.run_cmd "cd #{path}; bundle install", "Installed gems."
 end
 
 # Create a new rog site
