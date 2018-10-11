@@ -6,8 +6,8 @@ require 'benchmark'
 require 'yaml'
 require 'fileutils'
 require 'pathname'
-require 'rubyongo/paths'
-require 'rubyongo/archetyper'
+require_relative '../lib/rubyongo/paths'
+require_relative '../lib/rubyongo/archetyper'
 
 # Colors
 class String
@@ -278,23 +278,23 @@ end
 
 def dodo
   #time = Benchmark.realtime do
-    if @command == 'help' || @command == nil || @command == ""
+    if ['help', '', nil].include? @command
       print_usage
-    elsif @command == 'n' || @command == 'new'
+    elsif ['new', 'n'].include? @command
       new_rog(@name, { 'rog-usr' => @rog_usr, 'rog-host' => @rog_host })
-    elsif @command == 's' || @command == 'start'
+    elsif ['start', 's'].include? @command
       run_rog
-    elsif @command == 'd' || @command == 'deploy'
+    elsif ['deploy', 'd'].include? @command
       deploy_rog
-    elsif @command == 'i' || @command == 'init'
+    elsif ['init', 'i'].include? @command
       init_rog
     elsif ['upgrade', 'up', 'u'].include? @command
       upgrade_rog
-    elsif @command == 'e' || @command == 'equip'
+    elsif ['equip', 'e'].include? @command
       equip_rog
-    elsif @command == 'c' || @command == 'content'
+    elsif ['content', 'c'].include? @command
       content_rog
-    elsif @command == 'h' || @command == 'hugo'
+    elsif ['hugo', 'h'].include? @command
       run_hugo_server
     else
       print_usage
