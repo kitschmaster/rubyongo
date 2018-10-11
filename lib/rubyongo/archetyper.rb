@@ -1,11 +1,24 @@
 # encoding: UTF-8
 # frozen_string_literal: true
+
 class String
   # Extracting frontmatter
   # Gets a substring from self delimited with between
   def extract between
     self[/#{Regexp.escape(between)}(.*?)#{Regexp.escape(between)}/m, 1]
   end
+
+  # Colors
+  # Print strings in the console with style
+  def red; colorize(self, "\e[1m\e[31m"); end
+  def green; colorize(self, "\e[1m\e[32m"); end
+  def dark_green; colorize(self, "\e[32m"); end
+  def yellow; colorize(self, "\e[1m\e[33m"); end
+  def blue; colorize(self, "\e[1m\e[34m"); end
+  def dark_blue; colorize(self, "\e[34m"); end
+  def pur; colorize(self, "\e[1m\e[35m"); end
+  def colorize(text, color_code) "#{color_code}#{text}\e[0m" end
+  def say(with_color = :blue); puts "#{self.send(with_color.to_sym)}"; end
 end
 
 module Rubyongo
@@ -35,6 +48,131 @@ module Rubyongo
         content_archetype_dir = File.join(root_path, 'content', archetype)
         Dir.mkdir(content_archetype_dir) unless File.exists?(content_archetype_dir)
       end
+    end
+
+    def self.create_with_image(root_path = Rubyongo::EXEC_PATH, archetype, image)
+      imagefile = image[0]
+      contentfile_name = File.basename(imagefile).split('.').first + ".md"
+      contentfile_path = File.join(archetype, contentfile_name)
+      puts "create_with_image: #{imagefile} - #{contentfile_path}"
+      success = Archetyper.run_silent_cmd("cd #{root_path}; hugo new #{contentfile_path}")
+
+      if success
+        # Open the generated file and add image_tag as content
+        contentfile = File.join(root_path, 'content', contentfile_path)
+        File.open(contentfile, "a") { |io| io << "\n#{Archetyper.image_tag(imagefile)}\n"}
+      end
+    end
+
+    def self.upload_filename(path = Rubyongo::CONTENT_PATH, filename='')
+      File.join(path, filename)
+    end
+
+    def self.stream_filename(archetype, filename='')
+      filename = archetype.empty? ? filename : File.join(archetype.downcase, filename)
+      File.join(Rubyongo::CONTENT_PATH, filename)
+    end
+
+    def self.thumbnail_filename(filename='')
+      filename.gsub(/\./, "-thumb.")
+    end
+
+    def self.make_thumbnail(path, resize, thumbnail_path)
+      `convert #{path} -resize #{resize} #{thumbnail_path}`
+    end
+
+    def self.stream_in(archetype, filename, tempfile, resize='250x250')
+      img = Archetyper.stream_filename(archetype, filename)
+      thumb = Archetyper.thumbnail_filename(filename)
+      img_thumbnail_path = Archetyper.stream_filename(archetype, thumb)
+      File.open(img, 'wb') do |f|
+        f.write(tempfile.read)
+      end
+      Archetyper.make_thumbnail(img, resize, img_thumbnail_path)
+
+      relative_img = File.join( archetype, File.basename(img))
+      relative_img_thumb = File.join(archetype, File.basename(thumb))
+      image = [relative_img, relative_img_thumb]
+      Archetyper.create_with_image(Rubyongo::EXEC_PATH, archetype, image)
+      image
+    end
+
+    def self.upload(path, filename, tempfile, resize='250x250')
+      img = Archetyper.upload_filename(path, filename)
+      thmb = thumbnail_filename(filename)
+      img_thumbnail_path = Archetyper.upload_filename(path, thmb)
+      File.open(img, 'wb') do |f|
+        f.write(tempfile.read)
+      end
+      Archetyper.make_thumbnail(img, resize, img_thumbnail_path)
+      [img, img_thumbnail_path]
+    end
+
+    def self.save_content(path, content)
+      File.open(path, 'w+') {|f| f.write(content) }
+    end
+
+    def self.friendly_filename(filename)
+      #filename.gsub(/[^a-z0-9\-_ \.]+/, '_')
+      filename
+    end
+
+    # Run some shell command, print success message in green, on fail print error in red
+    def self.run_cmd(command, success_message)
+      r = `#{command}`
+      if r =~ //
+        "#{success_message}".say(:green)
+      else
+        r.say(:red)
+      end
+    end
+
+    # Run some shell command silently
+    def self.run_silent_cmd(command)
+      r = `#{command}`
+      if r =~ //
+        true
+      else
+        false
+      end
+    end
+
+    def self.image_tag(path)
+      #%(<img src="#{path.gsub(/\.\/content/, '')}"/>)
+      p = path
+      if path =~ /\A\.\/content/
+        p = path.gsub(/\.\/content/, '')
+      elsif path =~ /\A\.\/themes/
+        p = File.join( path.gsub(/\.\/themes/, '').split('/')[2..-1] )
+      end
+      p = File.join('/', p) unless p =~ /\A\//
+      %(![#{File.basename(p)}](#{p}))
+    end
+
+    def self.inline_image_tag(path)
+      %(<img src="data:#{Archetyper.mimetype(path)};base64,#{Base64.encode64(File.read(path))}"/>)
+    end
+
+    def self.mimetype(path)
+      `file -Ib #{path}`.gsub(/\n/,"")
+    end
+
+    # Data for jstree (which is used in the Panel to list and work with files)
+    # See more at https://github.com/vakata/jstree
+    def self.directory_hash(path, name=nil, excludes = [])
+      excludes.concat(['..', '.', '.git', '__MACOSX', '.DS_Store'])
+      data = {'text' => (name || path), 'id' => path}
+      data[:children] = children = []
+      Dir.foreach(path) do |entry|
+        next if excludes.include?(entry)
+        full_path = File.join(path, entry)
+        if File.directory?(full_path)
+          children << Archetyper.directory_hash(full_path, entry) # recursive call here!
+        else
+          children << {'icon' => 'jstree-file', 'text' => entry, 'id' => full_path, 'type' => 'file'}
+        end
+      end
+      return data
     end
 
     # TODO
