@@ -241,7 +241,7 @@ module Rubyongo
       @entries = []
       PANEL_ROOTS.each do |name|
         path = "./#{name}"
-        @entries << Guru.directory_hash(path, name) if File.directory? path
+        @entries << Rubyongo::Archetyper.directory_hash(path, name) if File.directory? path
       end
       json @entries
     end
@@ -252,7 +252,7 @@ module Rubyongo
       r = {}
       type = params[:type]
       new_basename = params[:text]
-      friendly_basename = Guru.friendly_filename(new_basename)
+      friendly_basename = Rubyongo::Archetyper.friendly_filename(new_basename)
       if new_basename != friendly_basename
         fill_result r, 'error' => "Please use something like >#{friendly_basename}< for the filename."
       else
@@ -438,7 +438,7 @@ module Rubyongo
           save_content = true
         end
         if save_content
-          Guru.save_content(path, content)
+          Rubyongo::Archetyper.save_content(path, content)
           current_guru.mark_content_changed_now
         end
         fill_result r
@@ -454,7 +454,10 @@ module Rubyongo
 
       uploads = {}
       files.each do |file|
-        uploads[file[:filename]] = Guru.upload(path, file[:filename], file[:tempfile], settings.thumbnail_resize)
+        uploads[file[:filename]] = Rubyongo::Archetyper.upload(path,
+                                                               file[:filename],
+                                                               file[:tempfile],
+                                                               settings.thumbnail_resize)
       end
 
       r = {}
@@ -491,8 +494,8 @@ module Rubyongo
 
     post '/stream_editor/in' do
       auth!
-      archetype = params[:archetype]
-      r = Guru.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
+      archetype = params[:archetype].downcase
+      r = Rubyongo::Archetyper.stream_in(archetype, params[:file][:filename], params[:file][:tempfile], settings.thumbnail_resize)
       @img_path = r[0]
       @img_thumbnail_path = r[1]
       @img_tag = inline_image_tag(@img_thumbnail_path)
@@ -501,7 +504,7 @@ module Rubyongo
 
     get '/stream_editor/data' do
       auth!
-      @entries = Guru.directory_hash('./content', 'content')
+      @entries = Rubyongo::Archetyper.directory_hash('./content', 'content')
       json @entries
     end
 
@@ -566,22 +569,15 @@ module Rubyongo
     end
 
     def mimetype(path)
-      `file -Ib #{path}`.gsub(/\n/,"")
+      Rubyongo::Archetyper.mimetype(path)
     end
 
     def image_tag(path)
-      #%(<img src="#{path.gsub(/\.\/content/, '')}"/>)
-      p = path
-      if path =~ /\A\.\/content/
-        p = path.gsub(/\.\/content/, '')
-      elsif path =~ /\A\.\/themes/
-        p = File.join( path.gsub(/\.\/themes/, '').split('/')[2..-1] )
-      end
-      %(![#{File.basename(p)}](#{p}))
+      Rubyongo::Archetyper.image_tag(path)
     end
 
     def inline_image_tag(path)
-      %(<img src="data:#{mimetype(path)};base64,#{Base64.encode64(File.read(path))}"/>)
+      Rubyongo::Archetyper.inline_image_tag(path)
     end
   end # class Kit
 end # module Rubyongo
