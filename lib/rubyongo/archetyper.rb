@@ -69,7 +69,7 @@ module Rubyongo
     end
 
     def self.stream_filename(archetype, filename='')
-      filename = archetype.empty? ? filename : File.join(archetype.downcase, filename)
+      filename = (archetype.empty? || archetype == 'nothing') ? filename : File.join(archetype.downcase, filename)
       File.join(Rubyongo::CONTENT_PATH, filename)
     end
 
@@ -138,7 +138,7 @@ module Rubyongo
     end
 
     def self.image_tag(path)
-      #%(<img src="#{path.gsub(/\.\/content/, '')}"/>)
+      return '' unless File.exist?(path)
       p = path
       if path =~ /\A\.\/content/
         p = path.gsub(/\.\/content/, '')
@@ -150,6 +150,7 @@ module Rubyongo
     end
 
     def self.inline_image_tag(path)
+      return '' unless File.exist?(path)
       %(<img src="data:#{Archetyper.mimetype(path)};base64,#{Base64.encode64(File.read(path))}"/>)
     end
 
