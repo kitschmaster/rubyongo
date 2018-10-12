@@ -62,6 +62,8 @@ module Rubyongo
     configure :development do
       register Sinatra::Reloader
       also_reload Rubyongo::GURU_LIB
+      also_reload File.join(Rubyongo::GURU_LIB, '..', 'archetyper.rb')
+      also_reload File.join(Rubyongo::GURU_LIB, '..', 'paths.rb')
     end
 
     #************************************************************************************************
@@ -321,7 +323,7 @@ module Rubyongo
       log "rename_node #{params[:id]} #{params[:text]}"
       r = {}
       new_basename = params[:text]
-      friendly_basename = Guru.friendly_filename(new_basename)
+      friendly_basename = Archetyper.friendly_filename(new_basename)
       if new_basename!=friendly_basename
         fill_result r, 'error' => "Please use something like >#{friendly_basename}< for the filename."
       else
