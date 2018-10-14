@@ -14,7 +14,6 @@ thumb: ""
 alt: ""
 item_title: ""
 item_description: ""
-item_variants: ""
 item_weight: ""
 item_measures: ""
 ---
