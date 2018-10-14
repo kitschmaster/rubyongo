@@ -11,7 +11,6 @@ thumb: "item/rog_logo.png"
 alt: "ROG01"
 item_title: "ROG Big Shop"
 item_description: "A big webshop for your needs."
-item_variants: ""
 ---
 
 Buy the big shop...
