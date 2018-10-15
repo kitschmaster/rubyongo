@@ -1,6 +1,6 @@
 ---
 draft: true
-title: "{{ replace .Name "-" " " | title }}"
+title: "{{ replace (replace .Name "-" " ") "_" " " | title }}"
 date: {{ .Date }}
 price: ""
 sku: ""
@@ -12,8 +12,6 @@ author: ""
 image: ""
 thumb: ""
 alt: ""
-item_title: ""
-item_description: ""
-item_weight: ""
-item_measures: ""
+weight: ""
+measures: ""
 ---
