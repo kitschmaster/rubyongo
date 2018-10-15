@@ -52,15 +52,25 @@ module Rubyongo
 
     def self.create_with_image(root_path = Rubyongo::EXEC_PATH, archetype, image)
       imagefile = image[0]
+      thumbfile = image[1]
       contentfile_name = File.basename(imagefile).split('.').first + ".md"
       contentfile_path = File.join(archetype, contentfile_name)
 
       success = Archetyper.run_silent_cmd("cd #{root_path}; hugo new #{contentfile_path}")
 
       if success
-        # Open the generated file and add image_tag as content
+        # Open the generated file and add image paths
         contentfile = File.join(root_path, 'content', contentfile_path)
-        File.open(contentfile, "a") { |io| io << "\n#{Archetyper.image_tag(imagefile)}\n"}
+        content = File.read(contentfile)
+
+        # Add frontmatter
+        replacements = {'image: ""' => %(image: "#{imagefile}"), 'thumb: ""' => %(thumb: "#{thumbfile}")}
+        replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
+
+        # Add content
+        content << "\n#{Archetyper.image_tag(imagefile)}\n"
+
+        File.open(contentfile, 'w') {|f| f.write content }
       end
     end
 
