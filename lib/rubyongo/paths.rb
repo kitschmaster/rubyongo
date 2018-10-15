@@ -18,6 +18,9 @@ module Rubyongo
   THEMES_PATH    = File.join(EXEC_PATH, 'themes')
   VIEWS_PATH     = File.join(GEM_PATH, 'lib', 'rubyongo', 'panel', 'views')
 
+  # LIB
+  LIB_PATH       = File.dirname(__FILE__)
+
   # Guru libs
   GURU_LIB       = File.join(File.dirname(__FILE__), 'guru', '**', '*.rb')
 
