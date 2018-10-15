@@ -3,17 +3,13 @@
 */
 
 .grid {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-	  flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 1em 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .grid > div {
@@ -33,7 +29,11 @@
 .item-fullimage {
   display: inline;
   text-align: center;
-  padding: 0 20px 0;
+  padding: 0;
+}
+
+.item-fullimage img {
+  display: inline-block;
 }
 
 .item-details h1 {
@@ -56,9 +56,76 @@ span.back-to-shop {
   font-size: 62px;
 }
 
+/* ============================================================ */
+/* Singlepage - Item detail */
+/* ============================================================ */
+
+div.singlepage {
+  text-align: left;
+  padding: 0.5em;
+}
+
+div.singlepage h1, div.singlepage h2, div.singlepage h3, div.singlepage h4, div.singlepage h5, div.singlepage h6 {
+    margin-bottom: 0;
+    text-transform: none; }
+
+div.singlepage h1 {
+  font-size: 26px; }
+
+div.singlepage h2 {
+  font-size: 24px; }
+
+div.singlepage h3 {
+  font-size: 20px;
+  margin-bottom: 20px; }
+
+div.singlepage h4 {
+  font-size: 18px;
+  margin-bottom: 18px; }
+
+div.singlepage h5 {
+  font-size: 16px;
+  margin-bottom: 15px; }
+
+div.singlepage h6 {
+  font-size: 14px;
+  margin-bottom: 12px; }
+
+div.singlepage p {
+  line-height: 1.8;
+  margin: 0 0 30px; }
+
+div.singlepage a {
+  color: #01a6e3;
+  text-decoration: none; }
+
+div.singlepageul, div.singlepage ol {
+  list-style-position: inside;
+  line-height: 1.4;
+  margin: 0 0 20px;
+  padding: 0; }
+div.singlepage ul ul, div.singlepage ul ol, div.singlepage ol ul, div.singlepage ol ol {
+    margin: 10px 0 0 20px; }
+div.singlepage ul li, div.singlepage ol li {
+    margin: 0 0 2px; }
+div.singlepage ul li:last-of-type, div.singlepage ol li:last-of-type {
+      margin-bottom: 0; }
+
+div.singlepage blockquote {
+  border-left: 1px dotted #303030;
+  margin: 40px 0;
+  padding: 5px 30px; }
+
+div.singlepage blockquote p {
+    color: #AEADAD;
+    display: block;
+    font-style: italic;
+    margin: 0;
+    width: 100%; }
+
 div.singlepage .item-details h1 {
 	font-weight: 300;
-	font-size: 62px;
+	font-size: 4em;
 	margin: 0;
 }
 
@@ -124,7 +191,7 @@ div.singlepage .item-details a:hover {
 	color: #999;
 }
 
-.media screen and (max-width: 830px) {
+@media screen and (max-width: 830px) {
 
 	div.singlepage {
 		padding: 0.5em;
@@ -147,6 +214,9 @@ div.singlepage .item-details a:hover {
 	div.singlepage {
 		padding: 0.5em;
 	}
+  div.singlepage .item-details h1 {
+    font-size: 3em;
+  }
 
 	div.singlepage .item-details .button {
 		width: 100%;
@@ -158,19 +228,6 @@ div.singlepage .item-details a:hover {
 	div.singlepage .item-details p.price {
 		text-align: center;
 	}
-}
-
-.numberCircle {
-    border-radius: 50%;
-    width: 140px;
-    font-size: 42px;
-    border: 2px solid white;
-    background-color: red;
-}
-.numberCircle span {
-    text-align: center;
-    line-height: 140px;
-    display: block;
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */
