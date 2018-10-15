@@ -5,13 +5,13 @@
     </div>
 
     <div class="item-details">
-      <h1 class="item_name"><span class="item-details-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></span>{{ if .Params.item_title }}{{.Params.item_title}}{{ else }} {{.Params.title}} {{ end }}</h1>
+      <h1 class="item_name">{{.Params.title}}</h1>
       <h2>{{.Params.category}}</h2>
       <p class="item_price price"><span class="circle">{{.Params.price}}</span></p>
       <div class="button">
         <a href="{{.Permalink}}" class="simpleCart_item_add item_add"><i class="fa fa-shopping-cart"></i> Add to basket</a>
       </div>
-      <p class="description">{{ if .Params.item_description }}{{ .Params.item_description }}{{ else }} {{ .Params.description }}{{ end }}</p>
+      <p class="description">{{ .Params.description }}</p>
     </div>
 
 </div>
