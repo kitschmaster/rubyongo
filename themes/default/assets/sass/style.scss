@@ -5,6 +5,7 @@
 $primary: #01a6e3;
 $secondary: #303030;
 $background: #FEFEFE;
+$color: #333;
 
 /* ============================================================ */
 /* Base */
@@ -13,10 +14,13 @@ $background: #FEFEFE;
 html, body { height: 100%; }
 
 body {
-    background: $background;
-    color: #424242;
-    font-family: "Open Sans", arial, sans-serif;
-    font-size: 18px;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: $color;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: $background;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,7 +76,6 @@ blockquote {
 
 img {
     display: block;
-    margin: 40px 0;
     width: auto;
     max-width: 100%;
 }
@@ -111,6 +114,23 @@ table {
     tr { border-bottom: 1px dotted #AEADAD; }
 }
 
+button {
+  font-size: 1.2em;
+  padding: 0.2em;
+  border: 2px solid white;
+  border-radius: 6px;
+}
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 ::selection {
     background: #FFF5B8;
     color: #000;
@@ -131,11 +151,25 @@ table {
     display: none;
 }
 
+i.fa {
+  cursor: pointer;
+}
+
+.main > p {
+    text-align: center;
+    padding: 50px 20px;
+}
+
 .clearfix {
-    &:after{
+    *zoom: 1;
+
+    &:before, &:after{
         content: "";
         display: table;
+    }
+    &:after {
         clear: both;
+
     }
 }
 
@@ -144,11 +178,52 @@ table {
 /* ============================================================ */
 
 .container {
-    margin: 0 auto;
+    margin: 0 auto 0;
     position: relative;
     width: 100%;
     max-width: 963px;
 }
+
+@media(min-width:768px){
+  .container {
+    width: 768px;
+  }
+}
+@media(min-width:992px){
+  .container {
+    width: 900px;
+  }
+}
+@media(min-width:1200px){
+  .container {
+    width: 1200px;
+  }
+}
+
+.container > header {
+    width: 90%;
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+    padding: 60px 30px 50px;
+    text-align: center;
+}
+
+.container > header h1 {
+    font-size: 34px;
+    line-height: 38px;
+    margin: 0 auto;
+    font-weight: 700;
+    color: #0dd;
+}
+
+.container > header h1 span {
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+  color: gray;
+}
+
 
 #wrapper {
     height: auto;
@@ -258,7 +333,6 @@ a.site-title {
 
     a:hover { color: #424242; }
 }
-
 
 /* Menu */
 .menu {
@@ -647,16 +721,29 @@ a.site-title {
     margin-top: 2em;
     margin-bottom: 2em;
 }
+.simpleCart_items  table {
+  min-width: 50%;
+}
 .simpleCart_items .headerRow th {
     text-align: center;
 }
 .simpleCart_items .itemRow .item-decrement {
     font-weight: bold;
     background: lightGray;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 .simpleCart_items .itemRow .item-increment {
     font-weight: bold;
     background: lightGray;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+}
+.simpleCart_totalquantity {
+  margin-left: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  text-align: left;
 }
 .simpleCart_item_add {
     text-align: right;
@@ -665,6 +752,7 @@ a.site-title {
 /* ============================================================ */
 /* Overlay */
 /* ============================================================ */
+
 .overlay{
     position: fixed;
     top: 0px;
