@@ -51,6 +51,11 @@
 	color: grey;
 }
 
+span.back-to-shop {
+  color: #E2E2E2;
+  font-size: 62px;
+}
+
 div.singlepage .item-details h1 {
 	font-weight: 300;
 	font-size: 62px;
@@ -153,12 +158,6 @@ div.singlepage .item-details a:hover {
 	div.singlepage .item-details p.price {
 		text-align: center;
 	}
-}
-
-.item-details-back {
-	float: right;
-	color: #E2E2E2;
-	padding-right: 5px;
 }
 
 .numberCircle {
