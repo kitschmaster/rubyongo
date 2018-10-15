@@ -1,3 +1,16 @@
+#15.10.2018 11:44:57 CodingSession::END
+
+support explained to me that ii need to use .bash_profile. which is strange, because there is aline in there doing "source .bashrc"... have to check that.
+
+meanwhile am looking at the default theme, slowly improving the styling...
+
+one more problem ii noticed is that, if ii do not delete the archetypes/default.md, it will override all theme/archetypes.
+it's just something slightly confusing... look here https://discourse.gohugo.io/t/hugo-doesnt-use-theme-archetypes/8382
+
+so ii will simply destroy archetypes/default.md during a "rog new" command...
+
+#15.10.2018 10:20:04 CodingSession::BEGIN
+
 #10.10.2018 12:48:03 CodingSession::END
 
 meanwhile am also researching an issue with ENV vars not being picked up by Passenger at Dreamhost. I was under the impression that setting up ENV vars inside .bashrc works nicely. but recently noticed the Publish button at rubyongo.org stopped working. seems like the ENV['GOROOT'] variable is not picked up, and thus we get the wrong `HUGO_RUN_PATH` and nothing works... ii opened a support ticket with Dreamhost and they sent me Phusion Passenger documentation on the matter of environment vars: https://www.phusionpassenger.com/library/indepth/environment_variables.html#passenger-served-apps
