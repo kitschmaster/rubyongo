@@ -157,6 +157,8 @@ def modify_rog_dir(name, to_path, replacements={})
 
     # Prepare archetype folders in content: content/item, content/post, content/project, content/page ...
     Rubyongo::Archetyper.create_content_structure(to_path)
+    # Remove generated archetypes/default.md, to enable theme archetypes
+    Rubyongo::Archetyper.enable_theme_archetypes(to_path)
   else
     "#{name} does not exist".say(:red)
     exit(1)
