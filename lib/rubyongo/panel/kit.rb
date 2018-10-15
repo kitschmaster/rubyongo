@@ -62,8 +62,8 @@ module Rubyongo
     configure :development do
       register Sinatra::Reloader
       also_reload Rubyongo::GURU_LIB
-      also_reload File.join(Rubyongo::GURU_LIB, '..', 'archetyper.rb')
-      also_reload File.join(Rubyongo::GURU_LIB, '..', 'paths.rb')
+      also_reload File.join(Rubyongo::LIB_PATH, 'archetyper.rb')
+      also_reload File.join(Rubyongo::LIB_PATH, 'paths.rb')
     end
 
     #************************************************************************************************
