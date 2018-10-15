@@ -50,6 +50,11 @@ module Rubyongo
       end
     end
 
+    def self.enable_theme_archetypes(root_path)
+      default_archetype = File.join(root_path, 'archetypes', 'default.md')
+      FileUtils.rm_rf(default_archetype)
+    end
+
     def self.create_with_image(root_path = Rubyongo::EXEC_PATH, archetype, image)
       imagefile = image[0]
       thumbfile = image[1]
