@@ -1,6 +1,22 @@
+#17.10.2018 10:30:16 CodingSession::END
+
+did some testing and it seems that doing this inside .bash_profile:
+
+  source .bashrc
+
+does not work properly, using the full path like this:
+
+  source ~/.bashrc
+
+works. the initial source command was silently failing.
+
+so am updating the sys scripts...
+
+#17.10.2018 10:01:55 CodingSession::BEGIN
+
 #15.10.2018 11:44:57 CodingSession::END
 
-support explained to me that ii need to use .bash_profile. which is strange, because there is aline in there doing "source .bashrc"... have to check that.
+support explained to me that ii need to use .bash_profile. which is strange, because there is a line in there doing "source .bashrc"... have to check that.
 
 meanwhile am looking at the default theme, slowly improving the styling...
 
