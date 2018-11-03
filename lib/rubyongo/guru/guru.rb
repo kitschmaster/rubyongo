@@ -141,7 +141,7 @@ module Rubyongo
         db_path = "sqlite://#{EXEC_PATH}/test-db.sqlite"
       end
 
-      puts "Setting up DB: #{db_path}"
+      #puts "Setting up DB: #{db_path}"
       DataMapper.setup(:default, db_path)
 
       # Tell DataMapper the models are done being defined
