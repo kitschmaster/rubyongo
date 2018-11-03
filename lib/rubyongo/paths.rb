@@ -33,6 +33,7 @@ module Rubyongo
   # Guru's Panel
   PANEL_LIB             = File.join(PANEL_PATH, 'lib', '**', '*.rb')
   PANEL_LIB_PUBLIC_PATH = File.join(File.dirname(__FILE__), 'panel', 'public')
+  PANEL_LIB_MATCH       = "\/panel\/lib\/"
 
   # Content editor file browser root folders
   PANEL_ROOTS = ['content', 'themes', 'public']
