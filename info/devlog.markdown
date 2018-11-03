@@ -1,3 +1,65 @@
+#03.11.2018 14:32:39 CodingSession::END
+
+modifying framework user's code loading, to get rid of the module and class definition...
+
+done. writing code will now look like writing a classic sinatra app.
+
+#03.11.2018 13:00:42 CodingSession::BEGIN
+
+#02.11.2018 22:59:18 ComSession::END
+
+am still thinking about upgradeability. a nightmare for some projects in the world of Ruby On Rails.
+
+ii don't want another Rails. rog has to be upgradeable automatically.
+
+so how can Ruby On Go achieve upgradeability? we'll see...
+
+#02.11.2018 22:36:52 ComSession::BEGIN
+
+#19.10.2018 21:15:45 ComSession::END
+
+what ii need for "rog upgrade":
+
++ the upgrade command must be run in the parent folder where the rog is installed
+  it should do the same as a the new command, without running hugo
+
+#19.10.2018 20:52:28 ComSession::BEGIN
+
+#18.10.2018 10:17:43 ComSession::END
+
+what ii need to do next:
+
+1. command line Item import, ii want something like this: "rog add /path/to/a/folder/with/images"
+
+it should create one content file for every image.
+it should also generate a SKU of the form: PREFIX-TIMESTAMP, where PREFIX comes from settings
+
+this will enable me to quickly fill up a shop with items, then after one can edit the individual frontmatters and set up: price, tags, weight, dimensions...
+
+2. Cart:
+2.0 show bill (already there)
+2.1 collect email and shipping address (after clicking checkout) - write into DB
+2.2 send order confirmation email: generate a bitcoin address and include that in the order-confirmation email
+    show: Please send X amount of bitcoin to the bitcoin address received in the email
+          The item will ship as soon as the payment arrives.
+2.3 watch bitcoin address for payment, as it is confirmed write into DB and send email to shop owner: You have a payment, please ship
+
+for 2, need to create a DB structure:
+
+Order:
++ SKU
++ filename (pointing to the content/item/xyz/../shop-item.md)
++ ordered_at
++ payed_at
++ shipped_at
++ email (customer email)
++ address (shipping address)
++ bitcoin_address
++ private_key
++ public_key
+
+#18.10.2018 10:04:43 ComSession::BEGIN
+
 #17.10.2018 10:30:16 CodingSession::END
 
 did some testing and it seems that doing this inside .bash_profile:
