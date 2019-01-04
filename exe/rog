@@ -21,13 +21,13 @@ $:.unshift @gem_path
 @rog_usr = nil
 @rog_host = nil
 if ARGV.length > 1
-  @rog_usr = ARGV[2]
-  @rog_host   = ARGV[3] if ARGV.length > 2
+  @rog_usr  = ARGV[2]
+  @rog_host = ARGV[3] if ARGV.length > 2
 
   # Conventionally, defaults come from the Name argument:
   # Name=rubyongo.org => DomainUsername: rubyongo, DomainHost: rubyongo.org
   # Name=rubyongo => DomainUsername: rubyongo, DomainHost: rubyongo.shop
-  @rog_usr ||= @name.split('.').first
+  @rog_usr  ||= @name.split('.').first
   @rog_host ||= @name =~ /\./ ? @name : "#{@name}.shop"
 end
 
@@ -59,6 +59,8 @@ Usage:
   rog equip                                          # run sys playbooks on the remote (installs go, hugo, libs, etc.)
   rog deploy                                         # deploys code and publishes site
   rog content                                        # deploys content and publishes site
+  rog upgrade                                        # upgrade framework to the current version
+  rog version                                        # show the currently installed rog version (which gem version was used to create the current app)
 
 One can use the first letter of a command to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
 
@@ -169,6 +171,10 @@ def populate_local_git_repo(path)
   Rubyongo::Archetyper.run_cmd "cd #{path}; git init; git add .; git commit -am 'Add generated rog'", "Development and/or content git repository #{path}/.git."
 end
 
+def write_version_for(path)
+  Rubyongo.write_version_for(path, Rubyongo.version)
+end
+
 def first_publish(path)
   Rubyongo::Archetyper.run_cmd "cd #{path}; hugo", "Published #{path}."
 end
@@ -200,6 +206,7 @@ def new_rog(name, settings={})
   first_publish(path) # publish the site to static generate the public folder for the first time (prevent an empty site)
   ensure_bundler_and_bundle(path) # check if bundler is installed, if not install it now, then bundle
   populate_local_git_repo(path) # set up an initial repo
+  write_version_for(path) # write the generator's version
   "Success".say(:green)
 end
 
@@ -234,7 +241,7 @@ def equip_rog
   exec("cd sys; ./rogequip #{usr} #{host}")
 end
 
-# TODO: upgrading rog internals
+# Upgrading rog internals.
 def upgrade_rog
   usr = settings['production']['usr']
   host = settings['production']['host']
@@ -253,6 +260,9 @@ def run_hugo_server
   set_env
   args = "" # TODO: allow passing arguments, which? let's add proper arguments parsing much later, when we know exactly what the CLI interface should do and achieve tasks.
   exec("hugo server #{args}")
+end
+
+def version_rog
 end
 
 def dodo
@@ -275,6 +285,8 @@ def dodo
       content_rog
     elsif ['hugo', 'h'].include? @command
       run_hugo_server
+    elsif ['version', 'v'].include? @command
+      version_rog
     else
       print_usage
       "Uknown command: #{@command}".say(:red)
