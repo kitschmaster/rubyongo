@@ -184,9 +184,7 @@ end
 
 def ensure_gem(name, path)
   r = `gem list -ie #{name}`
-  if r =~ /true/
-    "#{name} is present.".say(:green)
-  else
+  unless r =~ /true/
     "Missing #{name}, installing...".say(:red)
     `cd #{path}; gem install #{name}`
   end
