@@ -136,7 +136,7 @@ module Rubyongo
     # Run some shell command, print success message in green, on fail print error in red
     def self.run_cmd(command, success_message)
       "\nRunning: #{command}".say(:green)
-      r = ""
+      r = "".dup
       exit_status = nil
       Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
         r << stdout.read
