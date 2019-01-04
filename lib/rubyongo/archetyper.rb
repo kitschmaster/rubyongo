@@ -1,5 +1,6 @@
 # encoding: UTF-8
 # frozen_string_literal: true
+require 'open3'
 
 class String
   # Extracting frontmatter
@@ -134,8 +135,15 @@ module Rubyongo
 
     # Run some shell command, print success message in green, on fail print error in red
     def self.run_cmd(command, success_message)
-      r = `#{command}`
-      if r =~ //
+      "\nRunning: #{command}".say(:green)
+      r = ""
+      exit_status = nil
+      Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
+        r << stdout.read
+        exit_status = wait_thr.value # Process::Status object returned.
+      end
+      puts r # TODO: can be made optional for a verbose run
+      if exit_status.success?
         "#{success_message}".say(:green)
       else
         r.say(:red)
