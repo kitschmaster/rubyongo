@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-source 'file:///home/rog-usr/repo' # TODO: remove before release, this line is TEMPORARY for testing purpose only!
+
+source 'file:///home/rog-usr/repo' if File.exists?("/home/rog-usr/repo") # If there's a custom gem repository available, use it.
 
 gem 'rubyongo'
 
