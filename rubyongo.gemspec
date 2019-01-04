@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'dm-validations', '~>1.2'
   s.add_dependency 'sysrandom', '~>1.0'
 
-  s.add_development_dependency "bundler", "~>1"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "rake", "~>10.0"
   s.add_development_dependency "minitest", "~>5.0"
   s.add_development_dependency "minitest-capybara", "~>0.9"
