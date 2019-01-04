@@ -35,6 +35,9 @@ end
 # just take the current folder for now
 @gen_path = Dir.pwd
 
+# working path
+@working_path = @gen_path
+
 # load rubyongo
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "rubyongo/version"
@@ -263,6 +266,7 @@ def run_hugo_server
 end
 
 def version_rog
+  Rubyongo.version_for(@working_path)
 end
 
 def dodo
