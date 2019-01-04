@@ -39,4 +39,14 @@ class RogTest < Minitest::Test
     assert_equal 'spin_usr', settings['development']['usr']
     assert_equal 'spin_host.com', settings['development']['host']
   end
+
+  # This command returns the gem version used at creation time, >rog new< and >rog upgrade< both write the version out into a file named VERSION, >rog version< will read this file and present it.
+  def test_rog_version
+    r = `cd tmp; ../exe/rog new spin`
+    assert_match 'Success', r
+
+    r = `cd tmp; ../exe/rog version`
+    refute_nil r
+    assert_match ::Rubyongo.version, r
+  end
 end
