@@ -1,2 +1,10 @@
 require 'rubyongo'
-run Rubyongo::Kit
+require 'rubyongo/rack/secs'
+use ::Rubyongo::Rack::Secs
+use ::Rubyongo::Rack::Secs::AuthenticityToken
+use ::Rubyongo::Rack::Secs::CookieTossing
+use ::Rubyongo::Rack::Secs::ContentSecurityPolicy
+use ::Rubyongo::Rack::Secs::FormToken
+use ::Rubyongo::Rack::Secs::RemoteReferrer
+use ::Rubyongo::Rack::Secs::StrictTransport
+run ::Rubyongo::Kit
