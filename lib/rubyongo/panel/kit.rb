@@ -71,13 +71,15 @@ module Rubyongo
     #************************************************************************************************
     register Sinatra::Flash
     register Sinatra::ConfigFile
-    if ENV['RACK_ENV'] == 'test'
-      test_config = File.expand_path('../../../../test/panel_test.yml', __FILE__)
-      puts "Loading test config: #{test_config}"
-      config_file test_config
-    else
-      config_file Rubyongo::PANEL_CONFIG_PATH
-    end
+
+    test_config = if ENV['RACK_ENV'] == 'test' && ENV['PANEL_TEST_CONFIG_FILE']
+                    ENV['PANEL_TEST_CONFIG_FILE']
+                  else
+                    Rubyongo::PANEL_CONFIG_PATH
+                  end
+    puts "Loading config: #{test_config}" # TODO: remove this output eventually
+    config_file test_config
+
     set :bind, '0.0.0.0'
     set :port, 9393
 
