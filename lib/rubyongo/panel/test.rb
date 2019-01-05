@@ -7,6 +7,8 @@ module Rubyongo
     end
   end
 
-  class Spec <  Minitest::Capybara::Spec
+  if defined?(Minitest::Capybara::Spec)
+    class Spec <  Minitest::Capybara::Spec
+    end
   end
 end
