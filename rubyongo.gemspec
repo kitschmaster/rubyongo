@@ -50,5 +50,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "nokogiri", "~>1.6"
   s.add_development_dependency "capybara", "~>2.18"
   s.add_development_dependency "poltergeist", "~>1"
-
+  s.add_development_dependency "rspec", "~> 3.6"
 end
