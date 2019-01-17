@@ -12,4 +12,10 @@ class PanelSpec < Rubyongo::Spec
     tunein
     tuneout
   end
+
+  it "has a test" do
+    tunein
+    visit "/test"
+    tuneout
+  end
 end

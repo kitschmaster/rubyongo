@@ -1,8 +1,9 @@
 require "test_helper"
+require 'spec_helpers'
 
 class PanelTest < Rubyongo::Test
-
   def test_panel_test_path
+    tunein
     get '/test'
     assert_match 'TEST', last_response.body
   end

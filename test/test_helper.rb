@@ -17,6 +17,7 @@ require "capybara"
 require "capybara/dsl"
 require 'capybara/poltergeist'
 require 'spec_helpers'
+require 'test_helpers'
 require 'rubyongo'
 require 'rubyongo/panel/test'
 
@@ -26,6 +27,14 @@ module Rubyongo
     include SpecHelpers
   end
 end
+
+# Add test helpers
+module Rubyongo
+   class Test < Minitest::Test
+    include TestHelpers
+  end
+end
+
 
 # Set the driver
 Capybara.default_driver = :poltergeist
