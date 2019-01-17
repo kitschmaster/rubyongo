@@ -3,6 +3,7 @@ require "test_helper"
 class Panel < Rubyongo::Test
 
   def test_panel_test_path
+    tunein
     get '/test'
     assert_match 'TEST', last_response.body
   end
