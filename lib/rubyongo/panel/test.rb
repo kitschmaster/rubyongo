@@ -1,6 +1,6 @@
 module Rubyongo
   class Test < Minitest::Test
-    include Rack::Test::Methods
+    include ::Rack::Test::Methods
 
     def app
       Rubyongo::Kit

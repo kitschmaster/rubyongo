@@ -18,6 +18,7 @@ require 'warden'
 require 'json'
 require 'rack/contrib/try_static'
 require 'sysrandom/securerandom' # Replace the userspace Ruby (OpenSSL) RNG with `/dev/urandom`
+require 'rubyongo/rack/rogger_logger'
 
 module Rubyongo
 
@@ -98,12 +99,12 @@ module Rubyongo
     # Two public folders (the library one is being served before PANEL_PUBLIC_PATH)
     #************************************************************************************************
     set :public_folder, Rubyongo::PANEL_PUBLIC_PATH
-    use Rack::TryStatic, :root => Rubyongo::PANEL_LIB_PUBLIC_PATH, :urls => %w[/]
+    use ::Rack::TryStatic, :root => Rubyongo::PANEL_LIB_PUBLIC_PATH, :urls => %w[/]
 
     #************************************************************************************************
     # Logging
     #************************************************************************************************
-    use Rack::Logger
+    use ::Rubyongo::Rack::RoggerLogger
     helpers do
       def logger
         request.logger

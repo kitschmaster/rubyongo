@@ -1,3 +1,87 @@
+let's say ii create a fresh rog. then ii want to modify the stream in the backend UI, to do some extra stuff or add a new menu entry to the backend panel? how to place extras into the panel...
+
+#17.01.2019 19:27:12 CodingSession::BEGIN
+
+#04.01.2019 13:45:29 CodingSession::END
+
+after running >rog new< or >rog upgrade< the version will be written to a file in the root of the generated folder structure, called "VERSION".
+
+also adding some security... used rack-protection 2.0.5 code and adapted it for Rubyongo and will maintain it as Rubyongo::Rack::Secs from now on. also simply copied the spec folder of it, so need to also setup Travis to run rspec as well - todo for tomorrow.
+
+and then finally the upgrading... need to go more into detail and make a detailed list and think deep:
+
++ Gemfile: am thinking of splitting the Gemfile somehow, user added content and generated content? But what if the user makes some mistake and writes something in the generated content... what if the Gemfile would be parsed and then things would be ensured and that is it...
++ Gemfile.lock can be regenerated
++ .git repository: am thinking of cheating a little, just copy the .git folfer from the backup and add new files and commit
++ Rakefile: what if user modified it? how about comparing content and adding what is missing, removing nothing?
+#04.01.2019 09:32:02 CodingSession::BEGIN
+
+#03.01.2019 21:31:04 CodingSession::END
+
+am back to finish up the upgrade code. then some more...
+
+now devising the upgrading code...
+
+so let's first make a copy of the existing folder about to be upgraded to the currently installed rog gem code.
+
+to do that, need to be able to determine the current version. so that the framework user can see what he's got.
+
+implementing >rog version< first...
+
+done.
+
+#03.01.2019 20:09:49 CodingSession::BEGIN
+
+#16.11.2018 16:51:52 ComSession::END
+
+what is essentially an upgrade in the world of RoG?
+
+it is just three easy steps:
+
++ making a copy of the entire project folder structure, spinpainting.shop -> TIMESTAMP-spinpaintings.shop
++ creating a new one with the same name
++ copying non-upgradeable files from the old project to the new
+
+
+list of non-upgradeable files:
+
++ content/ (if Hugo changes structures, that's not a responsibility of RoG, user will have to handle upgrading the content separately, after all RoG is based on separation of concerns)
++ layouts (if user created additional theme overrides, simply copy to the new folder)
++ panel (if user created any microservices, views or code, simply copy over)
++ static (if any static was added, copy over)
++ themes (user can monkey patch the default theme, so need to copy from previous version and rename in place to: TIMESTAMP-default, so that user can diff and upgrade any modified files, if the user did not change anything in the theme, then there is nothing to do)
+
++ completely regen sys, then copy from previous:
+  + env.yml
+  + host_vars
+  + keys
+  if user changed any scripts, then they will have to diff with the previous and adjust files
+
++ regen configs completely, add TIMESTAMP-config.toml and TIMESTAMP-panel.yml, this needs extra care when upgrading, so will need to parse and set
+
+basically RoG achieves upgradeability by knowing what can not be upgraded automatically without the human eye.
+
+of course this can be enhanced with time, heuristics added... but the first upgradeable RoG will simply do the this simple procedure of saving a timestamp in the folder name, then creating a fresh with the fresh gem.
+
+if the user is also aware of the non-upgradeability of certain areas, they can prep for it and pay extra attention to those areas. it is probably good not to modify the default theme too much, but if you they do, it's a matter of removing the TIMESTAMP and using the previous version until they get the new one running. Hugo is good at backwards compatibility of templates too.
+
+full procedure:
+
++ open terminal
++ cd into the same folder where your installation sits, next to spinpaintings.shop
++ run "rog up spinpaintings.shop"
+  - establish a TIMESTAMP
+  - cp spinpaintings.shop TIMESTAMP-spinpaintings.shop
+  - run "rog new #{read settings from old and insert here: Name.ext [DeployUsername DeployDomainHost]}"
+  - copy non-upgradeable files from old
+  - do any other possible modifications
+
+and that is it, the thing should still work, especially if the user did not customise anything in the themes.
+
+later a content upgrade needs to be done as well. let's say an archetype changes, adds a field. then on upgrade need to be able to read frontmatters and add the field. like a DB migration almost.
+
+#16.11.2018 16:20:14 ComSession::BEGIN
+
 #03.11.2018 14:32:39 CodingSession::END
 
 modifying framework user's code loading, to get rid of the module and class definition...
