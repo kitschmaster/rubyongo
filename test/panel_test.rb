@@ -1,5 +1,4 @@
 require "test_helper"
-require 'spec_helpers'
 
 class PanelTest < Rubyongo::Test
   def test_panel_test_path
