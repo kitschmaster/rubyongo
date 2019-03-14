@@ -1,3 +1,5 @@
+#17.01.2019 20:11:12 CodingSession::END
+
 let's say ii create a fresh rog. then ii want to modify the stream in the backend UI, to do some extra stuff or add a new menu entry to the backend panel? how to place extras into the panel...
 
 #17.01.2019 19:27:12 CodingSession::BEGIN
@@ -12,7 +14,7 @@ and then finally the upgrading... need to go more into detail and make a detaile
 
 + Gemfile: am thinking of splitting the Gemfile somehow, user added content and generated content? But what if the user makes some mistake and writes something in the generated content... what if the Gemfile would be parsed and then things would be ensured and that is it...
 + Gemfile.lock can be regenerated
-+ .git repository: am thinking of cheating a little, just copy the .git folfer from the backup and add new files and commit
++ .git repository: am thinking of cheating a little, just copy the .git folder from the backup and add new files and commit
 + Rakefile: what if user modified it? how about comparing content and adding what is missing, removing nothing?
 #04.01.2019 09:32:02 CodingSession::BEGIN
 
