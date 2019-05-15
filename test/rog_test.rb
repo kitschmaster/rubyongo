@@ -49,4 +49,19 @@ class RogTest < Minitest::Test
     refute_nil r
     assert_match ::Rubyongo.version, r
   end
+
+  def test_rog_upgrade
+    r = `cd tmp; ../exe/rog new spin`
+    assert_match 'Success', r
+
+    r = `cd tmp; ../exe/rog upgrade spin`
+    assert_match 'Success', r
+
+    #settings_file = File.join('tmp', 'spin', 'panel.yml')
+    #assert_equal true, File.exist?(settings_file)
+    #settings = YAML.load_file(settings_file)
+    #assert_equal 'spin', settings['development']['usr']
+    #assert_equal 'spin.shop', settings['development']['host']
+  end
+
 end

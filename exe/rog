@@ -55,15 +55,16 @@ USAGE = <<-EOF
 
 Usage:
 
-  rog new Name.ext [DeployUsername DeployDomainHost] # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
-  rog start                                          # starts the Panel backend (rackup)
-  rog hugo                                           # starts the Hugo development server
-  rog init                                           # automated deployment pipeline installation
-  rog equip                                          # run sys playbooks on the remote (installs go, hugo, libs, etc.)
-  rog deploy                                         # deploys code and publishes site
-  rog content                                        # deploys content and publishes site
-  rog upgrade                                        # upgrade framework to the current version
-  rog version                                        # show the currently installed rog version (which gem version was used to create the current app)
+  rog new Name.ext [DeployUsername DeployDomainHost]     # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
+  rog start                                              # starts the Panel backend (rackup)
+  rog hugo                                               # starts the Hugo development server
+  rog init                                               # automated deployment pipeline installation
+  rog equip                                              # run sys playbooks on the remote (installs go, hugo, libs, etc.)
+  rog deploy                                             # deploys code and publishes site
+  rog content                                            # deploys content and publishes site
+  rog upgrade Name.ext [DeployUsername DeployDomainHost] # upgrade framework to the current gem version
+  rog gemversion                                         # show the current gem version
+  rog version                                            # show the currently installed rog version (which gem version was used to create the current app)
 
 One can use the first letter of a command to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
 
@@ -87,6 +88,16 @@ def set_env
   end
 end
 
+def upgrading_settings
+  if File.exists?("#{}/panel.yml")
+    @settings ||= YAML.load_file('panel.yml')
+  else
+    print_usage
+    "No panel.yml present in current folder. Did you run 'rog new'? Or 'rog init'?".say(:red)
+    exit(1)
+  end
+end
+
 def settings
   if File.exists?('panel.yml')
     @settings ||= YAML.load_file('panel.yml')
@@ -95,6 +106,10 @@ def settings
     "No panel.yml present in current folder. Did you run 'rog new'? Or 'rog init'?".say(:red)
     exit(1)
   end
+end
+
+def timestamp
+  Time.now.to_i
 end
 
 # Generate a file by copying
@@ -196,7 +211,7 @@ def ensure_bundler_and_bundle(path)
 end
 
 # Create a new rog site
-def new_rog(name, settings={})
+def new_rog(name, settings = {}, upgrade = false)
   if name == nil || name == ""
     "Please supply a name for the webshop.".say(:red)
     return
@@ -206,9 +221,30 @@ def new_rog(name, settings={})
   modify_rog_dir(name, path, settings) # populate the generated site with rog
   first_publish(path) # publish the site to static generate the public folder for the first time (prevent an empty site)
   ensure_bundler_and_bundle(path) # check if bundler is installed, if not install it now, then bundle
-  populate_local_git_repo(path) # set up an initial repo
+  populate_local_git_repo(path) unless upgrade # set up an initial repo (but not when upgrading)
   write_version_for(path) # write the generator's version
-  "Success".say(:green)
+  "Success".say(:green) unless upgrade
+end
+
+# Upgrading rog internals.
+def upgrade_rog(name, settings = {})
+  if name == nil || name == ""
+    "Please supply the name of the webshop to upgrade.".say(:red)
+    return
+  end
+  path = File.join(@gen_path, name)
+  backup_path = File.join(@gen_path, "#{timestamp}-#{name}")
+
+  # Making a copy of the entire project folder structure, spinpaintings.shop -> TIMESTAMP-spinpaintings.shop
+  Rubyongo::Archetyper.run_cmd "mv #{path} #{backup_path}", "Backed up to #{backup_path}."
+
+  # Creating a new rog with the same name
+  new_rog(name, settings, upgrade = true)
+
+  #TODO: copying non-upgradeable files from the old project to the new
+
+  #exec("cd sys; ./rogequip #{usr} #{host}")
+  "Success #{backup_path}".say(:green)
 end
 
 # Run the Panel's backend
@@ -242,14 +278,6 @@ def equip_rog
   exec("cd sys; ./rogequip #{usr} #{host}")
 end
 
-# Upgrading rog internals.
-def upgrade_rog
-  usr = settings['production']['usr']
-  host = settings['production']['host']
-  #exec("cd sys; ./rogequip #{usr} #{host}")
-  "Sorry! Not yet implemented".say(:red)
-end
-
 # Sync the content.
 def content_rog
   usr = settings['production']['usr']
@@ -264,7 +292,11 @@ def run_hugo_server
 end
 
 def version_rog
-  Rubyongo.version_for(@working_path)
+  "Framework version: #{Rubyongo.version_for(@working_path)}".say(:green)
+end
+
+def gem_version
+  "Gem version: #{Rubyongo.version}".say(:green)
 end
 
 def dodo
@@ -280,7 +312,7 @@ def dodo
     elsif ['init', 'i'].include? @command
       init_rog
     elsif ['upgrade', 'up', 'u'].include? @command
-      upgrade_rog
+      upgrade_rog(@name, { 'rog-usr' => @rog_usr, 'rog-host' => @rog_host })
     elsif ['equip', 'e'].include? @command
       equip_rog
     elsif ['content', 'c'].include? @command
@@ -289,6 +321,8 @@ def dodo
       run_hugo_server
     elsif ['version', 'v'].include? @command
       version_rog
+    elsif ['gemversion', 'gv'].include? @command
+      gem_version
     else
       print_usage
       "Uknown command: #{@command}".say(:red)
