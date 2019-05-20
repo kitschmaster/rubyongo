@@ -1,0 +1,11 @@
+Style/StringLiterals:
+ Enabled: false
+
+Metrics/LineLength:
+  Max: 220
+
+Metrics/BlockLength:
+  Max: 80
+
+Bundler/OrderedGems:
+  Enabled: false
