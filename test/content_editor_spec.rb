@@ -36,7 +36,7 @@ class ContentEditorSpec < Rubyongo::Spec
 
     # cleanup
     if file_exists
-      FileUtils.rm_r("./content/rog_logo-thumb.png")
+      FileUtils.rm_r("./content/rog_logo-thumb.jpg")
       FileUtils.rm_r("./content/rog_logo.png")
     end
   end

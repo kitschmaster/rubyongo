@@ -6,7 +6,7 @@ development: &common_settings
   sendform_to_business: rog-usr@rog-host
   sendform_from: rog-usr@rog-host
   sendform_subject: Order
-  thumbnail_resize: '250x250!'
+  thumbnail_resize: '250x250'
 
 test:
   <<: *common_settings

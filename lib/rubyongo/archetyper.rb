@@ -11,6 +11,11 @@ class String
     self[/#{Regexp.escape(between)}(.*?)#{Regexp.escape(between)}/m, 1]
   end
 
+  # Sanitize filename for hugo
+  def sane
+    self.encode(Encoding::UTF_8, invalid: :replace, undef: :replace, replace: "�").strip.tr("\u{202E}%$|:; \t\r\n\\", "-")
+  end
+
   # Colors
   # Print strings in the console with style
   def red; colorize(self, "\e[1m\e[31m"); end
@@ -81,7 +86,7 @@ module Rubyongo
     def self.create_with_image(root_path = Rubyongo::EXEC_PATH, archetype, image)
       imagefile = image[0]
       thumbfile = image[1]
-      contentfile_name = File.basename(imagefile).split('.').first + ".md"
+      contentfile_name = File.basename(imagefile).gsub(/\.[^\.]+$/, ".md")
       contentfile_path = File.join(archetype, contentfile_name)
 
       # Create content
@@ -96,8 +101,8 @@ module Rubyongo
       replacements = {'image: ""' => %(image: "#{imagefile}"), 'thumb: ""' => %(thumb: "#{thumbfile}")}
       replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
 
-      # Add image as content
-      content << "\n#{Archetyper.image_tag(imagefile)}\n"
+      # Add thumb image as content and link it to the original one
+      content << "\n#{Archetyper.markdown_link_thumbnail_to_image(imagefile, thumbfile)}\n"
 
       # Write content file
       File.open(contentfile, 'w') {|f| f.write content }
@@ -111,13 +116,13 @@ module Rubyongo
     # When the archetype is "none" we are uploading arbitrary file, probably images, in this case
     # we get: ...content/mno.jpg and we don't create a content entry .md file
     def self.stream_filename(archetype, filename = '')
-      filename = (archetype.empty? || archetype == Archetyper.no_archetype) ? filename : File.join(archetype.downcase, filename)
+      filename = (archetype.empty? || archetype == Archetyper.no_archetype) ? filename.sane : File.join(archetype.downcase, filename.sane)
       File.join(Rubyongo::CONTENT_PATH, filename)
     end
 
     # Add "-thumb" suffix to a filename, before the dot.
     def self.thumbnail_filename(filename = '')
-      filename.gsub(/\./, "-thumb.")
+      filename.sane.gsub(/\.[^\.]+$/, "-thumb.jpg")
     end
 
     def self.make_thumbnail(path, resize, thumbnail_path)
@@ -192,6 +197,10 @@ module Rubyongo
       else
         false
       end
+    end
+
+    def self.markdown_link_thumbnail_to_image(image, thumb)
+      %(<a href="/#{image}"><img src="/#{thumb}"></a>)
     end
 
     def self.image_tag(path)

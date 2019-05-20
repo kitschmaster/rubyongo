@@ -26,6 +26,7 @@ class ArchetyperTest < Minitest::Test
   def test_stream_filename
     assert_equal File.join(Rubyongo::CONTENT_PATH, "item/example.jpg"), Rubyongo::Archetyper.stream_filename("item", "example.jpg")
     assert_equal File.join(Rubyongo::CONTENT_PATH, "example.jpg"), Rubyongo::Archetyper.stream_filename(Rubyongo::Archetyper.no_archetype, "example.jpg")
+    assert_equal File.join(Rubyongo::CONTENT_PATH, "post/Some-weird-stuff.png"), Rubyongo::Archetyper.stream_filename("post", "Some weird stuff.png")
   end
 
   def test_archetype?

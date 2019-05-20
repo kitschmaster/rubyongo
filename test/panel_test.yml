@@ -6,7 +6,7 @@ development: &common_settings
   sendform_to_business: rubyongo@gmail.com
   sendform_subject: Order
   sendform_from: rubyongo@gmail.com
-  thumbnail_resize: '250x250!'
+  thumbnail_resize: '250x250'
 
 test:
   <<: *common_settings

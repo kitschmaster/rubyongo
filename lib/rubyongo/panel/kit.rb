@@ -518,8 +518,7 @@ module Rubyongo
     end
 
     #************************************************************************************************
-    # An image/youtube stream uploader/remover
-    # TODO: Allow streaming archetypes instead
+    # Allow streaming archetypes or images
     #************************************************************************************************
 
     get '/stream_editor' do
