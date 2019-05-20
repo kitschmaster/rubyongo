@@ -234,11 +234,15 @@ module Rubyongo
     post '/auth/in' do
       auth!
       flash[:success] = "Successfully tuned in"
+
+      # After auth, let's return to where we left off, excluding ajax calls
       if session[:return_to].nil?
-        redirect '/panel'
-      else
-        redirect session[:return_to]
+        session[:return_to] = '/panel'
+      elsif session[:return_to] =~ /content_editor\/\w+/
+        session[:return_to] = '/content_editor'
       end
+
+      redirect session[:return_to]
     end
 
     get '/auth/out' do
@@ -262,6 +266,7 @@ module Rubyongo
 
     get '/content_editor' do
       auth!
+      set_message "Welcome!"
       erb :editor
     end
 

@@ -1,9 +1,9 @@
-<div class="container">
+<div class="stream-form">
   <div class="pure-form pure-form-stacked">
     <div class="pure-control-group">
       <label for="archetype">Type:</label>
       <select id="archetype" class="pure-input-1-2">
-        <option>nothing</option>
+        <option><%= Rubyongo::Archetyper.no_archetype %></option>
         <% current_guru.archetypes.each do |archetype| %>
           <option <% if archetype == 'item' %>selected <% end %>><%= archetype.capitalize %></option>
         <% end %>

@@ -22,4 +22,17 @@ class ArchetyperTest < Minitest::Test
       FileUtils.rm_r(file)
     end
   end
+
+  def test_stream_filename
+    assert_equal File.join(Rubyongo::CONTENT_PATH, "item/example.jpg"), Rubyongo::Archetyper.stream_filename("item", "example.jpg")
+    assert_equal File.join(Rubyongo::CONTENT_PATH, "example.jpg"), Rubyongo::Archetyper.stream_filename(Rubyongo::Archetyper.no_archetype, "example.jpg")
+  end
+
+  def test_archetype?
+    assert_equal false, Rubyongo::Archetyper.archetype?(Rubyongo::Archetyper.no_archetype)
+
+    Rubyongo::Archetyper.archetypes.each do |archetype|
+      assert_equal true, Rubyongo::Archetyper.archetype?(archetype)
+    end
+  end
 end

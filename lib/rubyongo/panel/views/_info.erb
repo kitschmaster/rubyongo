@@ -1,0 +1,10 @@
+<% if current_guru && request.path_info =~ /content_editor/ %>
+  <div class="info">
+    <div class="text-center">
+      <span class="js-content-changed-at">Changed <%=current_guru.content_changed_at%></span>
+      <span class="js-content-published-at">Published <%=current_guru.content_published_at%></span>
+      <span class="js-content-theme"/>
+      <%=ENV['GOROOT']%>
+    </div>
+  </div>
+<% end %>

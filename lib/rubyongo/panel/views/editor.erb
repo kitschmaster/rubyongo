@@ -1,45 +1,44 @@
 <form class="hidden upload-form" method="POST" enctype="multipart/form-data" action='/content_editor/upload'>
   <input multiple type="file" id="upload" name='files[]' value="">
-  <input type="text" id="upload_path" name="path" value="">
+  <input type="text" id="js-upload-path" name="path" value="">
 </form>
 
-<div class="info">
-  <span class="content_changed_at">Changed <%=current_guru.content_changed_at%></span>
-  <span class="content_published_at">Published <%=current_guru.content_published_at%></span>
-  <span class="content_theme"/>
-  <%=ENV['GOROOT']%>
+<div class="editor-form-buttons">
+  <a class="js-editor-config pure-button button-primary" href="#" title="Edit config"><i class="fa fa-cogs"></i> Config</a>
+  <a class="js-editor-transend pure-button <%=publish_button_class%>" href="#" title="Publish content"><i class="fa fa-diamond"></i> Publish</a>
 </div>
-<form class="editor_form pure-form pure-form-stacked">
-  <div class="pure-g">
-    <div class="pure-u-1 pure-u-md-1-2">
-      <input type="text" placeholder="Search..." id="tree_q" value="" class="editor_tree_q input">
-    </div>
-    <div class="pure-u-1 pure-u-md-1-2" style='text-align: right;'>
-      <a class="pure-button editor_config button-primary tooltip" href="#" title="Edit config"><i class="fa fa-cogs"></i> Config</a>
-      <a class="pure-button editor_transend <%=publish_button_class%> tooltip" href="#" title="Publish content"><i class="fa fa-diamond"></i> Publish</a>
-    </div>
+
+<form class="editor-form pure-form pure-form-stacked">
+  <div class="search-form-input">
+    <input type="text" placeholder="Search..." id="tree_q" value="" class="editor_tree_q input">
   </div>
 </form>
-<div id="tree" class="tree"></div>
-<div id="tree_selection" class="tree_selection hidden"></div>
-<div class="editor_menu">
-  <div class="editor_content_menu">
-    <a class="pure-button editor_cancel button-cancel hidden" href="#"><i class="fa fa-undo"></i> Revert</a>
-    <a id="editor_save" class="pure-button editor_save button-success hidden" href="#"><i class="fa fa-floppy-o"></i> Save</a>
-  </div>
-  <div class="editor_preview_menu">
-    <a id="editor_refresh_preview" class="pure-button editor_refresh_preview button-primary hidden" href="#"><i class="fa fa-refresh"></i> Preview</a>
 
-    <label for="auto_preview" class="pure-checkbox">
-      <input id="auto_preview" type="checkbox" value="" checked>
+<div id="tree" class="tree"></div>
+
+<div id="js-tree-selection" class="tree-selection hidden"></div>
+
+<div class="editor-menu">
+  <div class="editor-content-menu">
+    <a class="js-editor-cancel pure-button  button-cancel hidden" href="#"><i class="fa fa-undo"></i> Revert</a>
+    <a id="js-editor-save" class="js-editor-save pure-button button-success hidden" href="#"><i class="fa fa-floppy-o"></i> Save</a>
+  </div>
+
+  <div class="editor-preview-menu">
+    <a id="js-editor-refresh-preview" class="js-editor-refresh-preview pure-button button-primary hidden" href="#"><i class="fa fa-refresh"></i> Preview</a>
+
+    <label for="js-auto-preview" class="pure-checkbox">
+      <input id="js-auto-preview" type="checkbox" value="" checked>
       Auto preview
     </label>
   </div>
 </div>
-<div class="editor_editor">
-  <textarea id="editor_content" class="editor_content" rows="20"></textarea>
-  <div id="editor_preview" class="editor_preview"></div>
+
+<div class="editor-editor">
+  <textarea id="js-editor-content" class="js-editor-content" rows="20"></textarea>
+  <div id="js-editor-preview" class="editor-preview"></div>
 </div>
+
 <script>
   Editor.init(<%=editor_init.to_json%>);
 </script>

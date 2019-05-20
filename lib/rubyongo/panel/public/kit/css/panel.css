@@ -127,42 +127,89 @@ table {
   display: table;
   clear: both; }
 
-/* ============================================================ */
-/* Layout */
-/* ============================================================ */
-.site { /*body*/
-  /*  display: -webkit-flex;
-  display: flex;
-  min-height: 150vh;
-  -webkit-flex-direction: column;
-          flex-direction: column;*/
-  margin:0;
-}
 .gray {
   background: rgba(0, 36, 138, 0.1);
 }
+
 .white {
   background: white;
 }
-.main {
-  /*-webkit-flex: 1;
-          flex: 1;*/
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto 3em;
+
+.text-right {
+  text-align: right;
 }
 
-#content {}
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
 
 .container {
   display: flex;
   justify-content: center;
 }
 
+.container > div {
+  flex: 0 0 200px;
+}
+
+/* ============================================================ */
+/* Layout */
+/* ============================================================ */
+.site {
+  margin: 0;
+}
+
+.main {
+  -webkit-flex: 1;
+          flex: 1;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto 3em;
+}
+
 header {
-  width:100%;
+  width: 100%;
   margin: 0 auto;
+}
+
+.info {
+  position: absolute;
+  margin-top: -1em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.info > div {
+  width: 100%;
+  font-size: small;
+  background: #eee;
+  color: gray;
+  border-radius: 0 0 6px 6px;
+}
+
+.flash {
+  text-align: center;
+  margin-top: 2.1em;
+  display: flex;
+  justify-content: center;
+}
+
+.flash .success {
+  color: green;
+}
+
+.flash .error {
+  color: red;
+}
+
+.flash .info {
+  color: gray;
 }
 
 footer {
@@ -175,20 +222,9 @@ footer {
   padding: 1em;
 }
 
-.flash {
-  margin: 1em;
-  text-align: center;
-}
-
 /* ============================================================ */
 /* Editor */
 /* ============================================================ */
-.info {
-  font-size: small;
-  margin: 0 0.5em;
-  width: 100%;
-  text-align: center;
-}
 .file-entry {
   color: black;
 }
@@ -202,33 +238,53 @@ footer {
   width: 100%;
 }
 
-.editor_form {
+.editor-form {
+  padding: 0 1em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.editor-form-buttons {
+  padding: 0.5em 1em;
+  display: flex;
+  flex-flow: row none;
+  justify-content: flex-end;
+}
+
+.editor-form-buttons .pure-button:nth-child(even) {
+  margin-left: 1em;
+}
+
+@media (max-width: 47.999em) {
+  .editor-form-buttons {
+    justify-content: space-between;
+  }
+}
+
+.editor-editor {
   padding: 1em;
 }
 
-.editor_editor {
-  padding: 1em;
-}
-
-.editor_menu {
+.editor-menu {
   padding: 1em 1em 0;
 }
 
-.editor_content_menu {
+.editor-content-menu {
   padding: 0;
   text-align: left;
   width: 48%;
   display: inline-block;
 }
 
-.editor_preview_menu {
+.editor-preview-menu {
   padding: 0;
   text-align: right;
   width: 49%;
   display: inline-block;
 }
 
-.editor_content {
+.editor-editor > textarea {
   min-width:48%;
   display: inline-block;
   float: left;
@@ -237,7 +293,7 @@ footer {
   border: 2px dashed lightgray;
 }
 
-.editor_preview {
+.editor-editor .editor-preview {
   display: inline-block;
   border: 1px dashed lightblue;
   width: 49%;
@@ -247,7 +303,21 @@ footer {
   min-height: 30em;
 }
 
-.tree_selection {
+@media (max-width: 47.999em) {
+  .editor-preview-menu {
+    display: none;
+  }
+
+  .editor-editor .editor-preview {
+    display: none;
+  }
+
+  .editor-editor > textarea {
+    min-width: 100%;
+  }
+}
+
+.tree-selection {
   margin: 0.5em 1em 0;
   color: rgb(66, 184, 221);
 }
@@ -278,26 +348,30 @@ footer {
 #tree .file-fla { background-position: -398px -0px }
 
 /* ============================================================ */
+/* Stream */
+/* ============================================================ */
+.stream-form {
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================================================ */
 /* Pure menu */
 /* ============================================================ */
-.menu-wrapper {
-    background-color: #01a6e3;
+.menu {
+    background-color: #09c6c3;
     margin-bottom: 1em;
-    -webkit-font-smoothing: antialiased;
     height: 2.1em;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
     -webkit-transition: height 0.5s;
     -moz-transition: height 0.5s;
     -ms-transition: height 0.5s;
     transition: height 0.5s;
 }
 
-.menu-wrapper.open {
+.menu.open {
     height: 14em;
-}
-
-.menu-menu-3 {
-    text-align: right;
 }
 
 .menu-toggle {
@@ -346,31 +420,38 @@ footer {
     transform: rotate(-45deg);
 }
 
-@media (max-width: 47.999em) {
-
-    .menu-menu-3 {
-        text-align: left;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
+.menu-align {
+  text-align: right;
 }
+
+@media (max-width: 47.999em) {
+  .menu-align {
+      text-align: center;
+  }
+
+  .menu-toggle {
+      display: block;
+  }
+}
+
 /* Pure menu color overrides */
 .pure-menu-heading {
   color: #eee;
 }
+
 .pure-menu-link {
   color: #eee;
 }
+
 .pure-menu-active>.pure-menu-link, .pure-menu-link:hover, .pure-menu-link:focus {
   color: #333;
 }
+
 .pure-menu-selected {
   background: #eee;
   font-weight: bold;
 }
+
 /* ============================================================ */
 /* Spinner */
 /* ============================================================ */
@@ -466,12 +547,13 @@ footer {
 .button-secondary {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
+
 /* tooltips */
 .tooltip{
     display: inline;
     position: relative;
 }
-.tooltip:hover:after{
+.tooltip:hover:after {
     background: #333;
     background: rgba(0,0,0,.8);
     border-radius: 5px;
@@ -484,7 +566,7 @@ footer {
     z-index: 98;
     /*width: 220px;*/
 }
-.tooltip:hover:before{
+.tooltip:hover:before {
     border: solid;
     border-color: #333 transparent;
     border-width: 6px 6px 0 6px;
