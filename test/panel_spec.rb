@@ -4,7 +4,7 @@ class PanelSpec < Rubyongo::Spec
 
   it "works" do
     visit "/panel"
-    page.must_have_content 'Guru Panel'.upcase
+    page.must_have_content 'rubyongo'.upcase
     page.must_have_content 'Tune in'
   end
 
