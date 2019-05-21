@@ -1,6 +1,7 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
+require_relative 'rubyongo/env'
 require_relative 'rubyongo/paths'
 require_relative 'rubyongo/version'
 require_relative 'rubyongo/archetyper'

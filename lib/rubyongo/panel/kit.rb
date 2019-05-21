@@ -24,7 +24,7 @@ require 'rubyongo/rack/secs'
 module Rubyongo
 
   # Redirect errors to a file during production run.
-  if ENV['RACK_ENV'] == 'production'
+  if Rubyongo.production? # Rubyongo.test?ction'
     # TODO: add logrotation ansible task (sys)
 
     log = File.new("log/production.log", "a+") # TODO path
@@ -74,7 +74,7 @@ module Rubyongo
     register Sinatra::Flash
     register Sinatra::ConfigFile
 
-    test_config = if ENV['RACK_ENV'] == 'test' && ENV['PANEL_TEST_CONFIG_FILE']
+    test_config = if Rubyongo.test? && ENV['PANEL_TEST_CONFIG_FILE']
                     ENV['PANEL_TEST_CONFIG_FILE']
                   else
                     Rubyongo::PANEL_CONFIG_PATH
