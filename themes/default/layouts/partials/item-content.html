@@ -8,7 +8,7 @@
       <h1 class="item_name">{{.Params.title}}</h1>
       <h2>{{.Params.category}}</h2>
       <p class="author">{{ .Params.author }}</p>
-      <p class="item_sku hidden">{{.Params.sku}}</p>
+      <p class="item_sku sku hidden">{{.Params.sku}}</p>
       <p class="item_price price"><span class="circle">{{.Params.price}}</span></p>
       <div class="button">
         {{ if .Params.sold }}
@@ -17,7 +17,13 @@
           <a href="{{.Permalink}}" class="simpleCart_item_add item_add"><i class="fa fa-shopping-cart"></i> Add to basket</a>
         {{ end }}
       </div>
-      <p class="description">{{ .Params.description }}</p>
+      {{ if .Params.measures }}
+        <p class="detail measures">{{ .Params.measures }}</p>
+      {{ end }}
+      {{ if .Params.mass }}
+        <p class="detail mass">{{ .Params.mass }}</p>
+      {{ end }}
+      <p class="detail description">{{ .Params.description }}</p>
     </div>
 
 </div>

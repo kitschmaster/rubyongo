@@ -1,5 +1,5 @@
 /* A very simple flexbox Grid
-	 This is the default Ruby On Go shop/items view. A flexible list of boxes for every Item.
+   This is the default Ruby On Go shop/items view. A flexible list of boxes for every Item.
 */
 
 .grid {
@@ -18,12 +18,12 @@
 }
 
 /*
-	A single item detail view
+  A single item detail view
 */
 
 .item-fullimage,
 .item-details {
-	width: 49%;
+  width: 49%;
 }
 
 .item-fullimage {
@@ -37,18 +37,18 @@
 }
 
 .item-details h1 {
-	font-weight: 300;
-	font-size: 62px;
-	padding: 0;
-	border-bottom: 1px solid grey;
+  font-weight: 300;
+  font-size: 62px;
+  padding: 0;
+  border-bottom: 1px solid grey;
 }
 
 .item-details h2 {
-	font-weight: normal;
-	font-size: 18px;
-	padding: 0 4px 0;
-	margin-bottom: 0;
-	color: grey;
+  font-weight: normal;
+  font-size: 18px;
+  padding: 0 4px 0;
+  margin-bottom: 0;
+  color: grey;
 }
 
 span.back-to-shop {
@@ -57,184 +57,179 @@ span.back-to-shop {
 }
 
 /* ============================================================ */
-/* Singlepage - Item detail */
+/* itempage - Item detail */
 /* ============================================================ */
 
-div.singlepage {
+div.itempage {
   text-align: left;
   padding: 0.5em;
 }
 
-div.singlepage h1, div.singlepage h2, div.singlepage h3, div.singlepage h4, div.singlepage h5, div.singlepage h6 {
+div.itempage h1, div.itempage h2, div.itempage h3, div.itempage h4, div.itempage h5, div.itempage h6 {
     margin-bottom: 0;
     text-transform: none; }
 
-div.singlepage h1 {
+div.itempage h1 {
   font-size: 26px; }
 
-div.singlepage h2 {
+div.itempage h2 {
   font-size: 24px; }
 
-div.singlepage h3 {
+div.itempage h3 {
   font-size: 20px;
   margin-bottom: 20px; }
 
-div.singlepage h4 {
+div.itempage h4 {
   font-size: 18px;
   margin-bottom: 18px; }
 
-div.singlepage h5 {
+div.itempage h5 {
   font-size: 16px;
   margin-bottom: 15px; }
 
-div.singlepage h6 {
+div.itempage h6 {
   font-size: 14px;
   margin-bottom: 12px; }
 
-div.singlepage p {
+div.itempage p {
   line-height: 1.8;
   margin: 0 0 30px; }
 
-div.singlepage a {
+div.itempage a {
   color: #01a6e3;
   text-decoration: none; }
 
-div.singlepageul, div.singlepage ol {
+div.itempageul, div.itempage ol {
   list-style-position: inside;
   line-height: 1.4;
   margin: 0 0 20px;
   padding: 0; }
-div.singlepage ul ul, div.singlepage ul ol, div.singlepage ol ul, div.singlepage ol ol {
+div.itempage ul ul, div.itempage ul ol, div.itempage ol ul, div.itempage ol ol {
     margin: 10px 0 0 20px; }
-div.singlepage ul li, div.singlepage ol li {
+div.itempage ul li, div.itempage ol li {
     margin: 0 0 2px; }
-div.singlepage ul li:last-of-type, div.singlepage ol li:last-of-type {
+div.itempage ul li:last-of-type, div.itempage ol li:last-of-type {
       margin-bottom: 0; }
 
-div.singlepage blockquote {
+div.itempage blockquote {
   border-left: 1px dotted #303030;
   margin: 40px 0;
   padding: 5px 30px; }
 
-div.singlepage blockquote p {
+div.itempage blockquote p {
     color: #AEADAD;
     display: block;
     font-style: italic;
     margin: 0;
     width: 100%; }
 
-div.singlepage .item-details h1 {
-	font-weight: 300;
-	font-size: 4em;
-	margin: 0;
+div.itempage .item-details h1 {
+  font-weight: 300;
+  font-size: 4em;
+  margin: 0;
 }
 
-.item-details p {
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 22px;
-	color: #999;
+div.itempage .item-details p.detail {
+  font-weight: normal;
+  color: #999;
+  margin: 0;
 }
 
-.item-details p.sold {
+div.itempage .item-details p.sold {
   font-weight: bold;
   font-size: 40px;
   line-height: 42px;
   color: red;
 }
 
-div.singlepage .item-details .button {
-	border-radius: 6px;
-	padding: 10%;
-	width: 100%;
-	background-color: #E2E2E2;
-	text-align: center;
+div.itempage .item-details .button {
+  border-radius: 6px;
+  padding: 10%;
+  width: 100%;
+  background-color: #E2E2E2;
+  text-align: center;
 }
 
-div.singlepage .item-details .button a {
-	font-weight: 700;
-	font-size: 16px;
-	color: #fff;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	padding: 10px 20px;
-	border-radius: 4px;
-	display: inline-block;
-	margin: 30px 0 0;
-	outline: none;
+div.itempage .item-details .button a {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 30px 0 0;
+  outline: none;
 
-	background: #7db9e8;
-	background: -moz-linear-gradient(top, #7db9e8 0%, #2989d8 2%, #2989d8 41%, #1e5799 100%);
-	background: -webkit-linear-gradient(top, #7db9e8 0%,#2989d8 2%,#2989d8 41%,#1e5799 100%);
-	background: linear-gradient(to bottom, #7db9e8 0%,#2989d8 2%,#2989d8 41%,#1e5799 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 );
+  background: #7db9e8;
+  background: -moz-linear-gradient(top, #7db9e8 0%, #2989d8 2%, #2989d8 41%, #1e5799 100%);
+  background: -webkit-linear-gradient(top, #7db9e8 0%,#2989d8 2%,#2989d8 41%,#1e5799 100%);
+  background: linear-gradient(to bottom, #7db9e8 0%,#2989d8 2%,#2989d8 41%,#1e5799 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 );
 }
 
-div.singlepage .item-details p.price {
-	font-weight: bold;
-	font-size: 2em;
-	padding-top: 0;
-	margin-bottom: 0;
+div.itempage .item-details p.price {
+  font-weight: bold;
+  font-size: 2em;
+  padding-top: 0;
+  margin-bottom: 0;
+  text-align: center;
 }
 
-div.singlepage .item-details p.description {
-	padding-top: 2em;
-	margin-bottom: 0;
+div.itempage .item-details p.variants {
+  padding-top: 0.5em;
+  font-size: 1.0em;
 }
 
-div.singlepage .item-details p.variants {
-	padding-top: 0.5em;
-	font-size: 1.0em;
+div.itempage .item-details a::before {
+  content: '\2192';
+  display: inline-block;
+  margin-right: 10px;
 }
 
-div.singlepage .item-details a::before {
-	content: '\2192';
-	display: inline-block;
-	margin-right: 10px;
-}
-
-div.singlepage .item-details a:hover {
-	border-color: #999;
-	color: #999;
+div.itempage .item-details a:hover {
+  border-color: #999;
+  color: #999;
 }
 
 @media screen and (max-width: 830px) {
 
-	div.singlepage {
-		padding: 0.5em;
-	}
+  div.itempage {
+    padding: 0.5em;
+  }
 
-	div.singlepage .item-details .button {
-		width: 100%;
-		background-color: transparent;
-		padding: 0;
-		text-align: center;
-	}
+  div.itempage .item-details .button {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 650px) {
 
-	.item-fullimage { width: 100%; }
+  .item-fullimage { width: 100%; }
 
-	.item-details { float: none; width: 100%; }
+  .item-details { float: none; width: 100%; }
 
-	div.singlepage {
-		padding: 0.5em;
-	}
-  div.singlepage .item-details h1 {
+  div.itempage {
+    padding: 0.5em;
+  }
+  div.itempage .item-details h1 {
     font-size: 3em;
   }
 
-	div.singlepage .item-details .button {
-		width: 100%;
-		background-color: transparent;
-		padding: 0;
-		text-align: center;
-	}
+  div.itempage .item-details .button {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    text-align: center;
+  }
 
-	div.singlepage .item-details p.price {
-		text-align: center;
-	}
+  div.itempage .item-details p.price {
+    text-align: center;
+  }
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */
