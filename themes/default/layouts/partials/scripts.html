@@ -54,20 +54,22 @@
               fn: function(){
                 var mailto = "mailto:{{ .Site.Params.order_email }}?subject=Order&body=";
                 simpleCart.each( function (item, x, val) {
-                  //var item = simpleCart.find(val);
+                  var sku = item.get("sku");
                   var name = item.get("name");
                   var price = item.get("price");
                   var quant = item.get("quantity");
-                  mailto += quant + "%20" + name + "%20for%20" + price + currency_string + "%0A";
+                  mailto += quant + "x%20...%20" + name + "%20[" + sku+ "]%20...%20" + price + currency_string + "%0A";
                 });
                 var grandTotal = simpleCart.total() + simpleCart.shipping();
-                mailto += "%0APrice%20without%20DDV%3A%20" + simpleCart.totalMinusTax()  + currency_string;
-                mailto += "%0APrice%20with%20DDV%3A%20" + simpleCart.total()  + currency_string;
+                mailto += "%0APrice%20without%20TAX%3A%20" + simpleCart.totalMinusTax()  + currency_string;
+                mailto += "%0APrice%20with%20TAX%3A%20" + simpleCart.total()  + currency_string;
                 mailto += "%0AShipping%3A%20" + simpleCart.shipping() + currency_string;
                 mailto += "%0ASum%3A%20" + grandTotal + currency_string;
                 mailto += "%0A%0AYour%20address%3A";
                 mailto += "%0A%0A";
-                console.log("generated: " + mailto);
+                mailto += "%0A%0ATel%20number%3A";
+                mailto += "%0A%0A";
+                //console.log("generated: " + mailto);
                 window.location.href = mailto;
                 return false;
               }
@@ -97,7 +99,7 @@
         });
 
         simpleCart.bind( 'beforeCheckout' , function(){
-            alert( "beforeCheckout!");
+            //alert( "beforeCheckout!");
         });
 
         var dialog = $('div.simpleCart_dialog');

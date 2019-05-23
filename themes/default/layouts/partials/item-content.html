@@ -11,7 +11,11 @@
       <p class="item_sku hidden">{{.Params.sku}}</p>
       <p class="item_price price"><span class="circle">{{.Params.price}}</span></p>
       <div class="button">
-        <a href="{{.Permalink}}" class="simpleCart_item_add item_add"><i class="fa fa-shopping-cart"></i> Add to basket</a>
+        {{ if .Params.sold }}
+          <p class="sold">SOLD OUT</p>
+        {{ else }}
+          <a href="{{.Permalink}}" class="simpleCart_item_add item_add"><i class="fa fa-shopping-cart"></i> Add to basket</a>
+        {{ end }}
       </div>
       <p class="description">{{ .Params.description }}</p>
     </div>

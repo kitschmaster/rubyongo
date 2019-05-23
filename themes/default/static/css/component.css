@@ -136,6 +136,13 @@ div.singlepage .item-details h1 {
 	color: #999;
 }
 
+.item-details p.sold {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 42px;
+  color: red;
+}
+
 div.singlepage .item-details .button {
 	border-radius: 6px;
 	padding: 10%;

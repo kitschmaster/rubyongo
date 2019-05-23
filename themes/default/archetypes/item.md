@@ -1,5 +1,6 @@
 ---
 draft: true
+sold: false
 title: "{{ replace (replace .Name "-" " ") "_" " " | title }}"
 date: {{ .Date }}
 price: ""
