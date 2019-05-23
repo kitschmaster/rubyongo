@@ -261,9 +261,10 @@ div.itempage .item-details a:hover {
   font-size: 20px;
   padding: 20px;
   text-align: center;
+  opacity: 0;
 }
 
 /* When you mouse over the container, fade in the overlay title */
 .item-container:hover .item-overlay {
-  opacity: 0;
+  opacity: 1;
 }
