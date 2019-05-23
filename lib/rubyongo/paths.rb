@@ -1,7 +1,7 @@
 module Rubyongo
 
   # Constants
-  IMAGE_FILES    = [ 'jpg', 'jpeg', 'gif', 'png', 'bmp' ]
+  IMAGE_FILES    = [ 'jpg', 'jpeg', 'gif', 'png', 'bmp', 'JPG', 'PNG']
   TEXT_FILES     = [ 'txt', 'text', 'toml', 'md', 'js',
                      'json', 'css', 'html', 'htm', 'xml',
                      'c', 'cpp', 'h', 'sql', 'log', 'py',
