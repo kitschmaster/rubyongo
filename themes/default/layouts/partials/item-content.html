@@ -17,11 +17,11 @@
           <a href="{{.Permalink}}" class="simpleCart_item_add item_add"><i class="fa fa-shopping-cart"></i> Add to basket</a>
         {{ end }}
       </div>
-      {{ if .Params.measures }}
-        <p class="detail measures">{{ .Params.measures }}</p>
-      {{ end }}
       {{ if .Params.mass }}
         <p class="detail mass">{{ .Params.mass }}</p>
+      {{ end }}
+      {{ if .Params.measures }}
+        <p class="detail measures">{{ .Params.measures }}</p>
       {{ end }}
       <p class="detail description">{{ .Params.description }}</p>
     </div>
