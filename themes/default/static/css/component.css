@@ -129,6 +129,10 @@ div.itempage .item-details h1 {
   margin: 0;
 }
 
+div.itempage .item-details p {
+  color: #999;
+}
+
 div.itempage .item-details p.detail {
   font-weight: normal;
   color: #999;
