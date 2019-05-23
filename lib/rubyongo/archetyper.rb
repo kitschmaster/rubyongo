@@ -86,7 +86,8 @@ module Rubyongo
     def self.create_with_image(root_path = Rubyongo::EXEC_PATH, archetype, image)
       imagefile = image[0]
       thumbfile = image[1]
-      contentfile_name = File.basename(imagefile).gsub(/\.[^\.]+$/, ".md")
+      contentfile_basename = File.basename(imagefile, File.extname(imagefile))
+      contentfile_name = contentfile_basename + ".md" # .gsub(/\.[^\.]+$/, ".md")
       contentfile_path = File.join(archetype, contentfile_name)
 
       # Create content
@@ -98,7 +99,9 @@ module Rubyongo
       content = File.read(contentfile)
 
       # Modify frontmatter entries with the image
-      replacements = {'image: ""' => %(image: "#{imagefile}"), 'thumb: ""' => %(thumb: "#{thumbfile}")}
+      replacements = { 'image: ""' => %(image: "#{imagefile}"),
+                       'thumb: ""' => %(thumb: "#{thumbfile}"),
+                       'sku: ""' => %(sku: "#{contentfile_basename.downcase}") }
       replacements.each {|k, v| content.gsub!(/#{k}/, "#{v}")}
 
       # Add thumb image as content and link it to the original one
