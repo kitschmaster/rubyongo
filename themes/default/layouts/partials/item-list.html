@@ -6,7 +6,14 @@
       <div class="item-container">
         <img class="item-image" src="/{{.Params.thumb}}" alt="{{.Params.alt}}"/>
         <div class="item-overlay">
-          <div class="item-text">{{.Params.title}} <b>{{.Params.price}}</b></div>
+          <div class="item-text">{{.Params.title}}
+            <b>{{ if .Params.sold }}
+                  SOLD OUT
+                {{ else }}
+                  {{.Params.price}}
+                {{ end }}
+            </b>
+          </div>
         </div>
       </div>
     </a>
