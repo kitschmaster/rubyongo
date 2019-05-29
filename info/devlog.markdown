@@ -1,3 +1,21 @@
+#29.05.2019 22:39:40 ComSession::END
+
+still not done with the upgrade code. the reason is, ii realised ii am still exploring how the workflow will work and which files will be the "upgradeable"...
+
+so meanwhile did some small improvements and a few bugfixes and focused primarily on using the framework from a user perspective.
+
+therefor ii finally got around publishing some actual items in the spinpaintings.shop, and luckily already sold one painting today, nice!
+
+when you read rog backwards you get a sLOVEnian word, which means: up!
+
+up we go with sails, indeed. am only a year behind my initial predicted road map, but that's prerry good for a "sideproject" like this, isn't it :)
+
+anyway, it feels really good to finally have the first item sold, the first customer served. and ii actually really enjoy using the content editor and publishing in the shop.
+
+hope to open the second one soon (not sure about the domain yet, probably incense-burners.shop).
+
+#29.05.2019 22:24:23 ComSession::BEGIN
+
 #17.01.2019 20:11:12 CodingSession::END
 
 let's say ii create a fresh rog. then ii want to modify the stream in the backend UI, to do some extra stuff or add a new menu entry to the backend panel? how to place extras into the panel...
