@@ -5,9 +5,9 @@ source 'file:///home/rog-usr/repo' if File.exists?("/home/rog-usr/repo") # If th
 gem 'rubyongo'
 
 group :development, :test do
-  gem "bundler", "~>1"
-  gem "rake", "~>10.0"
-  gem "minitest", "~>5.0"
+  gem "bundler"
+  gem "rake"
+  gem "minitest"
 end
 
 group :development do
