@@ -226,6 +226,27 @@ def new_rog(name, settings = {}, upgrade = false)
   "Success".say(:green) unless upgrade
 end
 
+def copy_nonupgradeable(backup_path, path)
+  # copy the .git folder
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, '.git')} .", "Copied git repo."
+
+  # copy the content folder
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'content')} .", "Copied content folder."
+
+  # copy archetypes added by framework user
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'archetypes')} .", "Copied archetypes folder."
+
+  # copy themes added by framework user
+  themes_folders = Dir[File.join(backup_path, 'themes', '*')]
+  themes_folders.delete_if {|folder| folder =~ 'default'}
+  themes_folders.each do |folder|
+    Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{folder} .", "Copied theme."
+  end
+
+  # copy database
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'db.sqlite')} .", "Copied db."
+end
+
 # Upgrading rog internals.
 def upgrade_rog(name, settings = {})
   if name == nil || name == ""
@@ -241,7 +262,8 @@ def upgrade_rog(name, settings = {})
   # Creating a new rog with the same name
   new_rog(name, settings, upgrade = true)
 
-  #TODO: copying non-upgradeable files from the old project to the new
+  # Copying non-upgradeable files from the old project to the new
+  copy_nonupgradeable(backup_path, path)
 
   #exec("cd sys; ./rogequip #{usr} #{host}")
   "Success #{backup_path}".say(:green)

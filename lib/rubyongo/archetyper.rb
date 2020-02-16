@@ -190,7 +190,7 @@ TOML
     end
 
     # Run some shell command, print success message in green, on fail print error in red
-    def self.run_cmd(command, success_message)
+    def self.run_cmd(command, success_message = 'Done')
       "\nRunning: #{command}".say(:green)
       r = "".dup
       exit_status = nil
