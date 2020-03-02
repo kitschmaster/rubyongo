@@ -312,6 +312,7 @@ module Rubyongo
           end
         elsif type == 'default'
           FileUtils::mkdir_p new_path
+          Rubyongo::Archetyper.make_folder_a_leaf(new_path, friendly_basename)
           current_guru.mark_content_changed_now
         end
         fill_result r, 'id' => new_path

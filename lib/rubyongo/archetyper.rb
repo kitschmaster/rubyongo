@@ -175,6 +175,19 @@ module Rubyongo
       filename
     end
 
+    def self.make_folder_a_leaf(new_path, description = 'Products')
+      date = DateTime.now.to_s # 2019-10-17T11:22:16+06:00
+      content=<<-TOML
+        ---
+        title: "#{description.capitalize}"
+        date: #{date}
+        draft: false
+        description : "#{description.capitalize}"
+        ---
+        TOML
+      File.open(File.join(new_path, "_index.md"), 'w+') {|f| f.write(content) }
+    end
+
     # Run some shell command, print success message in green, on fail print error in red
     def self.run_cmd(command, success_message)
       "\nRunning: #{command}".say(:green)
