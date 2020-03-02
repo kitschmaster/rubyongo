@@ -1,5 +1,30 @@
-{{ partial "header.html" . }}
-<div class="singlepage">
-  {{ .Content }}
-</div>
-{{ partial "footer.html" . }}
+{{ define "main" }}
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <article>
+          <h2>{{ .Title }}</h2>
+          <ul class="list-inline mb-4">
+            {{ if .Params.Author }}
+              <li class="list-inline-item"><i class="ti-pencil-alt text-primary mr-2"></i> By {{ .Params.Author }}</li>
+            {{ end }}
+            {{ if .Params.showDate }}
+              <li class="list-inline-item"><i class="ti-calendar text-primary mr-2"></i>
+              {{ .PublishDate.Format "02 Jan, 2006" }}</li>
+            {{ end }}
+          </ul>
+          {{ if .Params.Image }}
+          <img src="{{ .Params.Image | absURL }}" alt="{{ .Title }}" class="img-fluid w-100 mb-4">
+          {{ end }}
+          <div class="content">
+            {{.Content}}
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

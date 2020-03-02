@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      {{ $paginator := .Paginate .Data.Pages }}
+      {{ range $paginator.Pages }}
+      <div class="col-lg-8 mx-auto mb-5">
+        <article class="card rounded-0 border-0">
+          <div class="card-body px-0">
+            <a href="{{ .Permalink }}" class="btn btn-sm btn-outline-primary">{{ .Title | markdownify }}</a>
+          </div>
+        </article>
+      </div>
+      {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+  </div>
+</section>
+
+{{ end }}

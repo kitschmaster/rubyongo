@@ -1,0 +1,122 @@
+############################ banner ##########################
+banner:
+  enable : true
+  title : "A webshop framework"
+  content : "Sell your art with a custom rubyongo webshop. Turn your passion into money."
+  image : "images/banner.png"
+  # button
+  button:
+    enable : false
+    label : "All Products"
+    link : "products"
+  # demo video
+  video:
+    enable : false
+    videoURL : "https://www.youtube.com/embed/wf4F2-9UXUo"
+
+########################## About ##############################
+about:
+  enable : false
+  title : "About Our Product"
+  content : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+          clita kasd gubergren,"
+  image : "images/about.png"
+
+
+###################### Call to action ########################
+cta:
+  enable : false
+  title : "Buy one Get One Free Webshop"
+  content : "Available for limited time only. Grab one while you still can!"
+  image : "images/cta.png"
+  overlayImage : "images/cta-overlay.png"
+  button:
+    label : "All Products"
+    link : "products"
+
+######################## raw material #######################
+material:
+  enable : false
+  title : "Ingredients Of Our Products"
+  subtitle : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dol."
+  materialItem:
+    # material item loop
+    - title : "Matcha Seeds"
+      image : "images/material/material-1.png"
+      content : "Lorem ipsum dolor sit amet,be consetetur sadipscing elitr, sed diam nonumy eirmod tem"
+
+    # material item loop
+    - title : "Aloe Vera"
+      image : "images/material/material-2.png"
+      content : "Lorem ipsum dolor sit amet,be consetetur sadipscing elitr, sed diam nonumy eirmod tem"
+
+    # material item loop
+    - title : "Turmeric"
+      image : "images/material/material-3.png"
+      content : "Lorem ipsum dolor sit amet,be consetetur sadipscing elitr, sed diam nonumy eirmod tem"
+
+    # material item loop
+    - title : "Tulshi leaf"
+      image : "images/material/material-4.png"
+      content : "Lorem ipsum dolor sit amet,be consetetur sadipscing elitr, sed diam nonumy eirmod tem"
+
+########################### Advantage #########################
+advantage:
+  enable : false
+  title : "Advantages Of Using <br> Our Product"
+  subtitle : "Lorem ipsum dolor sit amet, da decal consetetur<br> sadipscing elitr, sed diam nonumya eirmod"
+  image : "images/advantage.png"
+  advantageList:
+    # advantage list loop
+    - listItem : "Extremely lightweight"
+    - listItem : "Excellent breathability"
+    - listItem : "Can increase Cell activation"
+    - listItem : "Glowing Skin In 7 Days"
+    - listItem : "Increasing Glow Of Face"
+    - listItem : "More Beautiful Face Skin"
+
+
+######################## Promo Video ##########################
+video:
+  enable : false
+  title : "How To Use This Product?"
+  content : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et."
+  videoThumb : "images/video-thumb.jpg"
+  videoURL : "https://www.youtube.com/embed/wf4F2-9UXUo"
+
+
+######################## Products #############################
+products:
+  enable : true
+  title : "Products"
+  # product item comes from "content/product"
+
+
+########################## Testimonial ########################
+testimonial:
+  enable : true
+  title : "What People Are Saying <br> About Our Product"
+  testimonialItem:
+    # testimonial item loop
+    - name : "Miha Plohl"
+      image : "images/clients/client-1.jpg" # size 100px*100px
+      designation : "CEO, Manitu"
+      content : "As CEO at Manitu I was delighted to buy from rubyongo and implement a shop for my self."
+      rating : "five" # rating star, one to five
+
+    # testimonial item loop
+    - name : "Tamara Kavcic"
+      image : "images/clients/client-2.jpg" # size 100px*100px
+      designation : "CEO, Hemp Linen Life"
+      content : "I was amazed of the quality <br> of the webshop I ordered. Thanks rubyongo"
+      rating : "five" # rating star, one to five
+
+    # testimonial item loop
+    - name : "Grizli Adams"
+      image : "images/clients/client-3.jpg" # size 100px*100px
+      designation : "CEO, Adams Familiy Resort"
+      content : "My shop runs fast and is easy to change and maintain, <br> I am very pleased."
+      rating : "five" # rating star, one to five

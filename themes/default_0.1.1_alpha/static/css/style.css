@@ -263,7 +263,7 @@ i.fa {
 }
 
 .button-square {
-  background: #01a6e3;
+  /*background: #01a6e3;*/
   color: #FFF;
   float: left;
   font-size: 17px;
@@ -315,7 +315,7 @@ i.fa {
 }
 .site-title a {
   float: left;
-  background: #01a6e3;
+  /*background: #01a6e3;*/
   color: #FEFEFE;
   padding: 5px 10px 6px;
 }
@@ -324,7 +324,7 @@ i.fa {
 }
 
 a.site-title {
-  background: #01a6e3;
+  /*background: #01a6e3;*/
   color: #FEFEFE;
   padding: 5px 10px 6px;
 }
@@ -345,36 +345,18 @@ a.site-title {
 }
 
 /* Menu */
+/* Style the links inside the navigation bar */
 .menu {
   margin-bottom: 10px;
-  background-color: #01a6e3;
+  background-color: white;
   overflow: hidden;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.menu .logo-and-title {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-right: auto;
-}
-
-.menu .logo-and-title .title {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.menu .logo-and-title a img {
-  margin: 0;
-  max-height: 49px;
-}
-
-/* Style the links inside the navigation bar */
 .menu a {
-  color: #f2f2f2;
+  color: #888;
   text-align: center;
   text-decoration: none;
   font-size: 17px;
@@ -393,8 +375,26 @@ a.site-title {
 
 /* Add an active class to highlight the current page */
 .active {
-  background-color: rgba(181, 63, 51, 0.9);
-  color: white;
+  background-color: #f3f3f3; /*rgba(181, 63, 51, 0.9);*/
+}
+
+.menu .logo-and-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: auto;
+}
+
+.menu .logo-and-title .title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #acb3de;
+}
+
+.menu .logo-and-title a img {
+  margin: 0;
+  max-height: 49px;
 }
 
 /* Hide the link that should open and close the menu on small screens */
@@ -592,8 +592,8 @@ a.site-title {
   padding: 20px 5px;
 }
 .post-stub a:hover {
-  background: #FCF5F5;
-  color: #01a6e3;
+  background: #F5F5F5;
+  color: #a3a3a3;
   padding: 20px 12px;
 }
 .post-stub a:hover .post-stub-tag {
@@ -718,7 +718,7 @@ a.site-title {
 }
 .footer .site-title a:hover,
 .footer .button-square:hover {
-  background: #121212;
+
 }
 .footer .button-jump-top {
   font-size: 23px;
@@ -825,6 +825,23 @@ a.site-title {
 }
 
 /* ============================================================ */
+/* Hero */
+/* ============================================================ */
+.hero {
+  background: transparent;
+  width: 100%;
+}
+
+/* ============================================================ */
+/* Featured */
+/* ============================================================ */
+.featured {
+  background: transparent;
+  width: 100%;
+}
+
+
+/* ============================================================ */
 /* Media Queries */
 /* ============================================================ */
 @media only screen and (max-width: 800px) {
@@ -879,23 +896,23 @@ a.site-title {
   }
 
   .post-title,
-.page-title,
-.author-name,
-.author-heading {
-    font-size: 42px;
-    margin-top: 5px;
-  }
+  .page-title,
+  .author-name,
+  .author-heading {
+      font-size: 42px;
+      margin-top: 5px;
+    }
 
   .post-date,
-.blog-description,
-.author-meta {
+  .blog-description,
+  .author-meta {
     margin-top: 20px;
   }
   .post-date:after, .post-date:before,
-.blog-description:after,
-.blog-description:before,
-.author-meta:after,
-.author-meta:before {
+  .blog-description:after,
+  .blog-description:before,
+  .author-meta:after,
+  .author-meta:before {
     margin-top: 30px;
   }
 
@@ -917,8 +934,8 @@ a.site-title {
   }
 
   .post-container,
-.post-list,
-.author-profile {
+  .post-list,
+  .author-profile {
     margin-right: 25px;
     margin-left: 25px;
   }
@@ -928,7 +945,7 @@ a.site-title {
   }
 
   .post-stub a,
-.post-stub a:hover {
+  .post-stub a:hover {
     padding-top: 12px;
     padding-bottom: 12px;
   }
@@ -947,29 +964,29 @@ a.site-title {
 }
 @media only screen and (max-width: 400px) {
   .post-title,
-.page-title,
-.author-name,
-.author-heading {
+  .page-title,
+  .author-name,
+  .author-heading {
     font-size: 30px;
     line-height: 1.2;
   }
 
   .post-date,
-.blog-description,
-.author-meta {
+  .blog-description,
+  .author-meta {
     line-height: 1.6;
   }
 
   .post-date,
-.blog-description,
-.author-meta {
+  .blog-description,
+  .author-meta {
     margin-top: 10px;
   }
   .post-date:after, .post-date:before,
-.blog-description:after,
-.blog-description:before,
-.author-meta:after,
-.author-meta:before {
+  .blog-description:after,
+  .blog-description:before,
+  .author-meta:after,
+  .author-meta:before {
     margin-top: 20px;
   }
 
@@ -978,8 +995,8 @@ a.site-title {
   }
 
   .post-container,
-.post-list,
-.author-profile {
+  .post-list,
+  .author-profile {
     margin-right: 15px;
     margin-left: 15px;
   }

@@ -5,5 +5,4 @@ date: {{ .Date }}
 description: ""
 author: ""
 tags: []
-categories: []
 ---

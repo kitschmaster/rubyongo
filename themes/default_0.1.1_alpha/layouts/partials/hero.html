@@ -1,0 +1,8 @@
+<div class="hero">
+  {{ range .Site.RegularPages }}
+    {{ if (eq .Params.hero true) }}
+      <h1>Hero title</h1>
+      <div>{{ .Content }}</div>
+    {{ end }}
+  {{ end }}
+</div>

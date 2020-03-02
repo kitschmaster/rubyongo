@@ -1,0 +1,23 @@
+.breadcrumb-item+.breadcrumb-item::before{display:inline-block;padding-right:.5rem;color:$active-color;content:">"}
+
+.breadcrumb-item.activealt+.breadcrumb-item.active::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
+.breadcrumb-item.active+.breadcrumb-item.activealt::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
+.breadcrumb-item.activealt+.breadcrumb-item.activealt::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
+
+.breadcrumb-item.activesel+.breadcrumb-item.activesel::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activesel}
+
+//.breadcrumb-item.activesel{font-weight: bold;background: $activesel-color;}
+
+.breadcrumb-item {
+ &.active a {
+  color: $active-color;
+  font-weight: bold;
+ }
+
+ &.activesel a {
+  font-weight: bold;
+  background: $activesel-color;
+  padding: 0.5em;
+  border-radius: 3px;
+ }
+}

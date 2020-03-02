@@ -1,18 +1,27 @@
 ---
 draft: true
 sold: false
+featured: false
 title: "{{ replace (replace .Name "-" " ") "_" " " | title }}"
 date: {{ .Date }}
 price: ""
+priceBefore: ""
 sku: ""
 tags: []
-categories: []
 keywords: []
 description: ""
+shortDescription: ""
 author: ""
 image: ""
+images: []
 thumb: ""
 alt: ""
-weight: ""
+sex: ""
+mass: ""
 measures: ""
+size: ""
+color: ""
+material: ""
+catname: ""
+categories: [all]
 ---

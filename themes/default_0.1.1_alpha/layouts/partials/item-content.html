@@ -2,6 +2,9 @@
 
     <div class="item-fullimage">
       <a href="/{{.Params.image}}"><img src="/{{.Params.image}}"></a>
+      {{ range .Params.images }}
+        <a href="/{{ .image }}"><img src="/{{ .image }}"></a>
+      {{ end }}
     </div>
 
     <div class="item-details">

@@ -39,6 +39,9 @@ Gemfile.lock
 # Public
 public/*
 
+# Resources generated
+resources/*
+
 # Ruby
 .ruby-version
 .ruby-gemset

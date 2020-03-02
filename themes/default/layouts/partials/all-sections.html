@@ -1,0 +1,19 @@
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent p-0">
+
+            <li class="breadcrumb-item">
+              {{ range .Sections }}
+                <a class="dark-text" href="{{ .Permalink }}">{{ .Title }}</a>
+              {{ end }}
+            </li>
+
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>

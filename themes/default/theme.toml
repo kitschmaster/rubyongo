@@ -1,12 +1,16 @@
-name = "rubyongo"
-license = "rubyongo"
-licenselink = "rubyongo"
-description = "rubyongo hugo template"
-homepage = "https://rubyongo.org"
-tags = ["webshop", "framework", "code"]
-features = ["webshop", "framework", "code"]
-min_version = 0.1
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "rubyongo webshop theme"
+license = "Creative Commons — Attribution 3.0 Unported — CC BY 3.0"
+licenselink = "https://creativecommons.org/licenses/by/3.0/"
+description = "rubyongo an e-commerce theme powered by hugo"
+homepage = "https://rubyongo.org/"
+tags = ["Ecommerce", "bootstrap", "blog", "contact", "responsive", "clean" , "Multi Product", "Minimal", "light", "google analytics", "disqus", "mobile", "fast", "customizable", "white", "flex", "pages", "hugo themes", "hugo templates"]
+features = ["Ecommerce", "responsive", "bootstrap-4"]
+min_version = "0.65.3"
 
 [author]
-    name = "kitschmaster"
-    homepage = "https://github.com/mihael"
+  name = "kitschmaster"
+  homepage = "https://kitschmaster.com"
+

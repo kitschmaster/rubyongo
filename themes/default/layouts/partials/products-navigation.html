@@ -1,0 +1,48 @@
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ .Title }}</h2>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent p-0">
+            {{ template "crumbnav" (dict "p1" . "p2" .) }}
+
+            {{ range .Sections }}
+              <li class="breadcrumb-item activesel">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+              </li>
+            {{ end }}
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{ define "crumbnav" }}
+  {{ if .p1.Parent }}
+    {{ template "crumbnav" (dict "p1" .p1.Parent "p2" .p2 ) }}
+  {{ else if not .p1.IsHome }}
+    {{ template "crumbnav" (dict "p1" .p1.Site.Home "p2" .p2 ) }}
+  {{ end }}
+
+  {{ if ne .p1.Title "Products" }}
+    {{ if eq .p1 .p2 }}
+      {{ $p1_Title := .p1.Title}}
+      {{ range .p1.Parent.Sections }}
+        {{ $active := eq .Title $p1_Title  }}
+        {{ $hidden := and .Parent.IsHome (ne .Title "Products")}}
+        {{ if not $hidden }}
+        <li class="breadcrumb-item {{ if $active }}active{{ else }}activealt activesel{{ end }}" {{ if $active }}aria-current="page"{{ end }}>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <li class="breadcrumb-item">
+        <a href="{{ .p1.Permalink }}">{{ .p1.Title }}</a>
+      </li>
+    {{ end }}
+  {{ end }}
+{{ end }}

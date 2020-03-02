@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+{{ partial "products-navigation.html" . }}
+
+{{ if gt (len (where .CurrentSection.Pages "Kind" "page")) 0 }}
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row">
+        {{ range .CurrentSection.Pages }}
+          {{ partial "product" . }}
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
+
+{{ $currentSection := lower .CurrentSection.Title }}
+
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col mb-3">
+        Similar products: {{ title $currentSection }}
+      </div>
+    </div>
+
+    <div class="row">
+
+      {{ $cats := slice }}
+      {{ if eq $currentSection "products" }}
+        {{ $cats = $.Site.GetPage "categories" "all"}}
+      {{ else }}
+        {{ $cats = .Site.GetPage (printf "/categories/%s" $currentSection)}}
+      {{ end }}
+
+      {{ range $cats.Pages }}
+        {{ partial "product" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ end }}
