@@ -15,7 +15,8 @@ require 'json'
 require 'rack/contrib/try_static'
 require 'sysrandom/securerandom' # Replace the userspace Ruby (OpenSSL) RNG with `/dev/urandom`
 require 'rubyongo/rack/rogger_logger'
-require 'rubyongo/rack/secs'
+require 'rack/protection'
+#require 'rubyongo/rack/secs'
 
 module Rubyongo
 
@@ -120,22 +121,23 @@ module Rubyongo
     #************************************************************************************************
     # Secs
     #************************************************************************************************
+    use ::Rack::Protection
     # ! Overriding Sinatra here ! Is there a cleaner way to replace Rack::Protection?
-    def self.setup_protection(builder)
-      return unless protection?
-      options = Hash === protection ? protection.dup : {}
-      options = {
-        img_src:  "'self' data:",
-        font_src: "'self'"
-      }.merge options
-
-      protect_session = options.fetch(:session) { sessions? }
-      options[:without_session] = !protect_session
-
-      options[:reaction] ||= :drop_session
-
-      builder.use Rubyongo::Rack::Secs, options
-    end
+    #def self.setup_protection(builder)
+    #  return unless protection?
+    #  options = Hash === protection ? protection.dup : {}
+    #  options = {
+    #    img_src:  "'self' data:",
+    #    font_src: "'self'"
+    #  }.merge options
+#
+    #  protect_session = options.fetch(:session) { sessions? }
+    #  options[:without_session] = !protect_session
+#
+    #  options[:reaction] ||= :drop_session
+#
+    #  builder.use Rubyongo::Rack::Secs, options
+    #end
 
     #************************************************************************************************
     # Guru

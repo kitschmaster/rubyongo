@@ -23,11 +23,11 @@ Gem::Specification.new do |s|
   s.executables   = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'rack', '~>1.6'
-  s.add_dependency 'rack-contrib', '~>1.6'
-  s.add_dependency 'rack-test', '~>0.7.0'
-  s.add_dependency 'sinatra', '~>1'
-  s.add_dependency 'sinatra-contrib', '~>1'
+  s.add_dependency 'rack', '~>2.2'
+  s.add_dependency 'rack-contrib', '~>2'
+  s.add_dependency 'rack-test', '~>1.1.0'
+  s.add_dependency 'sinatra', '~>2'
+  s.add_dependency 'sinatra-contrib', '~>2'
   s.add_dependency 'sinatra-flash', '~>0.3'
   s.add_dependency 'addressable', '2.3.7'
   s.add_dependency 'bcrypt-ruby', '~>3.1'
