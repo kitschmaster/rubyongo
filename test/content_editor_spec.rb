@@ -24,7 +24,7 @@ class ContentEditorSpec < Rubyongo::Spec
     # then attaching and upload begins automatically
     attach_file('files[]', './static/img/rog_logo.png', visible: false)
 
-    page.must_have_content "Uploaded"
+    expect(page).must_have_content "Uploaded"
     # checking for the filenames appear in the jsTree seems to result in intermittent failures
     # an issue with jsTree?
     # page.must_have_content "rog_logo.png"

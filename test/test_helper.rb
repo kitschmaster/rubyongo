@@ -30,7 +30,7 @@ end
 
 # Add test helpers
 module Rubyongo
-   class Test < Minitest::Test
+  class Test < Minitest::Test
     include TestHelpers
   end
 end

@@ -1,10 +1,6 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
-# Ruby 1.9 needs this to properly deal with non USASCII, like ščž...
-Encoding.default_internal = Encoding::UTF_8
-Encoding.default_external = Encoding::UTF_8
-
 # Load libs.
 require 'sinatra/base'
 require 'sinatra/config_file'
@@ -292,7 +288,7 @@ module Rubyongo
         fill_result r, 'error' => "Please use something like >#{friendly_basename}< for the filename."
       else
         path = params[:id]
-        old_basename = File.basename(path)
+        # old_basename = File.basename(path)
         new_path = File.join(path, new_basename)
         current_archetype = path.split('/')[2] #the archetypes are the folders within 'content'
         log "new path #{new_path} #{current_archetype}\n"
@@ -362,7 +358,7 @@ module Rubyongo
         fill_result r, 'error' => "Please use something like >#{friendly_basename}< for the filename."
       else
         path = params[:id]
-        old_basename = File.basename(path)
+        # old_basename = File.basename(path)
         if File.directory?(path)
           dirname = File.dirname(path)
           new_path = File.join(dirname, new_basename)
@@ -578,7 +574,7 @@ module Rubyongo
       msg = params[:msg]
       to_customer = params[:to]
       to_business = settings.sendform_to_business
-        x = `echo "#{msg}" | mail -s "#{settings.sendform_subject}" -r #{settings.sendform_from} -c #{to_business} #{to_customer} 2>&1`
+        `echo "#{msg}" | mail -s "#{settings.sendform_subject}" -r #{settings.sendform_from} -c #{to_business} #{to_customer} 2>&1`
         if $?.success?
           200
         else

@@ -22,7 +22,7 @@ module Rack
     private
 
     def log(env, status, header, began_at)
-      length = extract_content_length(header)
+      # length = extract_content_length(header)
 
       msg = JSON.dump({
         #remote_ip: env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-",
@@ -30,7 +30,7 @@ module Rack
         #time: Time.now.strftime("%d/%b/%Y:%H:%M:%S %z"),
         #http_version: env['HTTP_VERSION'],
         status: status.to_s[0..3],
-        #length: length,
+        # length: length,
         elapsed: Time.now - began_at,
         method: env['REQUEST_METHOD'],
         path: env['PATH_INFO'],

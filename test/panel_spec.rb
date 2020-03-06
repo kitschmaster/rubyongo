@@ -4,8 +4,8 @@ class PanelSpec < Rubyongo::Spec
 
   it "works" do
     visit "/panel"
-    page.must_have_content 'rubyongo'.upcase
-    page.must_have_content 'Tune in'
+    expect(page).must_have_content 'rubyongo'.upcase
+    expect(page).must_have_content 'Tune in'
   end
 
   it "tunes a guru in and out" do

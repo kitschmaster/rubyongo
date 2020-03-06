@@ -3,7 +3,7 @@ require "test_helper"
 class ArchetyperTest < Minitest::Test
 
   def test_listing_archetypes
-    assert_equal Rubyongo::Archetyper.archetypes.sort, ["item", "page", "post", "project"].sort
+    assert_equal Rubyongo::Archetyper.archetypes.sort, ["page", "product", "project", "stream"].sort
   end
 
   def test_create_with_image

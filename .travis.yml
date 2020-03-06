@@ -1,13 +1,11 @@
 sudo: false
 language: ruby
 rvm:
-  - 1.9.3
-  - 2.4.3
   - 2.5.1
 before_install:
-  - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.48/hugo_0.48_Linux-64bit.deb
+  - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_extended_0.65.3_Linux-64bit
   - sudo dpkg -i /tmp/hugo.deb
-  - gem install bundler -v 1.16.2
+  - gem install bundler -v 12.3.3
   - cp config.toml.example config.toml
   - cp panel.yml.example panel.yml
 

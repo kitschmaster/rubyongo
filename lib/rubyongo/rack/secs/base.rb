@@ -1,5 +1,4 @@
 require 'rubyongo/rack/secs'
-require 'rubyongo/rack/secs/base'
 require 'rack/utils'
 require 'digest'
 require 'logger'
