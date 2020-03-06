@@ -5,7 +5,7 @@ rvm:
 before_install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_extended_0.65.3_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-  - gem install bundler -v 12.3.3
+  - gem install bundler -v 2.1.4
   - cp config.toml.example config.toml
   - cp panel.yml.example panel.yml
 
