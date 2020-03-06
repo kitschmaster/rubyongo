@@ -1,12 +1,16 @@
 .breadcrumb-item+.breadcrumb-item::before{display:inline-block;padding-right:.5rem;color:$active-color;content:">"}
-
 .breadcrumb-item.activealt+.breadcrumb-item.active::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
 .breadcrumb-item.active+.breadcrumb-item.activealt::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
 .breadcrumb-item.activealt+.breadcrumb-item.activealt::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activealt}
-
 .breadcrumb-item.activesel+.breadcrumb-item.activesel::before{display:inline-block;padding-right:.5rem;color:$active-color;content:$activesel}
 
 //.breadcrumb-item.activesel{font-weight: bold;background: $activesel-color;}
+
+li.breadcrumb-item {
+  @include mobile {
+    padding: 1em;
+  }
+}
 
 .breadcrumb-item {
  &.active a {
@@ -20,4 +24,14 @@
   padding: 0.5em;
   border-radius: 3px;
  }
+}
+
+.blink {
+  animation: blinker 0.8s step-start 6;
+}
+
+@keyframes blinker {
+  30% {
+    opacity: 0.7;
+  }
 }

@@ -17,13 +17,14 @@ thumb: ""
 image: ""
 alt: ""
 images: []
-sex: ""
-mass: ""
-volume: ""
-measures: ""
-size: ""
-color: ""
-material: ""
+props:
+  sex: ""
+  mass: ""
+  volume: ""
+  measures: ""
+  size: ""
+  color: ""
+  material: ""
 category: ""
 categories: [all]
 ---

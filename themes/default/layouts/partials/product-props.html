@@ -1,0 +1,9 @@
+<div>
+  <ul>
+    {{ range $key, $val := .Params.props }}
+      {{ if $val }}
+        <li>{{ title $key }}: {{ $val }}</li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>

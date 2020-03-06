@@ -4,6 +4,12 @@
   // preloader js
   $(window).on('load', function () {
     $('.preloader').fadeOut(100);
+
+    setTimeout(function(){
+      if ($('.blink-products-navigation') && $('.blink-products-navigation').length > 0) {
+        $('.breadcrumb-item.activesel').addClass('blink');
+      }
+    }, 2);
   });
 
   // navigation

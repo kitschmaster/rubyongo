@@ -1,18 +1,21 @@
 // Colors
-// green $primary-color: #5AB51E;
+//example green $primary-color: #5AB51E;
 $primary-color: #04489e;
-$text-color: #333333;
+//$text-color: #333333;
+$text-color: #444444;
 $text-color-dark: #222222;
 $body-color: #fff;
 $border-color: #D1D1D1;
 $black: #000;
 $white: #fff;
 $light: rgb(223, 223, 223);
-//green $primary-gradient: linear-gradient( 27deg, rgb(89,181,30) 0%, rgb(149,210,57) 100%);
+//example green: $primary-gradient: linear-gradient( 27deg, rgb(89,181,30) 0%, rgb(149,210,57) 100%);
 $primary-gradient: linear-gradient( 180deg, rgb(0,94,249) 0%, rgb(4,72,158) 100%); // blue
 
 // Fonts
+//google font:
 $primary-font: 'Quicksand', sans-serif;
+//$primary-font: Futura, sans-serif;
 $icon-font: 'themify';
 
 $activesel: 'or';

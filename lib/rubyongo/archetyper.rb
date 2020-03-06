@@ -216,7 +216,6 @@ module Rubyongo
     end
 
     def self.markdown_link_thumbnail_to_image(image, thumb)
-      #%(<a href="/#{image}"><img src="/#{thumb}"></a>)
       %({{< img link="#{image}" src="#{thumb}">}})
     end
 

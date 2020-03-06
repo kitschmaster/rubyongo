@@ -25,15 +25,9 @@
           <span class="lead text-primary font-weight-medium">{{ .Params.Price }}</span>
           <s>{{ .Params.PriceBefore }}</s>
         </div>
-        <div>
-          <ul>
-          <li>Size: {{ .Params.size }}</li>
-          <li>Color: {{ .Params.color }}</li>
-          <li>Material: {{ .Params.material }}</li>
-          </ul>
-        </div>
+        {{ partial "product-props.html" . }}
         <p>{{ .Params.shortDescription | markdownify }}</p>
-        <button class="snipcart-add-item btn btn-primary" data-item-id="{{ .Params.ProductID }}"
+        <button class="snipcart-add-item btn btn-primary" data-item-id="{{ .Params.sku }}"
           data-item-name="{{ .Title }}" {{ range first 1 .Params.Images }} data-item-image="{{ .image | absURL }}"
           {{ end }} data-item-price="{{ .Params.Price }}" data-item-url="{{ .Permalink }}">
           Add to cart

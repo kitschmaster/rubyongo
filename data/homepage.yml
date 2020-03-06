@@ -2,34 +2,32 @@
 banner:
   enable : true
   title : "A webshop framework"
-  content : "Sell your art with a custom rubyongo webshop. Turn your passion into money."
+  content : "featuring open source static frontend webshop development. Turning your passions into money."
   image : "images/banner.png"
   # button
   button:
-    enable : false
+    enable : true
     label : "All Products"
     link : "products"
   # demo video
   video:
-    enable : false
+    enable : true
     videoURL : "https://www.youtube.com/embed/wf4F2-9UXUo"
 
 ########################## About ##############################
 about:
-  enable : false
+  enable : true
   title : "About Our Product"
-  content : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren,"
+  content : "Designed specifically for shared hosting environments. Developer oriented and user friendly. Built with upgradeability, speed and efficiency in mind. Utilising separation of concerns, making it easy to learn and maintain."
   image : "images/about.png"
 
 
 ###################### Call to action ########################
 cta:
-  enable : false
+  enable : true
   title : "Buy one Get One Free Webshop"
   content : "Available for limited time only. Grab one while you still can!"
-  image : "images/cta.png"
+  image : "img/rog_logo.png"
   overlayImage : "images/cta-overlay.png"
   button:
     label : "All Products"
@@ -37,8 +35,8 @@ cta:
 
 ######################## raw material #######################
 material:
-  enable : false
-  title : "Ingredients Of Our Products"
+  enable : true
+  title : "Why choose rubyongo for your next custom webshop?"
   subtitle : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
           dol."
   materialItem:
@@ -64,7 +62,7 @@ material:
 
 ########################### Advantage #########################
 advantage:
-  enable : false
+  enable : true
   title : "Advantages Of Using <br> Our Product"
   subtitle : "Lorem ipsum dolor sit amet, da decal consetetur<br> sadipscing elitr, sed diam nonumya eirmod"
   image : "images/advantage.png"
@@ -80,7 +78,7 @@ advantage:
 
 ######################## Promo Video ##########################
 video:
-  enable : false
+  enable : true
   title : "How To Use This Product?"
   content : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
           dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et."

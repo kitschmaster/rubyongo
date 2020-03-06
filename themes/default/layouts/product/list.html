@@ -2,17 +2,21 @@
 
 {{ partial "products-navigation.html" . }}
 
-{{ if gt (len (where .CurrentSection.Pages "Kind" "page")) 0 }}
-  <section class="section pt-0">
-    <div class="container">
-      <div class="row">
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      {{ if gt (len (where .CurrentSection.Pages "Kind" "page")) 0 }}
         {{ range .CurrentSection.Pages }}
           {{ partial "product" . }}
         {{ end }}
-      </div>
+      {{ else }}
+        <div class="col blink-products-navigation">
+          Nothing here yet.
+        </div>
+      {{ end }}
     </div>
-  </section>
-{{ end }}
+  </div>
+</section>
 
 {{ $currentSection := lower .CurrentSection.Title }}
 
@@ -20,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col mb-3">
-        Similar products: {{ title $currentSection }}
+        Similar products in category: {{ .CurrentSection.Title }}
       </div>
     </div>
 

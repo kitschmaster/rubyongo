@@ -1,0 +1,54 @@
+baseURL = "https://rubyongo.org/"
+languageCode = "en-us"
+title = "rubyongo"
+
+theme = "default"
+[author]
+  name = "a webshop framework"
+  shortBio = "team kitschmaster"
+
+[[menu.main]]
+    name = "Shop"
+    url = "/item/"
+    weight = 1
+
+[[menu.main]]
+    name = "Stream"
+    url = "/"
+    weight = 4
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 8
+
+[params]
+    title = "Ruby On Go"
+    subtitle = "A webshop framework."
+    author = "Miha Plohl"
+    description = ""
+    keywords = "ruby, go, webshop, framework, ecommerce"
+    logo = "/img/rog_logo.png"
+
+    #Site settings
+    currency = "EUR"
+    taxRate = 0.22
+    shippingFlatRate = 3
+    shippingTotalRate = 0
+    shippingQuantityRate = 0
+    shippingFreeQuantity = 2
+    order_email = "kitschmaster@gmail.com"
+
+    # Body background color
+    bodybgcolor = "#f9f9f9"
+
+    # Order button
+    buttontext = "Add to basket"
+
+    # Footer text
+    footertext = "Prices include tax 01.06.2018<br/><br/><br/><a style='font-size: 0.5em' href='https://kitschmaster.com'>kitschmaster design</a>"
+
+    # Wo integration
+    [params.wo]
+        url = "w/o"
+        redirect = "w/d"
