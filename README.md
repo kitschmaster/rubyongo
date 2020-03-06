@@ -66,7 +66,7 @@ Ruby On Go is designed to "run fast by default", even in cheap memory-poor envir
 ## Minimal requirements:
 
 + go 1.6
-+ ruby 1.9
++ ruby 2.5+
 + the host needs to support running Ruby Rack.
 + Hugo, the static site generator is a dependency currently and is used as the default static site generator.
 + (optional) the host needs to support running go web apps (for example on Dreamhost this is achieved by FCGI). In case you want to run go microservices next to the ruby microservices.
