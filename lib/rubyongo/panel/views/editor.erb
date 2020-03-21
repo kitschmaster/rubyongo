@@ -42,3 +42,20 @@
 <script>
   Editor.init(<%=editor_init.to_json%>);
 </script>
+
+<div id="editor-modal" class="modal">
+  <div class="modal-content-container">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      <div id="editor-modal-create-folder">
+        <div class="pure-form pure-form-stacked">
+          <div class="pure-control-group">
+            <label for="create-folder-name">New folder:</label>
+            <input id="create-folder-name" type="text" value="Untitled">
+            <a class="pure-button button-success js-editor-modal-save" href="#" title="Create folder"><i class="fa fa-floppy-o"></i> Create</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
