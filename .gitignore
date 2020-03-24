@@ -29,6 +29,9 @@ test-db.sqlite
 # Content
 content/*
 
+# Data
+data/*
+
 # Settings
 config.toml
 panel.yml
