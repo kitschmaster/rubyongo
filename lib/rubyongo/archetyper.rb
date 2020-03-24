@@ -217,7 +217,7 @@ TOML
     end
 
     def self.markdown_link_thumbnail_to_image(image, thumb)
-      %({{< img link="/#{image}" src="/#{thumb}">}})
+      %({{<img link="/#{image}" src="/#{thumb}">}})
     end
 
     def self.image_tag(path)

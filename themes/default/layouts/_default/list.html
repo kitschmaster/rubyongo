@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-{{ partial "page-title.html" . }}
+{{ partial "navigation.html" . }}
 
 <section class="section pt-0">
   <div class="container">
@@ -15,7 +15,9 @@
           <div class="card-body px-0">
             <a href="{{ .Permalink }}" class="h4 d-block">{{ .Title | markdownify }}</a>
             <ul class="list-inline">
-              <li class="list-inline-item"><i class="ti-pencil-alt text-primary mr-2"></i> By {{ .Params.Author }}</li>
+              {{ if .Params.Author }}
+                <li class="list-inline-item"><i class="ti-pencil-alt text-primary mr-2"></i> By {{ .Params.Author }}</li>
+              {{ end }}
               <li class="list-inline-item"><i class="ti-calendar text-primary mr-2"></i>
                 {{ .PublishDate.Format "02 Jan, 2006" }}</li>
             </ul>
