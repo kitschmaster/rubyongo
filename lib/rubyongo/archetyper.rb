@@ -178,13 +178,14 @@ module Rubyongo
     def self.make_folder_a_leaf(new_path, description = 'Products')
       date = DateTime.now.to_s # 2019-10-17T11:22:16+06:00
       content=<<-TOML
-        ---
-        title: "#{description.capitalize}"
-        date: #{date}
-        draft: false
-        description : "#{description.capitalize}"
-        ---
-        TOML
+---
+title: "#{description.capitalize}"
+date: #{date}
+draft: false
+description : "#{description.capitalize}"
+---
+TOML
+      # the above content frontmatter template for leafs, should probably be some sort of setting
       File.open(File.join(new_path, "_index.md"), 'w+') {|f| f.write(content) }
     end
 
@@ -216,7 +217,7 @@ module Rubyongo
     end
 
     def self.markdown_link_thumbnail_to_image(image, thumb)
-      %({{< img link="#{image}" src="#{thumb}">}})
+      %({{<img link="/#{image}" src="/#{thumb}">}})
     end
 
     def self.image_tag(path)

@@ -27,7 +27,7 @@
     {{ template "crumbnav" (dict "p1" .p1.Site.Home "p2" .p2 ) }}
   {{ end }}
 
-  {{ if ne .p1.Title "Products" }}
+  {{ if (ne .p1.Title "Products") }}
     {{ if eq .p1 .p2 }}
       {{ $p1_Title := .p1.Title}}
       {{ range .p1.Parent.Sections }}
