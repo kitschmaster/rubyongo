@@ -12,7 +12,7 @@ class ArchetyperTest < Minitest::Test
     Rubyongo::Archetyper.create_with_image('./', 'item', image)
 
     file = "./content/item/example.md"
-    file_exists = File.exists?(file)
+    file_exists = File.exist?(file)
     assert_equal true, file_exists, "#{file} file should exist"
 
     #content = File.read(file)
