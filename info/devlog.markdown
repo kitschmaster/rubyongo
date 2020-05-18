@@ -1,3 +1,19 @@
+#18.05.2020 14:23:59 ComSession::END
+
+time flies. had a day-job until early spring, then the world leaders hoaxed me with staying at home orders. but we're back now.
+
+ii added basic upgradeability and verified it by upgrading an old rog, it works well. it is very simplistic though.
+
+a copy of the rog is made, then a new one is created from scratch and certain files are copied from the old to the new and that's it.
+
+ii also worked on the default theme, which now looks a bit better and also features a breadcrumbs-like static-site navigation.
+
+some parts of the theme need data config, which is generated on "rog new" (during the upgrade we get this generated data, but then we also copy over it with the old data, so that's something to think about in 0.1.5-alpha)...
+
+the new default theme uses snipcart out of the box. the idea is to get rid of it and build a order backend.
+
+#18.05.2020 13:30:50 ComSession::BEGIN
+
 #29.05.2019 22:39:40 ComSession::END
 
 still not done with the upgrade code. the reason is, ii realised ii am still exploring how the workflow will work and which files will be the "upgradeable"...
