@@ -1,49 +1,150 @@
+## rogversion: 1.1.3
+## configuration ##########################################
 baseURL = "https://rog-host/"
 languageCode = "en-us"
 title = "rog-host"
 theme = "default"
+summaryLength = "20"
+paginate = 9
+disqusShortname = ""
 
-[author]
-  name = "a webshop framework"
-  shortBio = "team kitschmaster"
+## navigation #############################################
+[menu]
 
-[[menu.main]]
-    name = "Stream"
-    url = "/"
-    weight = 1
+  [[menu.main]]
+  name = "Shop"
+  URL = "product/"
+  weight = 1
 
-[[menu.main]]
-    name = "About"
-    url = "/page/about/"
-    weight = 4
+  [[menu.main]]
+  name = "Stream"
+  URL = "stream/"
+  weight = 3
 
-[[menu.main]]
-    name = "Shop"
-    url = "/item/"
-    weight = 5
+  # [[menu.main]]
+  # name = "FAQ"
+  # URL = "faq/"
+  # weight = 6
 
+  # [[menu.main]]
+  # name = "Contact"
+  # URL = "contact/"
+  # weight = 9
+
+  [[menu.main]]
+  name = "About"
+  URL = "page/about/"
+  weight = 9
+
+  # footer menu ###########################################
+  [[menu.footer]]
+  name = "Products"
+  URL = "product/"
+  weight = 1
+
+  [[menu.footer]]
+  name = "Stream"
+  URL = "stream/"
+  weight = 3
+
+  [[menu.footer]]
+  name = "FAQ"
+  URL = "faq/"
+  weight = 6
+
+  [[menu.footer]]
+  name = "Terms & Conditions"
+  URL = "terms-conditions/"
+  weight = 9
+
+  [[menu.footer]]
+  name = "Contact"
+  URL = "contact/"
+  weight = 12
+
+## taxonomies #############################################
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+## parameters #############################################
 [params]
-    title = "Ruby On Go"
-    subtitle = "A webshop framework."
-    author = "rog-usr"
-    description = ""
-    keywords = "webshop"
-    logo = "/img/rog_logo.png"
+logo = "images/logo.png"
+home = "rog-usr"
+description = "A webshop framework"
+author = "rog-usr"
 
-    # Site settings
-    currency = "EUR"
-    taxRate = 0.22
-    shippingFlatRate = 3
-    shippingTotalRate = 0
-    shippingQuantityRate = 0
-    shippingFreeQuantity = 2
-    order_email = "rog-usr@gmail.com"
+# google map
+gmapAPI = "https://maps.googleapis.com/maps/api/js?key=key&libraries=places"
+mapLatitude = "0"
+mapLongitude = "0"
+mapMarker = "images/marker.png"
 
-    # Body background color
-    bodybgcolor = "#f9f9f9"
+# Google Analitycs
+googleAnalitycsID = "Your ID"
 
-    # Order button
-    buttontext = "Add to basket"
+# Contact Information
+mobile = "070150022"
+email = "info@manitu.si"
+location = "Ljubinj 27, Slovenia"
 
-    # Footer text
-    footertext = "<a href='https://rog-host'>rog-host</a>"
+# copyright
+copyright = "Copyright &copy; 2020 [rog-usr](https://rog-host) All Rights Reserved"
+
+  # Preloader
+  [params.preloader]
+  enable = true
+  preloader = "" # use .png , .svg or .gif format
+
+  # Product Rating
+  # works with https://rating-widget.com/ , you will get the ID and publicKey after creating your account there.
+  [params.rating]
+  enable = true
+  websiteID = "444444"
+  publicKey = "811cf0927332bf51f2e12f84608594ax"
+
+  # Social Site
+  [[params.social]]
+  icon = "ti-facebook"
+  link = "#"
+
+  [[params.social]]
+  icon = "ti-twitter-alt"
+  link = "#"
+
+  [[params.social]]
+  icon = "ti-youtube"
+  link = "#"
+
+  [[params.social]]
+  icon = "ti-instagram"
+  link = "#"
+
+  [[params.social]]
+  icon = "ti-pinterest"
+  link = "#"
+
+  # Contact Form
+  [params.contact]
+  formAction = "#" # contact form works with formspree.io
+
+## theme plugins ##########################################
+[params.plugins]
+
+  # CSS plugins
+  [[params.plugins.css]]
+  link = "plugins/bootstrap/bootstrap.min.css"
+  [[params.plugins.css]]
+  link = "plugins/slick/slick.css"
+  [[params.plugins.css]]
+  link = "plugins/themify-icons/themify-icons.css"
+
+  # JS plugins
+  [[params.plugins.js]]
+  link = "plugins/jQuery/jquery.min.js"
+  [[params.plugins.js]]
+  link = "plugins/bootstrap/bootstrap.min.js"
+  [[params.plugins.js]]
+  link = "plugins/slick/slick.min.js"
+  [[params.plugins.js]]
+  link = "plugins/google-map/gmap.js"
