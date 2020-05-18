@@ -152,6 +152,7 @@ def modify_rog_dir(name, to_path, replacements={})
     gen(to_path, 'gen', 'test')
     gen(to_path, 'gen', 'config.ru')
     gen(to_path, 'gen', '.gitignore')
+    gen(to_path, 'gen', 'data')
     gen(to_path, 'sys')
     gen(to_path, 'static')
 
@@ -230,21 +231,42 @@ def copy_nonupgradeable(backup_path, path)
   # copy the .git folder
   Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, '.git')} .", "Copied git repo."
 
+  # copy database
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'db.sqlite')} .", "Copied db."
+
+  # copy sys/keys ~ if user changed something in sys scripts, well, that's non upgradeable.
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'sys', 'keys')} .", "Copied sys/keys."
+
   # copy the content folder
-  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'content')} .", "Copied content folder."
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'content')} .", "Copied content."
+
+  # copy data
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'data')} .", "Copied data."
 
   # copy archetypes added by framework user
-  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'archetypes')} .", "Copied archetypes folder."
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'archetypes')} .", "Copied archetypes."
+
+  # copy panel
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'panel')} .", "Copied panel."
+
+  # copy layouts
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'layouts')} .", "Copied layouts."
+
+  # copy static
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'static')} .", "Copied static."
 
   # copy themes added by framework user
   themes_folders = Dir[File.join(backup_path, 'themes', '*')]
-  themes_folders.delete_if {|folder| folder =~ 'default'}
+  themes_folders.delete_if {|folder| folder =~ /default/}
   themes_folders.each do |folder|
-    Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{folder} .", "Copied theme."
+    Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{folder} .", "Copied themes."
   end
 
-  # copy database
-  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'db.sqlite')} .", "Copied db."
+  # copy config.toml
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'config.toml')} old-config.toml", "Copied old config.toml."
+
+  # copy panel.yml
+  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'panel.yml')} old-panel.yml", "Copied old panel.yml."
 end
 
 # Upgrading rog internals.
