@@ -234,8 +234,12 @@ def copy_nonupgradeable(backup_path, path)
   # copy database
   Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'db.sqlite')} .", "Copied db."
 
-  # copy sys/keys ~ if user changed something in sys scripts, well, that's non upgradeable.
-  Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'sys', 'keys')} .", "Copied sys/keys."
+  # TODO: add an interactive decision: Use 1. previous sys as is, or 2. new sys with existing keys and host_vars or manual mode, you copy what you need
+  # copy sys/keys ~ if user changed something in sys scripts, well, that's non upgradeable. Well, one can manually copy from the upgrade-backup to restore any added functionality.
+  Rubyongo::Archetyper.run_cmd "cd #{path}/sys; cp -r #{File.join(backup_path, 'sys', 'keys')} .", "Copied sys/keys."
+
+  # copy sys/host_vars ~ any previously generated changes and new additions have to be copied. these files help the rogster to upgrade go and hugo with "rog equip".
+  Rubyongo::Archetyper.run_cmd "cd #{path}/sys; cp -r #{File.join(backup_path, 'sys', 'host_vars')} .", "Copied sys/host_vars."
 
   # copy the content folder
   Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'content')} .", "Copied content."
