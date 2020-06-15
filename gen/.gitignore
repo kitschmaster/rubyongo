@@ -10,6 +10,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/log/
 *~
 *.gem
 
@@ -25,8 +26,11 @@ restart.txt
 # Database
 db.sqlite
 
-# Content
+# Hugo Content
 content/*
+
+# Hugo artifacts
+resources/*
 
 # Settings
 #config.toml
