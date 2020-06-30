@@ -234,12 +234,14 @@ def copy_nonupgradeable(backup_path, path)
   # copy database
   Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'db.sqlite')} .", "Copied db."
 
-  # TODO: add an interactive decision: Use 1. previous sys as is, or 2. new sys with existing keys and host_vars or manual mode, you copy what you need
-  # copy sys/keys ~ if user changed something in sys scripts, well, that's non upgradeable. Well, one can manually copy from the upgrade-backup to restore any added functionality.
+  # copy sys/keys ~ if user changed something in other sys code, well, that's a non upgradeable for rog right now.
+  # instead, one can manually copy from the upgrade-backup sys folder to restore any added functionality.
+  # there has to be a better way to do this... tbc.
   Rubyongo::Archetyper.run_cmd "cd #{path}/sys; cp -r #{File.join(backup_path, 'sys', 'keys')} .", "Copied sys/keys."
 
-  # copy sys/host_vars ~ any previously generated changes and new additions have to be copied. these files help the rogster to upgrade go and hugo with "rog equip".
-  Rubyongo::Archetyper.run_cmd "cd #{path}/sys; cp -r #{File.join(backup_path, 'sys', 'host_vars')} .", "Copied sys/host_vars."
+  # copy sys/host_vars ~ any previously generated changes and new additions have to be copied.
+  # these files help the rogster to upgrade go and hugo with "rog equip" by changing the host vars settings and running the equip cli command.
+  Rubyongo::Archetyper.run_cmd "cd #{path}/sys; cp -ur #{File.join(backup_path, 'sys', 'host_vars')} .", "Copied sys/host_vars."
 
   # copy the content folder
   Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{File.join(backup_path, 'content')} .", "Copied content."
@@ -263,7 +265,7 @@ def copy_nonupgradeable(backup_path, path)
   themes_folders = Dir[File.join(backup_path, 'themes', '*')]
   themes_folders.delete_if {|folder| folder =~ /default/}
   themes_folders.each do |folder|
-    Rubyongo::Archetyper.run_cmd "cd #{path}; cp -r #{folder} .", "Copied themes."
+    Rubyongo::Archetyper.run_cmd "cd #{path}/themes; cp -r #{folder} .", "Copied themes."
   end
 
   # copy config.toml
