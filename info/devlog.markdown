@@ -1,3 +1,27 @@
+#25.09.2020 18:00:05 CodingSession::END
+
+it went kinda well. we learned a lot. wife was pushing too hard and ii ended up setting up shopify.
+
+our business partners did not keep their word, they lied and materials were stolen. so. lesson learned.
+
+don't let your wife lead development.
+
+ii am now again in the process of getting a dayjob, since we invested all the money and more or less failed.
+
+at least the nasty business partners had a positive ROI.
+
+#25.09.2020 17:55:20 CodingSession::BEGIN
+
+#18.06.2020 17:54:59 CodingSession::END
+
+it's getting a bit more serious now. my wife is starting a company, she needs a shop.
+
+ii wanted to use rubyongo and set it up first. show her and if she's fine with it, ii won't need to fall into shopify...
+
+so let's get this working... seems like the upgrading code does some mistakes...
+
+#15.06.2020 17:53:00 CodingSession::BEGIN
+
 #18.05.2020 14:23:59 ComSession::END
 
 time flies. had a day-job until early spring, then the world leaders hoaxed me with staying at home orders. but we're back now.
