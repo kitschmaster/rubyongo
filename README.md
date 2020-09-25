@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/kitschmaster/rubyongo.svg?branch=master)](https://travis-ci.org/kitschmaster/rubyongo)
 
-Welcome to Ruby On Go ~ a webshop framework.
+Welcome to rubyongo ~ a webshop framework.
 
 NOTE: This is still alpha software. It's under construction, but if you love this idea, please check back soon or join team kitschmaster and contribute!
 
@@ -18,7 +18,7 @@ Please also install the static site generator Hugo:
 
     https://gohugo.io/getting-started/installing/
 
-You should now be able to run `rog` the Ruby On Go CLI.
+You should now be able to run `rog` the rubyongo CLI.
 
 ## Quick start usage
 
@@ -26,7 +26,7 @@ You should now be able to run `rog` the Ruby On Go CLI.
 
     $ rog new domain.name
 
-This will generate a new Ruby On Go webshop in the subdirectory `domain.name`.
+This will generate a new rubyongo webshop in the subdirectory `domain.name`.
 
 The folders are very similar to a regular Hugo static site template. They include a `panel` folder for the ruby Panel UI, which is also the place where you write your Ruby microservices.
 
@@ -52,15 +52,21 @@ Start the Panel UI + backend app (Sinatra):
 
 Visit `localhost:9393` to see the panel, edit content...
 
+Edit microservice code in the generated __'panel'__ folder.
+
 Start the static site server (Hugo):
 
     $ rog h
 
 Visit `localhost:1313` to see the static site.
 
+Edit the theme in the themes folder and change content in the content folder.
+
+By default using the sys cli command `rog init` the content folder is set up as a separate git repo. This way you get full separation between your code and your content.
+
 ## Deploying static, serving dynamic
 
-Ruby On Go is designed to "run fast by default", even in cheap memory-poor environments, like shared hosting. It cuts down on deployment costs by staying fully static on the frontend, highly deployable, yet allowing adding microservices at the backend with very little effort.
+rubyongo is designed to "run fast by default", even in cheap memory-poor environments, like shared hosting. It cuts down on deployment costs by staying fully static on the frontend, highly deployable, yet allowing adding microservices at the backend with very little effort.
 
 
 ## Minimal requirements:
