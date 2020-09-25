@@ -28,7 +28,7 @@ You should now be able to run `rog` the rubyongo CLI.
 
 This will generate a new rubyongo webshop in the subdirectory `domain.name`.
 
-The folders are very similar to a regular Hugo static site template. They include a `panel` folder for the ruby Panel UI, which is also the place where you write your Ruby microservices.
+The folders are very similar to a regular Hugo static site template. They include a __`panel`__ folder for the ruby Panel UI, which is also the place where you write your Ruby microservices.
 
 ### The three config files
 
@@ -59,8 +59,6 @@ Start the static site server (Hugo):
     $ rog h
 
 Visit `localhost:1313` to see the static site.
-
-Edit the theme in the themes folder and change content in the content folder.
 
 By default using the sys cli command `rog init` the content folder is set up as a separate git repo. This way you get full separation between your code and your content.
 
