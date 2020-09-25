@@ -52,7 +52,7 @@ Start the Panel UI + backend app (Sinatra):
 
 Visit `localhost:9393` to see the panel, edit content...
 
-Edit microservice code in the generated __'panel'__ folder.
+Edit microservice code in the generated __`panel`__ folder.
 
 Start the static site server (Hugo):
 
