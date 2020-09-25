@@ -1,12 +1,31 @@
+#25.09.2020 21:58:39 CodingSession::END
+
+meanwhile am now managing 5 websites with rubyongo. it's becoming a neat little tool, with plenty of room for improvements.
+
+invest your time into opensource from scratch and use your own opensource, that's a way of life not just a statement. lol.
+
+right now ii need to create a git local repo on the server whenever ii setup a new rog site and host the rubyongo gem in it.
+
+when the gem gets published, this won't be needed anymore:
+
+  echo build and copy gem to remote
+  ssh username@some-domain.io "rm -rf /home/username/repo/gems/*"
+  cd ~/opensource/kitschmaster/rubyongo; rake build
+  scp pkg/rubyongo-0.1.3.alpha.gem username@some-domain.io:~/repo/gems
+  echo install gem on remote
+  ssh username@some-domain.io "gem uninstall rubyongo; cd ~/repo; gem generate_index"
+
+#25.09.2020 21:57:25 CodingSession::BEGIN
+
 #25.09.2020 18:00:05 CodingSession::END
 
-it went kinda well. we learned a lot. wife was pushing too hard and ii ended up setting up shopify.
+it went kinda well. we learned a lot. wife was pushing hard for shopify and ii ended up setting up shopify.
 
 our business partners did not keep their word, they lied and materials were stolen. so. lesson learned.
 
-don't let your wife lead development.
+don't let your workers unattended. :)
 
-ii am now again in the process of getting a dayjob, since we invested all the money and more or less failed.
+ii am now again in the process of getting a dayjob.
 
 at least the nasty business partners had a positive ROI.
 
@@ -16,7 +35,7 @@ at least the nasty business partners had a positive ROI.
 
 it's getting a bit more serious now. my wife is starting a company, she needs a shop.
 
-ii wanted to use rubyongo and set it up first. show her and if she's fine with it, ii won't need to fall into shopify...
+ii wanted to use rubyongo and set it up first. show her and if she's fine with it, ii won't need to fall into shopify's hole...
 
 so let's get this working... seems like the upgrading code does some mistakes...
 
@@ -48,7 +67,7 @@ therefor ii finally got around publishing some actual items in the spinpaintings
 
 when you read rog backwards you get a sLOVEnian word, which means: up!
 
-up we go with sails, indeed. am only a year behind my initial predicted road map, but that's prerry good for a "sideproject" like this, isn't it :)
+up we go with sails, indeed. am only a year behind my initial predicted road map, but that's pretty good for a "sideproject" like this, isn't it :)
 
 anyway, it feels really good to finally have the first item sold, the first customer served. and ii actually really enjoy using the content editor and publishing in the shop.
 
