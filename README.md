@@ -60,9 +60,7 @@ Start the static site server (Hugo):
 
 Visit `localhost:1313` to see the static site.
 
-Edit the content and theme folders. You can use your editor to do this or use the built in backend Panel UI.
-
-By default using the sys cli command `rog init` the content folder is set up as a separate git repo. This way you get full separation between your code and your content.
+Edit the content and theme folders. You can use your editor to do this or use the built in backend Panel UI. You can work with the static-site part of a rubyongo project as if working with a regular Hugo project. Read the [Hugo docs](https://gohugo.io/documentation/).
 
 ## Deploying static, serving dynamic
 
@@ -80,6 +78,8 @@ rubyongo is designed to "run fast by default", even in cheap memory-poor environ
 ## Deployment system commands
 
 The folder `sys` contains Ansible playbooks and bash scripts to allow setting up domains and deploy to them.
+
+By default using the sys cli command `rog init` the content folder is set up as a separate git repo. This way you get full separation between your code and your content.
 
 TODO
 
