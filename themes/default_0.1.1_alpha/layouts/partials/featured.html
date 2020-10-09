@@ -1,7 +1,0 @@
-<div id="post-index item-index" class="container">
-    <ol class="post-list item-list">
-      {{ range where (where .Site.Pages "Section" "item" ) ".Params.featured" "==" true }}
-        {{ partial "item-stub.html" . }}
-      {{ end }}
-    </ol>
-</div>
