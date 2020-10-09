@@ -5,10 +5,10 @@ panel_pass: rog-usr!
 deploy_user: rog-usr
 deploy_url: rog-host
 
-go_tarball: "go1.11.linux-amd64.tar.gz"
-go_tarball_checksum: "sha256:b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499"
+go_tarball: "go1.15.2.linux-amd64.tar.gz"
+go_tarball_checksum: "sha256:b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552"
 go_download_location: "https://storage.googleapis.com/golang/{{ go_tarball }}"
 
-hugo: "hugo_extended_0.75.1_Linux-64bit"
+hugo: "hugo_extended_0.76.3_Linux-64bit"
 hugo_tarball: "{{ hugo }}.tar.gz"
-hugo_download_location: "https://github.com/gohugoio/hugo/releases/download/v0.75.1/{{ hugo_tarball }}"
+hugo_download_location: "https://github.com/gohugoio/hugo/releases/download/v0.76.3/{{ hugo_tarball }}"
