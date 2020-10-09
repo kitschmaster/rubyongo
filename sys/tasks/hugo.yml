@@ -30,3 +30,6 @@
     dest: ~/go/bin
     remote_src: yes
   when: gohugo.stat.exists == False
+
+- name: Create tmp path
+  file: path=~/tmp state=directory mode=0755
