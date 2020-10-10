@@ -70,6 +70,14 @@ Visit `localhost:1313` to see the static site.
 
 Edit the content and theme folders. You can use your editor to do this or use the built in backend Panel UI. You can work with the static-site part of a rubyongo project as if working with a regular Hugo project. Read the [Hugo docs](https://gohugo.io/documentation/).
 
+Here are some ways you can set up a rubyongo project:
+
++ develop code, theme and content locally, push both content and code into the same repo
++ develop code and theme locally, but work with content through the deployed backend UI, push code and content into separate git repos
++ develop code, theme and content locally via the backend UI, push code and content into separate git repos
+
+It really boils down to, what you need for your specific site. The default is to deal with code locally and work with content on the remote.
+
 ## Deploying static, serving dynamic
 
 rubyongo is designed to "run fast by default", even in cheap memory-poor environments, like shared hosting. It cuts down on deployment costs by staying fully static on the frontend, highly deployable, yet allowing adding microservices at the backend with very little effort.
