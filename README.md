@@ -6,7 +6,7 @@
 
 Welcome to rubyongo ~ a webshop framework.
 
-NOTE: This is still alpha software. It's under construction, but if you love this idea, please check back soon or join [The Manitu Pack](https://manitu.si/page/pack) and contribute!
+NOTE: This is still alpha software. It's under construction, but if you love this idea, please check back soon or join [The Manitu Pack](https://manitu.si/page/pack/) and contribute!
 
 ## Installation
 
