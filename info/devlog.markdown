@@ -1,3 +1,15 @@
+#11.10.2020 17:23:38 CodingSession::END
+
+adding CLI commands to work with the svelte app.
+
+#11.10.2020 12:23:32 CodingSession::BEGIN
+
+#10.10.2020 23:22:52 CodingSession::END
+
+let me add a Svelte app into the default theme.
+
+#10.10.2020 22:33:11 CodingSession::BEGIN
+
 #25.09.2020 21:58:39 CodingSession::END
 
 meanwhile am now managing 5 websites with rubyongo. it's becoming a neat little tool, with plenty of room for improvements.
