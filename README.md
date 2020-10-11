@@ -33,8 +33,11 @@ When you want to customize, pass the deployment username and hostname after the 
 
     $ rog new myawesomeshop.com custom_user custom_domain.xyz
 
-
 The generated folder structure is very similar to a regular Hugo static site template with some extra folders and files inside. Included is a __`panel`__ folder for the ruby Panel UI, which is also the place where you write your Ruby code / microservices.
+
+Time to see, navigate into the generated folder:
+
+    $ cd myawesomeshop.com
 
 ### The three config files
 
@@ -58,7 +61,7 @@ Start the Panel UI + backend app (Sinatra):
 
     $ rog s
 
-Visit `localhost:9393` to see the panel, edit content...
+Visit [http://localhost:9393/panel](http://localhost:9393/panel) to tune into the Panel and edit content via the backend UI.
 
 Edit microservice code in the generated __`panel`__ folder.
 
@@ -70,13 +73,11 @@ Visit `localhost:1313` to see the static site.
 
 Edit the content and theme folders. You can use your editor to do this or use the built in backend Panel UI. You can work with the static-site part of a rubyongo project as if working with a regular Hugo project. Read the [Hugo docs](https://gohugo.io/documentation/).
 
-Here are some ways you can set up a rubyongo project:
+### Using Svelte in the static theme
 
-+ develop code, theme and content locally, push both content and code into the same repo
-+ develop code and theme locally, but work with content through the deployed backend UI, push code and content into separate git repos
-+ develop code, theme and content locally via the backend UI, push code and content into separate git repos
+A Svelte app is included in the default theme: a clock. In order to live reload the code do:
 
-It really boils down to, what you need for your specific site. The default is to deal with code locally and work with content on the remote.
+    $ rog rollupdev
 
 ## Deploying static, serving dynamic
 

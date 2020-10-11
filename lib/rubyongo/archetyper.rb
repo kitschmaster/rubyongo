@@ -301,4 +301,56 @@ TOML
         end
       end
   end
+
+  class YamlDiff
+    def initialize(file1, file2)
+      @file1 = file1
+      @file2 = file2
+    end
+
+    def diff
+      get_diffs
+    end
+
+    def show_diff
+      get_diffs.each do |diff|
+        puts diff.join(' -> ')
+      end
+      nil
+    end
+
+    def combine
+      yaml1 = read_yaml(@file1)
+      yaml2 = read_yaml(@file2)
+      # reverse merge but don't overwrite existing keys
+      yaml2.merge(yaml1) { |key, oldval, newval| oldval }
+    end
+
+    private
+
+    def get_diffs
+      hash_diff(read_yaml(@file1), read_yaml(@file2))
+    end
+
+    def read_yaml(file_path)
+      return {} unless File.exists?(file_path)
+      YAML.load(File.read(file_path))
+    end
+
+    def hash_diff(h1, h2, path = [])
+      diff = []
+      h1.each do |k, v|
+        if hash?(v)
+          diff += hash_diff(v, hash?(h2[k]) ? h2[k] : {}, path + [k])
+        elsif !h2.key?(k)
+          diff << path + [k]
+        end
+      end
+      diff
+    end
+
+    def hash?(var)
+      var.is_a?(Hash)
+    end
+  end
 end

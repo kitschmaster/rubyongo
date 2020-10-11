@@ -1,3 +1,9 @@
+############################ svelte app ##########################
+svelteapp:
+  enable : true
+  title : "Supports Svelte Apps"
+  content : "Enhance your webshop with Svelte Javascript components integrated into the default theme frontend."
+
 ############################ banner ##########################
 banner:
   enable : true

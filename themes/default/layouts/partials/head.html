@@ -22,4 +22,11 @@
   <link rel="shortcut icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
   <link rel="icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
 
+  {{ if .Site.Data.homepage.svelteapp.enable }}
+    {{ "<!--Svelte-->" | safeHTML }}
+    {{ $bundleStyle := resources.Get "js/svelte/bundle.css" | minify }}
+    <link rel='stylesheet' href="{{ $bundleStyle.Permalink }}">
+    {{ $bundleJs := resources.Get "js/svelte/bundle.js" }}
+    <script defer src="{{ $bundleJs.Permalink }}"></script>
+  {{ end }}
 </head>

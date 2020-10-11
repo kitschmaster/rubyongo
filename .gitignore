@@ -54,3 +54,6 @@ lib/gosrc/src/github.com
 lib/gosrc/src/golang.org
 lib/gosrc/src/gopkg.in
 lib/gosrc/pkg/darwin_amd64/*
+
+# Node
+node_modules

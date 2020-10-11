@@ -4,13 +4,14 @@
 
 require 'benchmark'
 require 'yaml'
+require 'toml'
 require 'fileutils'
 require 'pathname'
 require_relative '../lib/rubyongo/paths'
 require_relative '../lib/rubyongo/archetyper'
 
 # gem source path
-@gem_path = File.join(File.dirname(__FILE__))
+@gem_path = ::File.expand_path(::File.dirname(__FILE__))
 
 # just read two arguments (we will do full option parsing later)
 $:.unshift @gem_path
@@ -56,8 +57,8 @@ USAGE = <<-EOF
 Usage:
 
   rog new Name.ext [DeployUsername DeployDomainHost]     # generates a new webshop in the current folder, pass usr and host for custom deployment credentials (default: usr: Name, host: Name.ext)
-  rog start                                              # starts the Panel backend (rackup)
-  rog hugo                                               # starts the Hugo development server
+  rog start                                              # starts the Panel backend (rackup) at localhost:9393
+  rog hugo                                               # starts the Hugo development server at localhost:1313
   rog init                                               # automated deployment pipeline installation
   rog equip                                              # run sys playbooks on the remote (installs go, hugo, libs, etc.)
   rog deploy                                             # deploys code and publishes site
@@ -66,7 +67,16 @@ Usage:
   rog gemversion                                         # show the current gem version
   rog version                                            # show the currently installed rog version (which gem version was used to create the current app)
 
-One can use the first letter of a command to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
+One can use the first letter of any of the above commands to shortcut, example: 'rog s' to serve the Panel, 'rog h' to run Hugo server for the static.
+
+When the theme contains a 'svelte' folder with a Svelte app inside, use the following:
+
+  rog rollup    # builds svelte code
+  rog rollupdev # starts svelte code reloading (use this with: 'rog hugo') and also serves svelte app standalone on localhost:5000
+
+Updating an existing projects theme:
+
+  rog themeupdate # updates the theme from the gem (an alternative to a full upgrade)
 
 Good luck!
 
@@ -101,6 +111,11 @@ end
 def settings
   if File.exists?('panel.yml')
     @settings ||= YAML.load_file('panel.yml')
+    # add Hugo settings
+    if File.exists?('config.toml')
+      @static_settings ||= TOML.load_file('config.toml')
+      @settings = @settings.merge @static_settings
+    end
   else
     print_usage
     "No panel.yml present in current folder. Did you run 'rog new'? Or 'rog init'?".say(:red)
@@ -297,9 +312,32 @@ def upgrade_rog(name, settings = {})
   "Success #{backup_path}".say(:green)
 end
 
+# Updating a rog install theme
+def themeupdate
+  "Updating themes from gem source:".say(:green)
+  gen(@gen_path, 'themes')
+
+  "Updating data:".say(:green)
+  gem_data_files = Dir[File.join(@gem_path, '..', 'gen', 'data', '*')]
+  gem_data_files.each do |gem_data_file|
+    # get equivalent data file from this rog
+    basename = File.basename(gem_data_file)
+    "Updating keys for #{basename}".say(:green)
+    rog_data_file = File.join(@gen_path, 'data', basename)
+    merged_data = Rubyongo::YamlDiff.new(gem_data_file, rog_data_file).combine
+    File.write(rog_data_file, merged_data.to_yaml)
+  end
+end
+
+def theme
+  @theme ||= settings['theme'] || 'default'
+end
+
 # Run the Panel's backend
 def run_rog
   set_env
+  "rubyongo ".say(:yellow)
+  "theme: #{theme}\n".say(:green)
   require 'rubyongo'
   "Rubyongo #{ENV['RACK_ENV']}".say(:dark_blue)
   Rubyongo::Kit.run!
@@ -338,7 +376,32 @@ end
 def run_hugo_server
   set_env
   args = "" # TODO: allow passing arguments, which? let's add proper arguments parsing much later, when we know exactly what the CLI interface should do and achieve tasks.
+  "rubyongo ".say(:yellow)
+  "theme: #{theme}\n".say(:green)
+
+  svelte_path = "themes/#{theme}/svelte"
+  if Dir.exists?(svelte_path)
+    "theme contains svelte:".say(:green)
+    rollup_pids = `pgrep -f rollup`.split("\n")
+    watching =  rollup_pids != [Process.pid.to_s] && rollup_pids[0].to_i > 0
+    if watching
+      "svelte code reloading is on...\n".say(:dark_blue)
+    else
+      `cd #{svelte_path}; npm install; rollup -c`
+      "to get live svelte code reloading, please use another terminal window with the command 'rog sveltedev'\n".say(:green)
+    end
+  end
+  "hugo:".say(:green)
   exec("hugo server #{args}")
+end
+
+def run_svelte_rollup(options = '')
+  theme = settings['theme']
+  exec("cd themes/#{theme}/svelte; npm install; rollup -c#{options}")
+end
+
+def run_svelte_rollup_watch
+  run_svelte_rollup('w')
 end
 
 def version_rog
@@ -363,12 +426,18 @@ def dodo
       init_rog
     elsif ['upgrade', 'up', 'u'].include? @command
       upgrade_rog(@name, { 'rog-usr' => @rog_usr, 'rog-host' => @rog_host })
+    elsif ['themeupdate'].include? @command
+      themeupdate
     elsif ['equip', 'e'].include? @command
       equip_rog
     elsif ['content', 'c'].include? @command
       content_rog
     elsif ['hugo', 'h'].include? @command
       run_hugo_server
+    elsif ['rollup'].include? @command
+      run_svelte_rollup
+    elsif ['rollupdev'].include? @command
+      run_svelte_rollup_watch
     elsif ['version', 'v'].include? @command
       version_rog
     elsif ['gemversion', 'gv'].include? @command

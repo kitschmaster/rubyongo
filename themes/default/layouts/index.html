@@ -122,6 +122,26 @@
 {{ end }}
 <!-- /advantage -->
 
+<!-- svelte app -->
+{{ if .Site.Data.homepage.svelteapp.enable }}
+{{ with .Site.Data.homepage.svelteapp }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-lg-5 col-md-6">
+        <div id="js-svelte-app"></div>
+      </div>
+      <div class="col-lg-7 col-md-6">
+        <h1>{{ .title | markdownify }}</h1>
+        <p>{{ .content | markdownify }}</p>
+      </div>
+    </div>
+  </div>
+</section>>
+{{ end }}
+{{ end }}
+<!-- svelte app -->
+
 <!-- promo video -->
 {{ if .Site.Data.homepage.video.enable }}
 {{ with .Site.Data.homepage.video }}
