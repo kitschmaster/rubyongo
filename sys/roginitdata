@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Initialize a fresh remote data repo for deploying data to.
+#
+# The idea is to have a bare git data repository hosted on the deploy server it self.
+# The bare repo gives one the ability to have multiple people work on the data while having full undo/redo functionality and an ability to develop data locally.
+#
+# Full example (passing: username, host, repo, repo_provider):
+#   cd sys; roginitdata rubyongo rubyongo.org
+
+# Args
+NAME="$1@$2"                            # => rubyongo@rubyongo.org <= this is actually: rog-usr@rog-host
+REPO="$2"
+DATA_REPO="$2/data"               # => rubyongo.org/data
+DATA_REPO_CHECK="$DATA_REPO/.git" # => rubyongo.org/data/.git
+BARE_DATA_REPO="$2.data.git"      # => rubyongo.org.data.git
+BARE_DATA_REPO_CHECK="$BARE_DATA_REPO/.git"
+
+if [ $# -eq 0 ]
+then
+  echo "No arguments supplied, please provide full repo name, example: roginitdata rubyongo rubyongo.org"
+  exit 1
+else
+  echo Initializing rog data for $NAME
+fi
+
+if ssh $NAME test -d $DATA_REPO_CHECK
+then
+  echo A remote data repository already exists, nothing to init. Remove $DATA_REPO_CHECK on the remote to init again.
+  exit 1
+else
+  echo Initing repo on the remote
+  ssh $NAME "cd $REPO; hugo new post/welcome.md; cd ..; cd $DATA_REPO; git config --global push.default simple; git config --global user.name '$1'; git config --global user.email $NAME; git init; git add .; git commit -am 'Setup commit'; cd ~; git clone --bare $DATA_REPO $BARE_DATA_REPO; cd $DATA_REPO; git remote add origin ~/$BARE_DATA_REPO; git push -u origin master"
+  echo Cloning to local...
+  cd ..; rm -rf data; git clone $NAME:~/$BARE_DATA_REPO data
+  echo Done!
+fi

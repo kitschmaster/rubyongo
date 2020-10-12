@@ -356,7 +356,7 @@ def init_rog
   host = settings['production']['host']
   provider = "#{usr}@#{host}"
   # cd sys; roginit rubyongo rubyongo.org rubyongo@rubyongo.org:~/rubyongo.org.git rubyongo@rubyongo.org
-  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogequip #{usr} #{host}; ./roginitcontent #{usr} #{host}")
+  exec("cd sys; ./roginit #{usr} #{host} #{provider}:~/#{host}.git #{provider}; ./rogequip #{usr} #{host}; ./roginitcontent #{usr} #{host}; ./roginitdata #{usr} #{host}")
 end
 
 # Equip the remote deployment server.
