@@ -1,22 +1,24 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# A svelte app
 
----
+## Running with rubyongo
 
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+When you start the rubyongo static server (Hugo) like this:
 
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+rog h
+```
+
+It will do an `npm install` and then run `rog rollup` to generate the javascript and styles necessary to run this svelte app.
+
+If you want to live reload your svelte code, run the above static server in one terminal and at the same time run the following in another terminal:
+
+```bash
+rog rollupdev
 ```
 
 *Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
-
-## Get started
+## Development
 
 Install the dependencies...
 
@@ -28,6 +30,12 @@ npm install
 ...then start [Rollup](https://rollupjs.org):
 
 ```bash
+rollup -c
+```
+
+or use npm:
+
+```bash
 npm run dev
 ```
 
@@ -35,17 +43,15 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
-
 ## Building and running in production mode
 
-To create an optimised version of the app:
+To create an optimised version of the app (note that this happens automatically with `rog h`):
 
 ```bash
 npm run build
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
+You can run the newly built app with `npm run start` from this folder. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
 
 ## Single-page app mode
 
@@ -71,34 +77,5 @@ Or remove the script via:
 rm scripts/setupTypeScript.js
 ```
 
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+---
+*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
